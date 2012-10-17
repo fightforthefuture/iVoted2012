@@ -155,6 +155,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk
   coffee-rails (~> 3.2.1)
+  faraday
   heroku
   jquery-rails
   json

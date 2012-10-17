@@ -24,18 +24,19 @@ class User < ActiveRecord::Base
     end
   end
   
-  def self.download_image(url)
+  def self.read_remote_image(name, url)
+    local_path = "app/assets/images/users/#{name}.png"
     host = URI.parse(url).host
     path = url.gsub("https://", "").gsub("http://", "").gsub(host, "")
-    filename = path.split("/").last
-    local = "#{Rails.root}/app/assets/images/#{filename}"
-    Net::HTTP.start(host) do |http|
-        resp = http.get(path)
-        open(local, "wb") do |file|
-            file.write(resp.body)
-        end
+    conn = Faraday.new(:url => "http://#{host}") do |faraday|
+      faraday.request  :url_encoded
+      # faraday.response :logger
+      faraday.adapter  Faraday.default_adapter 
     end
-    return local
+    response = conn.get path
+    File.open(local_path, 'wb') { |fp| fp.write(response.body) }
+    return local_path
+
   end
   
   def export_image(badge_overlay)
