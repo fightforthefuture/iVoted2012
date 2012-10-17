@@ -43,7 +43,7 @@ class TwitterController < ApplicationController
     Rails.logger.info creds.inspect
     avatar_url = client.user(screen_name).profile_image_url(:bigger)
     Rails.logger.info avatar_url
-    image_file = open avatar_url
+    image_file = open User.download_image(avatar_url)
     Rails.logger.info image_file.inspect
     user = User.new(
       :twitter_screen_name => screen_name,

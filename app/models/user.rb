@@ -24,8 +24,22 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.download_image(url)
+    host = URI.parse(url).host
+    path = url.gsub("https://", "").gsub("http://", "").gsub(host, "")
+    filename = path.split("/").last
+    local = "#{Rails.root}/app/assets/images/#{filename}"
+    Net::HTTP.start(host) do |http|
+        resp = http.get(path)
+        open(local, "wb") do |file|
+            file.write(resp.body)
+        end
+    end
+    return local
+  end
+  
   def export_image(badge_overlay)
-    `mkdir -p #{Rails.root}/app/assets/images/users/#{self.login}`if !File.directory? "#{Rails.root}/app/assets/images/users/#{self.login}"
+
     overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
     dst = Magick::Image.read("#{self.avatar.url}").first.scale(300, 300)
     src = Magick::Image.read(overlay).first
