@@ -1,17 +1,18 @@
 source 'https://rubygems.org'
-
+# ruby '1.9.3'
 gem 'rails', '3.2.8'
-
+gem "heroku"
+gem 'thin'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
+
 gem 'pg'
 gem 'settingslogic'
 gem 'oauth'
 gem 'json'
 gem 'twitter'
-gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'rmagick', '2.12.0', :require => 'RMagick'
 
 # Gems used only for assets and not required

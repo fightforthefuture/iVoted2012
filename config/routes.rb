@@ -1,4 +1,4 @@
-IVoted::Application.routes.draw do
+IVoted2012::Application.routes.draw do
   resources :posts
 
   # 

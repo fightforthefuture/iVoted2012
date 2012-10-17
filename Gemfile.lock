@@ -1,11 +1,3 @@
-GIT
-  remote: git://github.com/binarylogic/authlogic.git
-  revision: 40c0e16d13329a9a1dc81a1598e5eaa38a7acc39
-  specs:
-    authlogic (3.1.3)
-      activerecord (>= 3.0.0)
-      activesupport (>= 3.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,6 +28,7 @@ GEM
     activesupport (3.2.8)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.2)
     arel (3.0.2)
     builder (3.0.3)
     coffee-rails (3.2.2)
@@ -45,11 +38,22 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    daemons (1.1.9)
     erubis (2.7.0)
+    eventmachine (1.0.0)
+    excon (0.16.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
+    heroku (2.32.14)
+      heroku-api (~> 0.3.5)
+      launchy (>= 0.3.2)
+      netrc (~> 0.7.7)
+      rest-client (~> 1.6.1)
+      rubyzip
+    heroku-api (0.3.5)
+      excon (~> 0.16.1)
     hike (1.2.1)
     i18n (0.6.1)
     journey (1.0.4)
@@ -57,6 +61,8 @@ GEM
       railties (>= 3.1.0, < 5.0)
       thor (~> 0.14)
     json (1.7.5)
+    launchy (2.1.2)
+      addressable (~> 2.3)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -64,6 +70,7 @@ GEM
     mime-types (1.19)
     multi_json (1.3.6)
     multipart-post (1.1.5)
+    netrc (0.7.7)
     oauth (0.4.6)
     pg (0.14.1)
     polyglot (0.3.3)
@@ -92,7 +99,10 @@ GEM
     rake (0.9.2.2)
     rdoc (3.12)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rmagick (2.12.0)
+    rubyzip (0.9.9)
     sass (3.2.1)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -104,6 +114,10 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    thin (1.5.0)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     thor (0.16.0)
     tilt (1.3.3)
     treetop (1.4.11)
@@ -122,8 +136,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  authlogic!
   coffee-rails (~> 3.2.1)
+  heroku
   jquery-rails
   json
   oauth
@@ -132,5 +146,6 @@ DEPENDENCIES
   rmagick (= 2.12.0)
   sass-rails (~> 3.2.3)
   settingslogic
+  thin
   twitter
   uglifier (>= 1.0.3)

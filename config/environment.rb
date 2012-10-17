@@ -2,4 +2,4 @@
 require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
-IVoted::Application.initialize!
+IVoted2012::Application.initialize!

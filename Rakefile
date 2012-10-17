@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-IVoted::Application.load_tasks
+iVoted2012::Application.load_tasks
