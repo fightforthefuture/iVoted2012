@@ -15,12 +15,12 @@ class User < ActiveRecord::Base
   
   
   def current_image
-    if !self.badge.url.nil?
+    if self.badge.url != "/badges/original/missing.png"
       return self.badge.url
-    elsif !self.avatar.url.nil?
+    elsif self.avatar.url != "/badges/original/missing.png"
       return self.avatar.url
     else
-      return false
+      return "defaul_user.jpg"
     end
   end
   
