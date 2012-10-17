@@ -8,7 +8,7 @@
         current_badge  = 'banner_badge'
       end
     %>
-    <% Settings.overlay_options.each do |overlay| %>
+    <% overlay_options.each do |overlay| %>
       <div class="overlay_option">
         <%= radio_button_tag :overlay, overlay[:name], overlay[:name] == current_badge %>
         <%= label :overlay, overlay[:name], overlay[:title]%><br/>

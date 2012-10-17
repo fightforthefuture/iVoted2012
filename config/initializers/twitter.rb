@@ -1,4 +1,4 @@
 Twitter.configure do |config|
-  config.consumer_key = Settings[:twitter]['consumer_key']
-  config.consumer_secret = Settings[:twitter]['consumer_secret']
+  config.consumer_key =   ENV['TWITTER_CONSUMER_KEY']
+  config.consumer_secret = ENV['TWITTER_CONSUMER_SECRET']
 end

@@ -13,8 +13,10 @@ class TwitterController < ApplicationController
     redirect_to "/twitter" if @user.nil?
   end
   
-  def new    
-    oauth = OAuth::Consumer.new(Settings[:twitter]['consumer_key'], Settings[:twitter]['consumer_secret'],{ :site => "http://twitter.com" })
+  def new
+    Rails.logger.info "Key = #{ENV['TWITTER_CONSUMER_KEY']}."
+    Rails.logger.info "Key = #{ENV['TWITTER_CONSUMER_SECRET']}."
+    oauth = OAuth::Consumer.new(ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'],{ :site => "http://twitter.com" })
     callback = "http://127.0.0.1:3000/auth/twitter/callback"
     session[:request_token] = oauth.get_request_token(:oauth_callback => callback)
     redirect_to session[:request_token].authorize_url
