@@ -25,12 +25,11 @@ class User < ActiveRecord::Base
   end
   
   def self.read_remote_image(name, url)
-    local_path = "/tmp/#{name}.png"
+    local_path = "#{TEMP_STORAGE}/#{name}.png"
     host = URI.parse(url).host
     path = url.gsub("https://", "").gsub("http://", "").gsub(host, "")
     conn = Faraday.new(:url => "http://#{host}") do |faraday|
       faraday.request  :url_encoded
-      # faraday.response :logger
       faraday.adapter  Faraday.default_adapter 
     end
     response = conn.get path
@@ -41,11 +40,11 @@ class User < ActiveRecord::Base
   
   def export_image(badge_overlay)
 
-    overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
+    overlay = "#{TEMP_STORAGE}/#{badge_overlay}.png"
     dst = Magick::Image.read("#{self.avatar.url}").first.scale(300, 300)
     src = Magick::Image.read(overlay).first
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp).scale(128,128)
-    badge_path = "#{Rails.root}/app/assets/images/users/#{self.login}/#{self.login}_badge.jpg"
+    badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
     result.write(badge_path)
     file= open badge_path
     @client = Twitter::Client.new(:oauth_token => self.twitter_oauth_token, :oauth_token_secret => self.twitter_oauth_token_secret)

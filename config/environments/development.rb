@@ -1,7 +1,7 @@
 IVoted2012::Application.configure do
   
   TWITTER_CALLBACK = "http://127.0.0.1:3000/auth/twitter/callback"
-    
+  TEMP_STORAGE = "#{Rails.root}/app/assets/images"
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
