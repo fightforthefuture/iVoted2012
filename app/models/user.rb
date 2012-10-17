@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
   
   def self.read_remote_image(name, url)
-    local_path = "app/assets/images/users/#{name}.png"
+    local_path = "#{Rails.root}/app/assets/images/users/#{name}.png"
     host = URI.parse(url).host
     path = url.gsub("https://", "").gsub("http://", "").gsub(host, "")
     conn = Faraday.new(:url => "http://#{host}") do |faraday|
