@@ -20,7 +20,7 @@
     </span>
   </div>
   <div class="preview">
-    <%= image_tag(@user.local_avatar_path, :class=>"original")%>
+    <%= image_tag(@user.avatar.url, :class=>"original")%>
     <%= image_tag("banner_badge.png", :class=>"overlay")%>
     <div class="preview_text">
       <p>A preview of the badge to be uploaded to Twitter.</p>

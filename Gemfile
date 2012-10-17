@@ -8,7 +8,8 @@ gem 'thin'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 #gem 'sqlite3'
-
+gem 'paperclip'
+gem 'aws-sdk'
 gem 'pg'
 gem 'oauth'
 gem 'json'

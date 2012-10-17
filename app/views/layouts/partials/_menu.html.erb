@@ -4,7 +4,7 @@
   <li><%= link_to "Sign-in", "/login" %></li>
 <% else %>
   <li><%= link_to "My Profile", twitter_path(current_user.login) %> |</li>
-  <li><%= link_to "Logout", signout_path, :method => :delete, :confirm => "Are you sure you want to logout?" %></li>
+  <li><%= link_to "Logout", signout_path, :method => :delete %></li>
 <% end %>
 </ul>
 

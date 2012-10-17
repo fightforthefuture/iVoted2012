@@ -1,41 +1,45 @@
 class User < ActiveRecord::Base
  
   require 'RMagick'
+  require 'open-uri'
+  require 'net/http'
   
   has_many :posts
   
+  attr_accessor :avatar_url, :badge_url, :current_image
+  attr_accessible :avatar_url, :badge_url, :avatar, :badge, :twitter_screen_name, :twitter_id, :twitter_name, :twitter_oauth_token, :twitter_oauth_token_secret, :twitter_active, :twitter_badge_style
+  has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
+  has_attached_file :badge, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
+
   alias_attribute :login, :twitter_screen_name
-
   
-  def remote_avatar_path
-     "http://api.twitter.com/1/users/profile_image/#{self.login}.json"
+  
+  def current_image
+    if !self.badge.url.nil?
+      return self.badge.url
+    elsif !self.avatar.url.nil?
+      return self.avatar.url
+    else
+      return false
+    end
   end
-    
-  def local_avatar_path
-     "users/#{self.login}/#{self.login}_original.jpg"
-  end
-
-  def local_badge_path
-     "users/#{self.login}/#{self.login}_badge.jpg"
-  end
-
-  def download_image
+  
+  def export_image(badge_overlay)
     `mkdir -p #{Rails.root}/app/assets/images/users/#{self.login}`if !File.directory? "#{Rails.root}/app/assets/images/users/#{self.login}"
-    `wget #{remote_avatar_path} -O #{Rails.root}/app/assets/images/#{local_avatar_path}`
-  end
-
-  def current_badge
-    return local_badge_path if File.exists? "#{Rails.root}/app/assets/images/#{local_badge_path}"
-    return local_avatar_path if File.exists? "#{Rails.root}/app/assets/images/#{local_avatar_path}"
-  end
-  
-  def export_image(overlay)
-    overlay = "#{Rails.root}/app/assets/images/#{overlay}.png"
-    dst = Magick::Image.read("#{Rails.root}/app/assets/images/#{local_avatar_path}").first.scale(300, 300)
+    overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
+    dst = Magick::Image.read("#{self.avatar.url}").first.scale(300, 300)
     src = Magick::Image.read(overlay).first
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp).scale(128,128)
-    result.write("#{Rails.root}/app/assets/images/#{local_badge_path}")
-    return "#{Rails.root}/app/assets/images/#{local_badge_path}"
+    badge_path = "#{Rails.root}/app/assets/images/users/#{self.login}/#{self.login}_badge.jpg"
+    result.write(badge_path)
+    file= open badge_path
+    @client = Twitter::Client.new(:oauth_token => self.twitter_oauth_token, :oauth_token_secret => self.twitter_oauth_token_secret)
+    @client.update_profile_image(file)
+    if self.update_attributes(:badge => file, :twitter_badge_style => badge_overlay)
+      return true
+    else
+      return false
+    end
   end
-
+  
 end
