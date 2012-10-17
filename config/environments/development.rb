@@ -1,4 +1,7 @@
 IVoted2012::Application.configure do
+  
+  TWITTER_CALLBACK = "http://127.0.0.1:3000/auth/twitter/callback"
+    
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
@@ -36,4 +39,5 @@ IVoted2012::Application.configure do
   config.assets.debug = true
   
   config.serve_static_assets = true
+
 end

@@ -1,4 +1,8 @@
 IVoted2012::Application.configure do
+  
+  TWITTER_CALLBACK = "http://thawing-temple-1449.herokuapp.com/auth/twitter/callback"
+  
+  
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
