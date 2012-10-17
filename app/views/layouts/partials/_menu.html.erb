@@ -1,0 +1,10 @@
+<ul class="menu">
+  <li><%= link_to image_tag("logo.png",:class=>"logo"), "/" %>:</li>
+ <% if !current_user %>
+  <li><%= link_to "Sign-in", "/login" %></li>
+<% else %>
+  <li><%= link_to "My Profile", twitter_path(current_user.login) %> |</li>
+  <li><%= link_to "Logout", signout_path, :method => :delete, :confirm => "Are you sure you want to logout?" %></li>
+<% end %>
+</ul>
+

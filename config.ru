@@ -1,8 +1,4 @@
-use Rack::Static , :urls => { 
-    "/" => "index.html", 
-    "/index.html" => "index.html",
-    } , :root => "public"
+# This file is used by Rack-based servers to start the application.
 
-run Rack::URLMap.new({
-  "/"      => Rack::Directory.new("public"),
-})
+require ::File.expand_path('../config/environment',  __FILE__)
+run IVoted::Application

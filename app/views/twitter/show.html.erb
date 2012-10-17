@@ -1,0 +1,11 @@
+<h2>
+  <%= image_tag(@user.current_badge, :style=> "width:48px;") if @user %>
+  <%= @user.twitter_screen_name %>
+</h2>
+<hr/>
+<% if current_user %>
+  <%= render :partial => "twitter/partials/tweetbox"%>
+  <%= render :partial => "twitter/partials/image_picker"%>
+<% else %>
+ <%= render :partial => "twitter/partials/tweets"%>
+<% end %>
