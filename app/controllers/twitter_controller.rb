@@ -30,7 +30,7 @@ class TwitterController < ApplicationController
     user = User.find_by_twitter_screen_name(token.params[:screen_name])
     if !user.nil?
       session[:user_id] = user.id
-      redirect_to "/twitter/#{screen_name}", :notice => "Signed in!"
+      redirect_to "/twitter/#{token.params[:screen_name]}", :notice => "Signed in!"
     else
       create_user(token, @client)
     end
@@ -41,8 +41,6 @@ class TwitterController < ApplicationController
     creds = client.verify_credentials
     avatar_url = client.user(screen_name).profile_image_url(:bigger)
     image_file = open avatar_url
-    Rails.logger.info avatar_url
-    Rails.logger.info image_file.inspect
     user = User.new(
       :twitter_screen_name => screen_name,
       :twitter_id=> creds[:id],
@@ -56,6 +54,7 @@ class TwitterController < ApplicationController
       session[:user_id] = user.id
       redirect_to "/twitter/#{screen_name}", :notice => "Signed in!"
     else
+      session[:user_id] = nil
       redirect_to root_url, :notice => "Authorization failed!"
     end
   end
