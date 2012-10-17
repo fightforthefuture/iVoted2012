@@ -7,7 +7,6 @@
 # Ignore bundler config
 /.bundle
 
-config/settings.yml
 config/database.yml
 
 app/assets/images/users
