@@ -1,0 +1,19 @@
+<div class="votebox">
+  <%= form_for(@user) do |f| %>
+    <div class="field">
+      <div class="line" style="margin: 20px 0;"><h4>I voted for President:</h4></div>
+      <%= f.text_field :i_voted_for_president %>
+    </div>
+    <div class="field">
+      <div class="line" style="margin: 20px 0;"><h4>I voted because:</h4></div>
+      <%= f.text_field :i_voted_because %>
+    </div>
+    <div class="field">
+      <div class="line" style="margin: 20px 0;"><h4>Where I voted:</h4></div>
+      <%= f.text_field :where_i_voted_at %>
+    </div>
+    <span class="center">
+       <%= link_to_submit 'Update', "" %>
+    </span>
+  <% end %>
+</div>

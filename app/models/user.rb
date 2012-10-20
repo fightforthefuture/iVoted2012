@@ -6,14 +6,19 @@ class User < ActiveRecord::Base
   
   has_many :posts
   
-  attr_accessor :avatar_url, :badge_url, :current_image
-  attr_accessible :avatar_url, :badge_url, :avatar, :badge, :twitter_screen_name, :twitter_id, :twitter_name, :twitter_oauth_token, :twitter_oauth_token_secret, :twitter_active, :twitter_badge_style
+  attr_accessor :avatar_url, :badge_url, :current_image,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count
+  attr_accessible :avatar_url, :badge_url, :avatar, :badge, :twitter_screen_name, :twitter_id, :twitter_name, :twitter_oauth_token, :twitter_oauth_token_secret, 
+  :twitter_active, :twitter_badge_style, :twitter_followers_count, :twitter_listed_count, :twitter_friends_count, :twitter_favourites_count,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count,
+  :i_voted_for_president, :i_voted_because, :where_i_voted_at
+  
   has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
   has_attached_file :badge, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
 
   alias_attribute :login, :twitter_screen_name
   
-  
+  #validates_presence_of [:i_voted_for_president, :i_voted_because, :where_i_voted_at], :on => :update_profile
+
+    
   def current_image
     if self.badge.url != "/badges/original/missing.png"
       return self.badge.url
@@ -39,11 +44,11 @@ class User < ActiveRecord::Base
   end
   
   def export_image(badge_overlay)
-
     overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
-    dst = Magick::Image.read("#{self.avatar.url}").first.scale(300, 300)
+    dst = Magick::Image.read("#{self.avatar.url}").first.scale(250, 250)
     src = Magick::Image.read(overlay).first
-    result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp).scale(128,128)
+    result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
+    #.scale(128,128)
     badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
     result.write(badge_path)
     file= open badge_path
@@ -55,5 +60,5 @@ class User < ActiveRecord::Base
       return false
     end
   end
-  
+
 end

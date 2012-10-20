@@ -1,36 +1,23 @@
-<p>
-  <b>Email:</b>
-  <%=h @user.email %>
-</p>
-
-<p>
-  <b>Login count:</b>
-  <%=h @user.login_count %>
-</p>
-
-<p>
-  <b>Last request at:</b>
-  <%=h @user.last_request_at %>
-</p>
-
-<p>
-  <b>Last login at:</b>
-  <%=h @user.last_login_at %>
-</p>
-
-<p>
-  <b>Current login at:</b>
-  <%=h @user.current_login_at %>
-</p>
-
-<p>
-  <b>Last login ip:</b>
-  <%=h @user.last_login_ip %>
-</p>
-
-<p>
-  <b>Current login ip:</b>
-  <%=h @user.current_login_ip %>
-</p>
-<%= image_tag @user.image_overlay  %>
-<%= link_to 'Edit', edit_user_path %>
+<div class="headline">
+  <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted">voted!</span>
+</div>
+<div id="image_picker">
+  <div class="preview">
+    <%= image_tag(@user.avatar.url, :class=>"original")%>
+    <%= image_tag("#{@user.twitter_badge_style}.png", :class=>"overlay") if @user.twitter_badge_style != "original" %>
+  </div>
+</div>
+<div class="votebox">
+  <div class="field">
+    <div class="line" style="margin: 20px 0;"><h4>I voted for President:</h4></div>
+    <p><%= @user.i_voted_for_president %></p>
+  </div>
+  <div class="field">
+    <div class="line" style="margin: 20px 0;"><h4>I voted because:</h4></div>
+    <p><%=  @user.i_voted_because %></p>
+  </div>
+  <div class="field">
+    <div class="line" style="margin: 20px 0;"><h4>Where I voted:</h4></div>
+    <p><%=  @user.where_i_voted_at %></p>
+  </div>
+</div>

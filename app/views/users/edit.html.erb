@@ -1,18 +1,8 @@
-<h1>Edit My Account</h1>
-
-<% form_for @user, :url => users_path do |f| %>
-  <% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited:</h2>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
+<% if current_user %>
+  <%= render :partial => "users/partials/tweetbox"%>
+  <div class="headline">
+    <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted">voted!</span>
   </div>
-  <% end %>
-  <%= render :partial => "users/partials/form", :locals=> {:f => f} %>
-  <%= f.submit "Update" %>
+  <%= render :partial => "users/partials/image_picker"%>
+  <%= render :partial => "users/partials/votebox"%>
 <% end %>
-
-<br /><%= link_to "My Profile", users_path %>

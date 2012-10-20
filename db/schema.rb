@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121017165835) do
+ActiveRecord::Schema.define(:version => 20121020173149) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id",                            :null => false
@@ -24,15 +24,15 @@ ActiveRecord::Schema.define(:version => 20121017165835) do
 
   create_table "users", :force => true do |t|
     t.boolean  "admin",                      :default => false
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
     t.string   "twitter_id"
     t.string   "twitter_name"
     t.string   "twitter_screen_name"
     t.boolean  "twitter_active",             :default => false
     t.string   "twitter_oauth_token"
     t.string   "twitter_oauth_token_secret"
-    t.string   "twitter_badge_style"
+    t.string   "twitter_badge_style",        :default => "original", :null => false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(:version => 20121017165835) do
     t.string   "badge_content_type"
     t.integer  "badge_file_size"
     t.datetime "badge_updated_at"
+    t.integer  "twitter_followers_count",    :default => 0
+    t.integer  "twitter_listed_count",       :default => 0
+    t.integer  "twitter_friends_count",      :default => 0
+    t.integer  "twitter_favourites_count",   :default => 0
+    t.string   "i_voted_for_president"
+    t.string   "i_voted_because"
+    t.string   "where_i_voted_at"
   end
+
+  add_index "users", ["twitter_badge_style"], :name => "index_users_on_twitter_badge_style"
+  add_index "users", ["twitter_followers_count"], :name => "index_users_on_twitter_followers_count"
 
 end

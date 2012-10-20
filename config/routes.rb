@@ -1,24 +1,17 @@
 IVoted2012::Application.routes.draw do
   resources :posts
 
-  # 
-  # resources :sessions
-  # match 'login' => "sessions#new",      :as => :login
-  # match 'logout' => "sessions#destroy", :as => :logout
-  # 
-  resources :users
-  root :to => 'twitter#index'
-  # match 'signup' => 'users#new', :as => :signup
+  root :to => 'users#index'
   
   ## Twitter
-  resources :twitter do
+  resources :users do
     collection do
       get 'upload_badge'
       post 'tweet'
     end
   end
-  match '/auth/twitter/callback' => 'twitter#create'
-  match '/login' => 'twitter#new', :as => :new
+  match '/auth/twitter/callback' => 'users#create'
+  match '/login' => 'users#new', :as => :new
   match "/signout" => "sessions#destroy", :as => :signout
   
   #match "/auth/:provider/callback" => "sessions#create"

@@ -1,0 +1,13 @@
+<div class="tweetbox">
+  <%= form_for(@post) do |f| %>
+    <div style="float:right;">
+      <%= link_to_submit 'Tweet this page', "twitter" %>
+    </div>
+    <div class="field">
+      <%= f.text_area :message, :value => default_tweet, :style=> "width:60%; height: 60px;font-size: 120%;" %>
+    </div>
+    <%= f.hidden_field :user_id, :value=> current_user.id %>
+    <%= f.hidden_field :screen_name, :value=> current_user.login %>
+    <%= f.hidden_field :platform, :value => "twitter"  %>
+  <% end %>
+</div>

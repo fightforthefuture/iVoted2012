@@ -19,9 +19,11 @@ class PostsController < ApplicationController
       send_tweet(params[:post][:message])
       @post = Post.new(params[:post])
       if @post.save
-        redirect_to "/twitter/#{current_user.login}", :notice => "You tweet has been sent!"
+        flash[:notice] = TWEET_SENT
+        redirect_to user_path(current_user) 
       else
-        redirect_to "/twitter/#{current_user.login}", :notice => "We are sorry. Something went wrong. Please try again later."
+        flash[:notice] = TWEET_FAILED
+        redirect_to user_path(current_user)
       end
     end
   end
