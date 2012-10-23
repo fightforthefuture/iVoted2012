@@ -4,15 +4,18 @@ class ApplicationController < ActionController::Base
   
   after_filter :reset_random_avatar
 
-  SIGNIN_NOTICE = "Thank you for signing in."
+  LOGIN_NOTICE = "Thank you for logging in!"
+  SIGNIN_NOTICE = "Thank you for signing up!"
   AUTHORIZATION_FAILED = "Authorization failed!"
-  BADGE_UPDATED = "Your badge has been updated!"
   BADGE_FAILED = "We're sorry, we were unable to update your badge at this time."
   PROFILE_UPDATED = "Your Profile has been updated!"
   PROFILE_FAILED = "We we're unable to update your Profile!"
   TWEET_SENT = "You tweet has been sent!"
   TWEET_FAILED = "We are sorry. Something went wrong. Please try again later."
   
+  BADGE_UPDATED = "<b>Awesome! Here's your own 'I Voted' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
+  We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
+  <div style='margin: 10px;'><a href='/users/CURRENT_ID' class='button grey'>Hide this and view the page</a></div>"
   
   private
   

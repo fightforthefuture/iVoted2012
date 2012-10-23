@@ -1,27 +1,52 @@
 <div class="cta">
-  <h2 class="border">Did you vote? Will you vote?</h2>
+  <h2><span  class="border">Did you vote? Will you vote?</span></h2>
   <h4>Get a Twitter badge and vote page to help moticate your followers to vote.</h4>
-  <div class="action">
-    <a class="option half" href="/login?badge=ivoted_banner">
-      <p class="bubble text red" style="position:absolute; top: 20px; left: 20px; width: 200px; padding: 10px;">Yes, I voted.</p>
-      <div class="badge thumb" style="margin-left: 240px;">
-        <div class="ivoted_banner"></div>
-        <%= image_tag(random_avatar, :class=>"avatar")%>
-      </div>
-    </a>
-    <div class="buffer"></div>
-    <a class="option half rght" href="/login?badge=ipledge_banner">
-      <p class="bubble text blue" style="position:absolute; top: 20px; right: 20px; width: 200px; padding: 10px;">I pledge to vote.</p>
-      <div class="badge thumb" style="margin-right: 240px;">
-        <div class="ipledge_banner"></div>
-        <%= image_tag(random_avatar, :class=>"avatar")%>
-      </div>
-    </a>
+  <div class="padd">
+    <div class="action">
+      <a class="option half left selected" data-url="/login?badge=ivoted_banner">
+        <div class="text">
+          <p class="bubble red" style="float: left;">Yes, I voted.</p>
+           <p class="explanation"></p>
+        </div>
+        <div class="badge medium">
+          <div class="ivoted_banner"></div>
+          <%= image_tag(random_avatar, :class=>"avatar")%>
+        </div>
+      </a>
+      <div class="buffer"><div class="line"></div></div>
+      <a class="option half right" data-url="/login?badge=ipledge_banner">
+        <div class="badge medium">
+          <div class="ipledge_banner"></div>
+          <%= image_tag(random_avatar, :class=>"avatar")%>
+        </div>
+        <div class="text">
+          <p class="bubble blue" style="float: right;">I pledge to vote.</p>
+          <p class="explanation">Voting hasn't started in your state? Pledge and get a badge, page and helpful voting info.</p>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
 
+<% content_for :footer do %>
+  <% javascript_tag do %>
+     $(document).ready(function(){
+        change_badge($("a.option.selected"));
+      });
+      
+      $('a.option.half').bind("click", function() {
+        change_badge($(this));
+      });
+    
+      function change_badge(obj){
+        $("a.option.half").removeClass('selected');
+        $(obj).addClass('selected');
+      }
+  <% end %>
+<% end %>
+
 <p class="splash_text">
-  <span class="center"><%= link_to "Sign-In with Twitter", "/login?badge=original", :class=>"button twitter"%></span>
+  <span class="center"><%= link_to "choose your badge", "/login?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
 </p>
 
 <div class="sexy_line"></div>
@@ -48,7 +73,7 @@
     <div class="ipledge_badge"></div>
     <p class="count"><%= @counts['ipledge_badge_count'] %> Choose This</p>
   </a>
-  <% if !@top_users.empty? %>
+  <% if !@top_users.empty? && @top_users.count == 4 %>
     <div class="top_badge_user">
       <div class="line"><h4>Top Badge Users</h4></div>
       <% for user in @top_users %>

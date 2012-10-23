@@ -1,0 +1,11 @@
+<% if flash[:notice] %>
+    <div id="notice"><span>
+      <p class="flash-notice">
+        <% if current_user %>
+          <%= flash[:notice].gsub('CURRENT_ID', current_user.id.to_s).gsub('CURRENT_LOGIN', current_user.login).html_safe %>
+        <% else %>
+          <%= flash[:notice].html_safe %>
+        <% end %>
+      </p>
+    </span></div>
+<% end %>

@@ -6,7 +6,9 @@ IVoted2012::Application.routes.draw do
   ## Twitter
   resources :users do
     collection do
+      get 'pick_badge'
       get 'upload_badge'
+      get 'download_badge'
       post 'tweet'
     end
   end

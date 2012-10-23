@@ -1,0 +1,51 @@
+<div class="pick_badge">
+  <h2>Pick Your favorite Badge</h2>
+  <div class="row">
+    <a class="badge thumb selected" href="#" data-badge='ivoted_banner'>
+       <div class="ivoted_banner"></div>
+       <%= image_tag(@user.avatar.url, :class=>"avatar")%>
+       <p class="count">I Voted Banner</p>
+     </a>
+     <a class="badge thumb" href="#" data-badge='ivoted_badge'>
+       <div class="ivoted_badge"></div>
+       <p class="count">I Voted Badge</p>
+     </a>
+     <a class="badge thumb" href="#" data-badge='ipledge_banner'>
+       <div class="ipledge_banner"></div>
+       <%= image_tag(@user.avatar.url, :class=>"avatar")%>
+       <p class="count">I Pledge Banner</p>
+     </a>
+     <a class="badge thumb" href="#" data-badge='ipledge_badge'>
+       <div class="ipledge_badge"></div>
+       <p class="count">I Pledge Badge</p>
+     </a>
+     <a class="badge thumb" href="#" data-badge='original'>
+        <%= image_tag(@user.avatar.url, :class=>"avatar")%>
+        <p class="count">Keep Original</p>
+     </a>
+   </div>
+    <%= link_to "continue", "#", :id=> 'upload_badge', :class=> "button blue" %>
+</div>
+
+
+
+<% content_for :footer do %>
+  <% javascript_tag do %>
+     $(document).ready(function(){
+       var badge_style = '<%= session[:badge] %>';
+       console.log(badge_style);
+       var obj = $("a.badge[data-badge='"+badge_style+"']");
+       change_badge(obj);
+     });
+      
+     $('a.badge').bind("click", function() {
+       change_badge($(this));
+     });
+    
+     function change_badge(obj){
+       $("#upload_badge").attr("href", "/users/upload_badge?badge="+obj.data('badge'));
+       $("a.badge").removeClass('selected');
+       $(obj).addClass('selected');
+     }
+  <% end %>
+<% end %>

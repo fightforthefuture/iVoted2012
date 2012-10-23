@@ -2,73 +2,12 @@
  
   <div class="preview">
     <%= image_tag(@user.avatar.url, :class=>"original")%>
-    <%= image_tag("ivoted_badge.png", :class=>"overlay")%>
+    <%= image_tag("#{@user.twitter_badge_style}.png", :class=>"overlay")%>
   </div>
-
-  <div class="overlay_selection open" style="<%= h('display:none;') if @user.twitter_badge_style != 'original' %>">
-     <div class="line" style="margin: 20px 0;"><h4>Choose a Badge Design:</h4></div>
-     <%
-       if !current_user.twitter_badge_style.nil? 
-         current_badge  = current_user.twitter_badge_style
-       elsif !session[:badge].nil?
-         current_badge = session[:badge]
-       else
-         current_badge  = 'banner_badge'
-       end
-     %>
-     <% overlay_options.each do |overlay| %>
-       <label for="overlay_<%= overlay[:name] %>">
-         <div class="overlay_option <%= 'selected' if overlay[:name] == current_badge %>">   
-           <div class="badge icon" style="float:left;">
-             <div class="<%= overlay[:name] %>"></div> 
-             <%= image_tag(@user.avatar.url, :class=>"avatar")%>   
-           </div>
-           <div style="margin-left: 40px;">
-             <%= radio_button_tag :overlay, overlay[:name], overlay[:name] == current_badge %>
-             <%= overlay[:title]%><br/>
-             <%= overlay[:description]%>
-           </div>
-         </div>
-       </label>
-     <% end %><br/>
-     <span class="center">
-     <%= link_to "Upload Badge", "javascript:upload_badge();", :class=>"button twitter"%>
-     </span>
-   </div>
-   <div class="overlay_selection closed" style="<%= h('display:none;') if @user.twitter_badge_style == 'original' %>">
+   <div class="overlay_selection closed">
     <span class="center">
-    <%= link_to "Change Badge", "javascript:toggle_overlay_selection();", :class=>"button twitter"%>
+    <%= link_to "Download Badge", "/users/download_badge" %><br/><br/>
+    <%= link_to "Change Badge", "/users/pick_badge", :class=>"button blue twitter"%>
     </span>
   </div>
-
-  <% content_for :footer do %>
-    <% javascript_tag do %>
-    
-      function toggle_overlay_selection(){
-        $('.overlay_selection.open').toggle();
-        $('.overlay_selection.closed').toggle();
-      }
-    
-      function change_badge(obj){
-        var path = $('input[name=overlay]:checked').val();
-        var asset = "/assets/"+path+".png";
-        $("img.overlay").attr("src", asset);
-        $(".overlay_option").removeClass('selected');
-        $(obj).addClass('selected');
-      }
-    
-      $(document).ready(function(){
-        change_badge($(".overlay_option.selected"));
-      });
-      
-      $('input[name=overlay]').bind("change", function() {
-        change_badge($(this).parent().parent());
-      });
-      
-      function upload_badge(){
-        var badge = $('input[name=overlay]:checked').val();
-        window.location.replace('/users/upload_badge?badge='+badge);
-      }
-    <% end %>
-  <% end %>
 </div>

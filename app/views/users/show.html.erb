@@ -1,23 +1,36 @@
+<div class="menu">
+  <% if current_user && current_user != @user %> 
+    <%= link_to "Gonna vote? Get your own page", "/login", :class=> "button grey"  %>
+    <%= link_to "My Page", "/users/#{current_user.id}", :class=> "button grey" %>
+  <%end %>
+</div>
 <div class="headline">
   <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted">voted!</span>
 </div>
-<div id="image_picker">
-  <div class="preview">
-    <%= image_tag(@user.avatar.url, :class=>"original")%>
-    <%= image_tag("#{@user.twitter_badge_style}.png", :class=>"overlay") if @user.twitter_badge_style != "original" %>
-  </div>
+<div style="text-align:center;">
+  <% if !@user.badge.url.nil? %>
+    <%= image_tag(@user.badge.url, :class=>"original", :style=> "width:250px;")%>
+  <% elsif !@user.avatar.url.nil? %>
+    <%= image_tag(@user.avatar.url, :class=>"original", :style=> "width:250px;")%>
+  <% end %>
 </div>
 <div class="votebox">
+  <% if !@user.i_voted_for_president.blank?%>
+    <div class="field">
+      <div class="sexy_line"><h4>I voted for President:</h4></div>
+      <p><%= @user.i_voted_for_president %></p>
+    </div>
+  <% end %>
+  <% if !@user.i_voted_because.blank?%>
   <div class="field">
-    <div class="line" style="margin: 20px 0;"><h4>I voted for President:</h4></div>
-    <p><%= @user.i_voted_for_president %></p>
-  </div>
-  <div class="field">
-    <div class="line" style="margin: 20px 0;"><h4>I voted because:</h4></div>
+    <div class="sexy_line"><h4>I voted because:</h4></div>
     <p><%=  @user.i_voted_because %></p>
   </div>
+  <% end %>
+  <% if !@user.where_i_voted_at.blank?%>
   <div class="field">
-    <div class="line" style="margin: 20px 0;"><h4>Where I voted:</h4></div>
+    <div class="sexy_line"><h4>Where I voted:</h4></div>
     <p><%=  @user.where_i_voted_at %></p>
   </div>
+  <% end %>
 </div>

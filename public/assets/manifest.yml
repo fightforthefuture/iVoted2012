@@ -15,10 +15,12 @@ original.png: original-d80d6f7b07527ac8d5edf633ed534b52.png
 pledge_ribbon.png: pledge_ribbon-563bca24944ef2817d06da8acff57388.png
 rails.png: rails-be8732dac73d845ac5b142c8fb5f9fb0.png
 seal.png: seal-04e890f158f655d0cdc7ec156dbf2a40.png
-selected.png: selected-56a0b3831134f8f4a123b121f240e81e.png
+selected.png: selected-dabaa4f1c7ae7677243d491783ce336d.png
+selected_30.png: selected_30-7fc3150be8035bc18ad562da0365c474.png
 tux.gif: tux-2a92d465ed855b6d82ee0a157ca6ce54.gif
 twitter_bird.png: twitter_bird-2536caf531e3c51f2c3bb187976597cc.png
-tyrauber.png: tyrauber-e8318c04a969f99e51204624fe32cfd8.png
+tyrauber.png: tyrauber-f0321a9b4316c1118cbe9d9d2f14e0cb.png
+tyrauber_badge.jpg: tyrauber_badge-f0321a9b4316c1118cbe9d9d2f14e0cb.jpg
 users/rauber_icon_bigger.jpg: users/rauber_icon_bigger-e049c119ce133d577001e9d739afdd34.jpg
 users/tyrauber/tyrauber_original.jpg: users/tyrauber/tyrauber_original-cae3df80b78d7fbf337a5c1a58247bf4.jpg
 users/tyrauber_ivoted.jpg: users/tyrauber_ivoted-ad96a96f059e2948af76e030f353f23e.jpg
@@ -26,7 +28,7 @@ users/voted2012.png: users/voted2012-7b59491f9d062552e336bc556fd057e2.png
 users/voted2012/voted2012_badge.jpg: users/voted2012/voted2012_badge-3c031c690a55d9b77c6f6772c3955b50.jpg
 users/voted2012/voted2012_original.jpg: users/voted2012/voted2012_original-d27fb00c9beefb3278bb7c6b99e45bbb.jpg
 vote_check.png: vote_check-b10bdfc0bc2a0af3ca60cdf7f29d9b10.png
-voted2012.png: voted2012-67340fc00888b9c02f2477c076af5b47.png
-voted2012_badge.jpg: voted2012_badge-088c5b581a553dce73459163ea3e4efe.jpg
+voted2012.png: voted2012-69f4becfc97be3b6a583e56680b093b2.png
+voted2012_badge.jpg: voted2012_badge-17e13a5488eae77b93cbe5d72d5cabdd.jpg
 application.js: application-f80a4969e35ab168fdf0011e44cda56d.js
-application.css: application-18ec7a50c0d14f6dc7284bf3397be4ae.css
+application.css: application-accbf7d155dfc6535bba703b5465c155.css

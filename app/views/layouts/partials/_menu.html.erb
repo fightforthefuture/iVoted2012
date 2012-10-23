@@ -1,10 +1,17 @@
-<ul class="menu">
- <% if !current_user %>
-  <li><%= link_to "Sign-in", "/login" %></li>
-<% else %>
-  <li><%= link_to "View", user_path(current_user) %> |</li>
-  <li><%= link_to "Edit", edit_user_path(current_user) %> |</li>
-  <li><%= link_to "Logout", signout_path, :method => :delete %></li>
+<% if params[:controller] == 'users' && (params[:action] == 'edit' || params[:action] == 'show') %>
+  <% if !current_page?('/') %>
+    <ul class="menu">
+     <% if !current_user %>
+      <li><%= link_to "Sign-in", "/login", :class=>"button grey" %></li>
+    <% else %>
+      <%  if params[:controller] == 'users' && params[:action] == 'edit' %>
+        <li><%= link_to "View", user_path(current_user), :class=>"button grey" %></li>
+      <% end %>
+      <%  if params[:controller] == 'users' && params[:action] == 'show' %>
+        <li><%= link_to "Edit", edit_user_path(current_user), :class=>"button grey" %></li>
+      <% end %>
+      <li><%= link_to "Logout", signout_path, :method => :delete, :class=>"button grey" %></li>
+    <% end %>
+    </ul>
+  <% end %>
 <% end %>
-</ul>
-

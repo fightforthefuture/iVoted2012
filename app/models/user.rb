@@ -17,7 +17,12 @@ class User < ActiveRecord::Base
   alias_attribute :login, :twitter_screen_name
   
   #validates_presence_of [:i_voted_for_president, :i_voted_because, :where_i_voted_at], :on => :update_profile
-
+  
+  def update_tokens(token)
+    if self.twitter_oauth_token != token.token && self.twitter_oauth_token_secret != token.secret
+      self.update_attributes(:twitter_oauth_token => token.token, :twitter_oauth_token_secret => token.secret)
+    end
+  end
     
   def current_image
     if self.badge.url != "/badges/original/missing.png"
@@ -28,6 +33,7 @@ class User < ActiveRecord::Base
       return "defaul_user.jpg"
     end
   end
+
   
   def self.read_remote_image(name, url)
     local_path = "#{TEMP_STORAGE}/#{name}.png"
@@ -48,7 +54,6 @@ class User < ActiveRecord::Base
     dst = Magick::Image.read("#{self.avatar.url}").first.scale(250, 250)
     src = Magick::Image.read(overlay).first
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
-    #.scale(128,128)
     badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
     result.write(badge_path)
     file= open badge_path

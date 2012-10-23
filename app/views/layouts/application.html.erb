@@ -7,11 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="background_fade">
-  <% if flash[:notice] %>
-      <div id="notice"><span><p class="flash-notice"><%= flash[:notice] %></p></span></div>
-  <% end %>
-  <%= render :partial => "layouts/partials/menu"%>
+  <%= render :partial => "layouts/partials/flash", :locals=>{:flash => flash} %>
   <table class="stars"><tr><td class="lft"></td><td><%= link_to image_tag("ivoted_logo.png"), "/" %></td><td class="rgt"></td></tr></table>
+  <div class="fb-like" data-href="http://ivote2012.org" data-send="true" data-layout="box_count" data-width="50" data-show-faces="true"></div>
+  <%= render :partial => "layouts/partials/menu"%>
   <div id="page">
     <%= yield %>
   </div>
