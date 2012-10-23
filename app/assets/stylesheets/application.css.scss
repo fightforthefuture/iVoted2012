@@ -533,12 +533,12 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   z-index: -1;
  }
  .ribbon:before {
-  left: -2em;
+  left: -1em;
   border-right-width: 1.5em;
   border-left-color: transparent;
  }
  .ribbon:after {
-  right: -2em;
+  right: -1em;
   border-left-width: 1.5em;
   border-right-color: transparent;
  }
