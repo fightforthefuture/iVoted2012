@@ -1,5 +1,5 @@
 <div class="cta">
-  <h2><span  class="border">Did you vote? Will you vote?</span></h2>
+  <%= image_tag("did_you_vote.png", :class=> "title")  %>
   <h4>Get a Twitter badge and vote page to help moticate your followers to vote.</h4>
   <div class="padd">
     <div class="action">
@@ -25,6 +25,7 @@
         </div>
       </a>
     </div>
+    <%= image_tag("arrow.png", :class=>"arrow")%>
   </div>
 </div>
 
@@ -44,12 +45,9 @@
       }
   <% end %>
 <% end %>
+<span class="center"><%= link_to "choose your badge", "/login?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
 
-<p class="splash_text">
-  <span class="center"><%= link_to "choose your badge", "/login?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
-</p>
-
-<div class="sexy_line"></div>
+<%= image_tag("seperator.png", :style=> "border:none;margin-top: 60px;") %>
 
 <div class="followers">
   <h1 class="ribbon">

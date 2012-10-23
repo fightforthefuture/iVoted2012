@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
  
-  require 'RMagick'
+  #require 'RMagick'
   require 'open-uri'
   require 'net/http'
   

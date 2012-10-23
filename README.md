@@ -1,7 +1,7 @@
-iVoted2012
+I Voted 2012 - Change your Twitter Badge to Show You've Voted
 ======
 
-iVoted2012.org Rails 3 Web application using Twitter api and RMagick
+IVoted2012.org Rails 3 Web application using Twitter api and RMagick
 
 ## Features
 

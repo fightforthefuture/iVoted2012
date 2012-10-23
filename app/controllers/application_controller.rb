@@ -26,15 +26,15 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-     "#iVoted2012, I just voted and got my own iVoted2012.org profile page. Join me and pledge your vote."
+     "#i_voted, I just voted and got my own IVoted2012.org Badge and Profile page. Join me and pledge your vote."
   end
 
   def overlay_options
      [
-       {:name => 'ivoted_badge', :title=> "iVoted Badge", :description=> "Replace your avatar with a full iVoted Badge"},
-       {:name => 'ivoted_banner', :title=> "iVoted Banner Overlay", :description=> "An iVoted overlay badge on of your current twitter avatar."},
-       {:name => 'ipledge_badge', :title=> "iPledge Badge", :description=> "Replace your avatar with a full iPlede Badge"},
-       {:name => 'ipledge_banner', :title=> "iPledge Banner Overlay", :description=> "An iPledge overlay badge on of your current twitter avatar."},
+       {:name => 'ivoted_badge', :title=> "I Voted Badge", :description=> "Replace your avatar with a full I Voted Badge"},
+       {:name => 'ivoted_banner', :title=> "I Voted Banner Overlay", :description=> "An I Voted overlay badge on of your current twitter avatar."},
+       {:name => 'ipledge_badge', :title=> "I Pledge Badge", :description=> "Replace your avatar with a full I Plede Badge"},
+       {:name => 'ipledge_banner', :title=> "I Pledge Banner Overlay", :description=> "An I Pledge overlay badge on of your current twitter avatar."},
        {:name => 'original', :title=> "No Badge", :description=> "Your original twitter avatar."}
       ]
   end

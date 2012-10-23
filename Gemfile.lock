@@ -130,6 +130,7 @@ GEM
       hike (~> 1.2)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
+    sqlite3 (1.3.6)
     thin (1.5.0)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -165,6 +166,7 @@ DEPENDENCIES
   rails (= 3.2.8)
   rmagick (= 2.12.0)
   sass-rails (~> 3.2.3)
+  sqlite3
   thin
   twitter
   uglifier (>= 1.0.3)
