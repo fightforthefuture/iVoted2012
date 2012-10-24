@@ -441,6 +441,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
    h4:before{padding-right: 20px;}
    h4:after{padding-left: 20px;}
 }​
+
 /**********  Speech bubble ******************/
 
 p.bubble{ padding: 0px; margin: 0px auto;}
@@ -503,7 +504,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   -moz-background-clip: padding;
   -webkit-background-clip: padding-box;
   background-clip: padding-box; 
-  background-color: rgba(223,223,223,.38); 
+  background-color: #ececec; 
   -moz-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 0 rgba(1,0,0,.27), inset 0 0 5px rgba(0,0,0,.1); 
   -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 0 rgba(1,0,0,.27), inset 0 0 5px rgba(0,0,0,.1); 
   box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 0 rgba(1,0,0,.27), inset 0 0 5px rgba(0,0,0,.1);
@@ -517,7 +518,24 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   padding: 40px 50px;
   margin: 40px auto;
   text-align: center;
-   
+
+  .line {
+    width: 100%;
+    border-bottom: 1px dotted #999;
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+	  
+    h4 {
+    display: inline-block;
+    background-color: #ececec; 
+    font-weight: bold;
+    font-size: 120%;
+    padding: 10px;
+    position: relative;
+    bottom: -20px;
+    }
+  }
   .badge{
     margin: 20px;
     
@@ -535,15 +553,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
 
 /******* Ribbon **************/
 
- 
- .line {
-    width: 100%;
- 	  border-bottom: 1px dotted #999;
- 	  text-align:center;
- 	  position: relative;
 
- }
- 
 .votebox{
 
   .field {

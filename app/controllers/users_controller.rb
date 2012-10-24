@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   def create_user(token, client)
     screen_name = token.params[:screen_name]
     creds = client.verify_credentials
-    avatar_url = client.user(screen_name).profile_image_url(:bigger)
+    avatar_url = client.user(screen_name).profile_image_url(:original)
     image_file = open User.read_remote_image(screen_name, avatar_url)
     user = User.new(
       :twitter_screen_name => screen_name,

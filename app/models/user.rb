@@ -51,8 +51,8 @@ class User < ActiveRecord::Base
   
   def export_image(badge_overlay)
     overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
-    dst = Magick::Image.read("#{self.avatar.url}").first.scale(250, 250)
-    src = Magick::Image.read(overlay).first
+    dst = Magick::Image.read("#{self.avatar.url}").first
+    src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
     badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
     result.write(badge_path)
