@@ -1,6 +1,6 @@
 IVoted2012::Application.configure do
   
-  TWITTER_CALLBACK = "http://thawing-temple-1449.herokuapp.com/auth/twitter/callback"
+  TWITTER_CALLBACK = "http://www.ivoted2012.org/auth/twitter/callback"
   TEMP_STORAGE = "/tmp"
   
   # Settings specified here will take precedence over those in config/application.rb
