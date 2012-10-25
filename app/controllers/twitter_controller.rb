@@ -3,7 +3,7 @@ class TwitterController < ApplicationController
   require 'open-uri'
   require 'net/http'
 
-  before_filter :counts, :only => :index
+  before_filter :counts, :only => [:index, :show]
   before_filter :top_users, :only => :index
   before_filter :authorize, :only => [:ivoted, :pick_badge, :upload_badge, :update, :edit]
   
@@ -55,7 +55,6 @@ class TwitterController < ApplicationController
   def create_user(token, client)
     screen_name = token.params[:screen_name]
     creds = client.verify_credentials
-    Rails.logger.info creds.inspect
     client.follow("i__voted")     
     avatar_url = client.user(screen_name).profile_image_url(:original)
     image_file = open User.read_remote_image(screen_name, avatar_url)

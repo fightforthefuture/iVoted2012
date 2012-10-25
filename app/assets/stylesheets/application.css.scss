@@ -52,7 +52,7 @@
 
 #page{margin-top: 40px;}
 
-.tweetbox, #image_picker, .votebox{
+.tweetbox, #image_picker{
   width: 640px;
   margin: 0px auto;
   padding: 20px;
@@ -96,7 +96,8 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 
 #notice{
   width: 100%;
-  background-color: #414141;
+  background: #414141 url('/assets/grey_background.jpg');
+  box-shadow: inset 0 -10px 20px -10px black;
   text-align:center;
   padding: 20px 0;
   >span {    
@@ -171,7 +172,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 		-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
 		box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
     }
-    a.option.half.badge.selected:before {
+    a.badge.selected:before {
       content: url('/assets/selected.png');
       position: absolute;
       top: -15px;
@@ -195,13 +196,20 @@ img.logo{ border:none; bottom: -30px; position:relative;}
   padding: 20px auto;
   > .have_voted{
     width: 500px;
-    margin: 0px auto;
     padding: 20px;
     display: block;
     font-size: 140%;
     line-height: 140%;
-    >span,.button{
-      display:table-cell;
+    margin: 0px auto;
+    
+    >.button{
+      float: right;
+      padding: 5px 10px;
+      font-size: 100%;
+      min-width: 75px;
+    }
+    >span{
+      
       >a{
         color:#134383;
         text-decoration: underline;
@@ -473,16 +481,18 @@ h2, h4 {margin: 0px 0; padding: 0;}
   background:linear-gradient(left, #FFFFFF 0%,#777 50%,#FFFFFF 100%);
   width:100%;
   height: 2px;
-  margin: 40px 0 20px 0;
+  margin: 60px 0 30px 0;
   display:block;
   text-align:center;
   
   h4{
     display:inline-block;
     background-color:#f6f6f6;
-    font-style:italic;
-    font-weight: bold;
-    font-size: 120%;
+    font-family: 'Oleo Script', cursive;
+    font-weight:lighter;
+    letter-spacing: 2px;
+    font-size: 200%;
+    color: #555555;
     padding: 0px;
     position: relative;
     top: -5px;
@@ -490,6 +500,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
    h4:before, h4:after{ content: " ♦♦ "; color: #999999;font-size: 60%; position: relative; top: -4px;}
    h4:before{padding-right: 20px;}
    h4:after{padding-left: 20px;}
+
 }​
 
 /**********  Speech bubble ******************/
@@ -615,18 +626,21 @@ p.bubble{ padding: 0px; margin: 0px auto;}
 .votebox{
 
   .field {
-    margin: 40px 0;
+    margin: 0 auto;
     input{
-      width: 100%;
+      width: 620px;
+      margin: 0px auto;
       font-size: 140%;
       text-align: center;
       padding: 10px 0;
       font-size: 200%;
       font-weight: bold;
+      display:block;
     }
     p{
-      font-size: 200%;
-      font-weight: bold;
+      font-size: 340%;
+      font-weight:bold;
+      letter-spacing: 2px;
       text-align:center;
     }
   }

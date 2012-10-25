@@ -1,9 +1,3 @@
-<div class="menu">
-  <% if current_user && current_user != @user %> 
-    <%= link_to "Gonna vote? Get your own page", "/twitter/new", :class=> "button grey"  %>
-    <%= link_to "My Page", "/users/#{current_user.id}", :class=> "button grey" %>
-  <%end %>
-</div>
 <div class="headline">
     <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted"><%= vote_status(@user) %></span>
 </div>
@@ -17,20 +11,43 @@
 <div class="votebox">
   <% if !@user.i_voted_for_president.blank?%>
     <div class="field">
-      <div class="sexy_line"><h4>I voted for President:</h4></div>
+      <div class="sexy_line"><h4><%= vote_for(@user) %></h4></div>
       <p><%= @user.i_voted_for_president %></p>
     </div>
   <% end %>
   <% if !@user.i_voted_because.blank?%>
   <div class="field">
-    <div class="sexy_line"><h4>I voted because:</h4></div>
+    <div class="sexy_line"><h4><%= vote_because(@user) %></h4></div>
     <p><%=  @user.i_voted_because %></p>
   </div>
   <% end %>
   <% if !@user.where_i_voted_at.blank?%>
   <div class="field">
-    <div class="sexy_line"><h4>Where I voted:</h4></div>
+    <div class="sexy_line"><h4><%= vote_at(@user) %></h4></div>
     <p><%=  @user.where_i_voted_at %></p>
   </div>
   <% end %>
 </div>
+<% if params[:action] == 'show' && (!current_user || current_user != @user)%>
+  <div class="followers">
+  <div class="headline" style="font-size: 200%;">Gonna vote? Get your own page</div>
+    <a class="badge thumb" href="/twitter/new?badge=ivoted_banner">
+      <div class="ivoted_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+      <p class="count"><%= @counts['ivoted_banner_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ivoted_badge">
+      <div class="ivoted_badge"></div>
+      <p class="count"><%= @counts['ivoted_badge_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ipledge_banner">
+      <div class="ipledge_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+      <p class="count"><%= @counts['ipledge_banner_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ipledge_badge">
+      <div class="ipledge_badge"></div>
+      <p class="count"><%= @counts['ipledge_badge_count'] %> Choose This</p>
+    </a>
+  </div>
+<% end %>

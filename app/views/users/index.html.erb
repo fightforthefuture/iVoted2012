@@ -47,10 +47,9 @@
   	           $("#thatone").toggle();
   	           $("#thisone").toggle();	   
   		   }
-		  
         $("a.option.half").removeClass('selected');
-		
         $(obj).addClass('selected');
+        $("#login_button").attr("href", $(obj).data('url'));
       }
   <% end %>
 <% end %>

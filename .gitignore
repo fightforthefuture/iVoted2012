@@ -19,3 +19,4 @@ app/assets/images/users
 /tmp
 
 .DS_Store
+app/.DS_Store

@@ -1,10 +1,10 @@
 <div id="image_picker">
   <% if !@user.voted?%>
     <div class="have_voted">
+      <%= link_to "I Voted", "/#{params[:controller]}/i_voted", :class=>"button green ivoted" %>
       <span>Have you voted?
        <%= link_to "Yes, get my 'I Voted' badge/page", "/#{params[:controller]}/i_voted" %>
-       </span>
-      <%= link_to "I Voted", "/#{params[:controller]}/i_voted", :class=>"button green" %>
+       </span> 
     </div>
   <% end %>
   <div class="preview">
