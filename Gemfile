@@ -7,7 +7,7 @@ gem 'thin'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3'
+gem 'sqlite3'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'pg'
@@ -15,7 +15,7 @@ gem 'faraday'
 gem 'oauth'
 gem 'json'
 gem 'twitter'
-gem 'rmagick', '2.12.0', :require => 'RMagick'
+#gem 'rmagick', '2.12.0', :require => 'RMagick'
 
 # Gems used only for assets and not required
 # in production environments by default.

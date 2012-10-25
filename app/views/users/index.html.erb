@@ -25,7 +25,8 @@
         </div>
       </a>
     </div>
-    <%= image_tag("arrow.png", :class=>"arrow")%>
+    <%= image_tag("arrow.png", :class=>"arrow", :id=>"thisone")%>
+    <%= image_tag("arrow_left.png", :class=>"arrow", :id=>"thatone", :style =>"display: none;")%>	
   </div>
 </div>
 
@@ -40,7 +41,15 @@
       });
     
       function change_badge(obj){
+  		if ($(obj).hasClass('selected')) {
+  			console.log("go it");
+  		   } else {
+  	           $("#thatone").toggle();
+  	           $("#thisone").toggle();	   
+  		   }
+		  
         $("a.option.half").removeClass('selected');
+		
         $(obj).addClass('selected');
       }
   <% end %>
