@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
  
-#  require 'RMagick'
+  require 'RMagick'
   require 'open-uri'
   require 'net/http'
   
@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessor :avatar_url, :badge_url, :current_image,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count
   attr_accessible :avatar_url, :badge_url, :avatar, :badge, :twitter_screen_name, :twitter_id, :twitter_name, :twitter_oauth_token, :twitter_oauth_token_secret, 
   :twitter_active, :twitter_badge_style, :twitter_followers_count, :twitter_listed_count, :twitter_friends_count, :twitter_favourites_count,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count,
-  :i_voted_for_president, :i_voted_because, :where_i_voted_at
+  :i_voted_for_president, :i_voted_because, :where_i_voted_at, :pledged, :voted
   
   has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
   has_attached_file :badge, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
@@ -23,6 +23,12 @@ class User < ActiveRecord::Base
       self.update_attributes(:twitter_oauth_token => token.token, :twitter_oauth_token_secret => token.secret)
     end
   end
+    
+  def vote_status
+    return "I Voted" if self.twitter_badge_style.match("ivoted")
+    return "I Pledge to Vote" if self.twitter_badge_style.match("ipledge")
+  end
+  
     
   def current_image
     if self.badge.url != "/badges/original/missing.png"
@@ -51,15 +57,15 @@ class User < ActiveRecord::Base
   
   def export_image(badge_overlay)
     overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
-    dst = Magick::Image.read("#{self.avatar.url}").first.scale(250, 250)
-    src = Magick::Image.read(overlay).first
+    dst = Magick::Image.read("#{self.avatar.url}").first
+    src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
     badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
     result.write(badge_path)
     file= open badge_path
     @client = Twitter::Client.new(:oauth_token => self.twitter_oauth_token, :oauth_token_secret => self.twitter_oauth_token_secret)
     @client.update_profile_image(file)
-    if self.update_attributes(:badge => file, :twitter_badge_style => badge_overlay)
+    if self.update_attributes(:badge => file, :twitter_badge_style => badge_overlay, :pledged => !!badge_overlay.match("pledge"), :voted => !!badge_overlay.match("vote"))
       return true
     else
       return false

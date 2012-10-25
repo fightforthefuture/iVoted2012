@@ -1,7 +1,7 @@
 <% if current_user %>
   <%= render :partial => "users/partials/tweetbox"%>
   <div class="headline">
-    <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted">voted!</span>
+    <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted"><%= vote_status(@user) %></span>
   </div>
   <%= render :partial => "users/partials/image_picker"%>
   <%= render :partial => "users/partials/votebox"%>
