@@ -58,7 +58,7 @@
   padding: 20px;
 }
 
-textarea#post_messag {
+textarea#post_message {
 	border: 1px solid #828282; /* stroke */
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
@@ -154,6 +154,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
       font-size: 100%;
       text-align:center;
       margin: 120px 0px 0 0px;
+	  line-height: 1.5;
     }
     > a.badge.selected p.count{
       margin: 121px 0px 0 0px;
