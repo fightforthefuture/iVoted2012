@@ -27,10 +27,12 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-    status = "pledged to vote"
-    status = "voted" if current_user && current_user.voted?
     idz = session[:user_id]
-    return "I voted! And here's my voter page http://www.ivoted2012.org/users/#{idz} #ivoted"
+    status = ""
+    status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/users/#{idz} #iwillvote" if current_user
+    status = "I voted! And here's my voter page http://www.ivoted2012.org/users/#{idz} #ivoted" if current_user && current_user.voted?
+    
+    return status
   end
 
   def overlay_options
