@@ -149,7 +149,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
        -webkit-box-shadow: inset 0 0 3px #555;
        box-shadow:         inset 0 0 3px #555;
     }
-    a.badge.selected:before {
+    a.option.half.badge.selected:before {
       content: url('/assets/selected.png');
       position: absolute;
       top: -15px;
@@ -258,8 +258,8 @@ a.button:hover, button:hover{
 .stars{ width:100%; padding-top: 30px; overflow:hidden; }
 .stars img{border:none; margin-top: -15px;}
 
-.stars .lft{ width:50%; background: url('/assets/grey_star_one.jpg') top right repeat-x;}
-.stars .rgt{ width:50%; background: url('/assets/grey_star_one.jpg') top left repeat-x;}
+.stars .lft{ width:50%; background: url('/assets/grey_star_one.png') top right repeat-x;}
+.stars .rgt{ width:50%; background: url('/assets/grey_star_one.png') top left repeat-x;}
 
 /**** CTA ****/
 h2, h4 {margin: 0px 0; padding: 0;}
@@ -360,7 +360,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
       top: -15px;
     }
     a.option.half.left.selected:before { left: -15px; }
-    a.option.half.right.selected:before { right: -15px; }
+    a.option.half.right.selected:before { left: -15px; z-index: 999;}
   }
 }
 
@@ -413,9 +413,12 @@ h2, h4 {margin: 0px 0; padding: 0;}
 .badge{
   margin: 10px;
   display:inline-block;
-  border: 1px solid #333333;
+  border: 1px solid #4e4e4e;
   background-color: #333333;
-
+  -moz-box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
+  -webkit-box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
+  box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
+  border-radius: 1px;
 }
 .sexy_line {
   background:-moz-linear-gradient(left, #FFFFFF 0%,#777 50%,#FFFFFF 100%); 
@@ -449,7 +452,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
    position:relative;
    padding:5px;
    top: 0px;
-   color:#ffffff;
+   color:transparent;
    -moz-border-radius:10px;
    -webkit-border-radius:10px;
    border-radius:10px;
@@ -467,19 +470,22 @@ p.bubble{ padding: 0px; margin: 0px auto;}
    border-width:8px 8px 0;
    border-style:solid;
 }
-.bubble.red{
-   background: #c42a2a url("/assets/voted_badge.png") 5px 5px no-repeat;
-   background-size: 25px 25px;
-}
-.bubble.red:after{
-   border-color:#c42a2a transparent;
+.cta .action > a.option .bubble.red{
+   background: transparent url("/assets/i_voted_bubble.png")  no-repeat;
+   font-weight: bold;
+   text-indent: -9999px;
+   width: 150px;
+   height: 45px;
+   display: inline-block;
+   padding: 0;
+   margin-left: 40px;
 }
 .bubble.blue{
-   background: #293d7a url("/assets/pledge_badge.png") 5px 5px no-repeat;
-   background-size: 25px 25px;
-}
-.bubble.blue:after{
-  border-color: #293d7a transparent;
+   background: url("/assets/i_want_to_pledge_bubble.png")  no-repeat;
+   text-indent: -9999px;
+   height: 46px;
+   width: 202px;
+   margin-left: 10px;
 }
 .text .bubble{
   text-transform:uppercase; 
@@ -492,6 +498,11 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   position: absolute;
   bottom: -100px;
   left: 200px;
+}
+
+#thatone {
+	left: 590px;
+	display: none;
 }
 
 /************* FOLLOWERS ******************/
@@ -523,7 +534,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
     
     .count{
       color: #5d5d5d;
-      font-size: 130%;
+      font-size: 110%;
       width: 110px;
       font-weight:bold;
       display: block;
@@ -592,35 +603,23 @@ a.button{
   text-shadow: 0px -1px 1px rgba(0, 0, 0, 0.8);
 }
 a.button.twitter{
-  padding-left: 60px;
+  padding: 0;
   font-weight:normal;
+  text-indent: -9999px;
+  background: url('/assets/twitter_circle_button.png');
+  width: 256px;
+  height: 54px;
 }
 a.button.twitter:after{
-  content: url('/assets/twitter_circle.png');
+  content: url('/assets/twitter_circle_button.png');
   position: absolute;
   left: 10px;
   top: 10px;
 }
 a.button.blue, a.button.blue:active {
-  border: none;
-  background-color: #208bc0;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#27a4e0 0%), to(#208bc0 50%));
-  /* Saf4+, Chrome */
-  background-image: -webkit-linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
-  background-image: -moz-linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
-  background-image: -ms-linear-gradient(top,#77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
-  background-image: -o-linear-gradient(top,#77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
-  background-image: linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
+
 }
 a.button.blue:hover{
-    background-color: #f37873;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(#1f8bbd 0%), to(#216ec8 50%));
-    /* Saf4+, Chrome */
-    background-image: -webkit-linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
-    background-image: -moz-linear-gradient(top,  #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
-    background-image: -ms-linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
-    background-image: -o-linear-gradient(top,  #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
-    background-image: linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
 }
 a.button.grey, a.button.grey:active {
   border: 1px solid #999999;
