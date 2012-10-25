@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :default_tweet, :overlay_options, :random_avatar
+  helper_method :current_user, :default_tweet, :overlay_options, :random_avatar, :get_id
   
   after_filter :reset_random_avatar
 
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   
   BADGE_UPDATED = "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
   We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
-  <div style='margin: 10px;'><a href='/users/CURRENT_ID' class='button grey'>Hide this and view the page</a></div>"
+  <div style='margin: 10px;'><a href='PLATFORM_PATH' class='button grey'>Hide this and view the page</a></div>"
   
   
   private
@@ -27,12 +27,17 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-    idz = session[:user_id]
+    idz = current_user.twitter_screen_name
     status = ""
-    status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/users/#{idz} #iwillvote" if current_user
-    status = "I voted! And here's my voter page http://www.ivoted2012.org/users/#{idz} #ivoted" if current_user && current_user.voted?
-    
+    status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/twitter/#{idz} #iwillvote" if current_user
+    status = "I voted! And here's my voter page http://www.ivoted2012.org/twitter/#{idz} #ivoted" if current_user && current_user.voted?
     return status
+  end
+
+  def get_id(user, params)
+    return @id ||= user.twitter_screen_name if params[:platform] == "twitter"
+    #return @id ||= user.facebook_screen_name if params[:platform] == "facebook"
+    return user.id
   end
 
   def overlay_options

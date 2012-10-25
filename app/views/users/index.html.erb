@@ -3,7 +3,7 @@
   <h4>Get a Twitter badge and vote page to help moticate your followers to vote.</h4>
   <div class="padd">
     <div class="action">
-      <a class="option half left selected" data-url="/login?badge=ivoted_banner">
+      <a class="option half left selected" data-url="/twitter/new?badge=ivoted_banner">
         <div class="text">
           <p class="bubble red" style="float: left;">Yes, I voted.</p>
            <p class="explanation"></p>
@@ -14,7 +14,7 @@
         </div>
       </a>
       <div class="buffer"><div class="line"></div></div>
-      <a class="option half right" data-url="/login?badge=ipledge_banner">
+      <a class="option half right" data-url="/twitter/new?badge=ipledge_banner">
         <div class="badge medium">
           <div class="ipledge_banner"></div>
           <%= image_tag(random_avatar, :class=>"avatar")%>
@@ -54,7 +54,7 @@
       }
   <% end %>
 <% end %>
-<span class="center"><%= link_to "choose your badge", "/login?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
+<span class="center"><%= link_to "choose your badge", "/twitter/new?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
 
 <%= image_tag("seperator.png", :style=> "border:none;margin-top: 60px;") %>
 
@@ -62,21 +62,21 @@
   <h1 class="ribbon">
      <strong class="ribbon-content"> <%= @counts['total_followers'] %> Followers reached by these badges</strong>
   </h1>
-  <a class="badge thumb" href="/login?badge=ivoted_banner">
+  <a class="badge thumb" href="/twitter/new?badge=ivoted_banner">
     <div class="ivoted_banner"></div>
     <%= image_tag(random_avatar, :class=>"avatar")%>
     <p class="count"><%= @counts['ivoted_banner_count'] %> Choose This</p>
   </a>
-  <a class="badge thumb" href="/login?badge=ivoted_badge">
+  <a class="badge thumb" href="/twitter/new?badge=ivoted_badge">
     <div class="ivoted_badge"></div>
     <p class="count"><%= @counts['ivoted_badge_count'] %> Choose This</p>
   </a>
-  <a class="badge thumb" href="/login?badge=ipledge_banner">
+  <a class="badge thumb" href="/twitter/new?badge=ipledge_banner">
     <div class="ipledge_banner"></div>
     <%= image_tag(random_avatar, :class=>"avatar")%>
     <p class="count"><%= @counts['ipledge_banner_count'] %> Choose This</p>
   </a>
-  <a class="badge thumb" href="/login?badge=ipledge_badge">
+  <a class="badge thumb" href="/twitter/new?badge=ipledge_badge">
     <div class="ipledge_badge"></div>
     <p class="count"><%= @counts['ipledge_badge_count'] %> Choose This</p>
   </a>

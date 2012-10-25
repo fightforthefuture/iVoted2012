@@ -3,8 +3,8 @@
       <p class="flash-notice">
         <% if current_user %>
           <%= flash[:notice].
-                gsub('CURRENT_ID', current_id).
                 gsub('CURRENT_LOGIN', current_login).
+                gsub('PLATFORM_PATH', platform_path).
                 gsub('VOTE_NOTICE', vote_notice).
               html_safe %>
         <% else %>

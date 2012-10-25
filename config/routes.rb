@@ -1,21 +1,26 @@
 IVoted2012::Application.routes.draw do
-  resources :posts
-
-  root :to => 'users#index'
   
-  ## Twitter
-  resources :users do
+  resources :posts
+  
+  resources :twitter do
     collection do
+      get 'i_voted'
       get 'pick_badge'
       get 'upload_badge'
       get 'download_badge'
       post 'tweet'
     end
   end
-  match '/auth/twitter/callback' => 'users#create'
-  match '/login' => 'users#new', :as => :new
-  match "/signout" => "sessions#destroy", :as => :signout
   
+  match '/auth/twitter/callback' => 'twitter#create'
+  match "/signout" => "sessions#destroy", :as => :signout
+
+  # resources :users, :path => :twitter, :platform => "twitter"
+  # resources :users, :path => :facebook, :platform => "facebook"
+  # root :to => 'users#index', :platform => "twitter"
+  # 
+  
+  root :to => 'twitter#index'
   #match "/auth/:provider/callback" => "sessions#create"
   
   # The priority is based upon order of creation:

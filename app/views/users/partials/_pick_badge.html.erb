@@ -48,7 +48,7 @@
      });
     
      function change_badge(obj){
-       $("#upload_badge").attr("href", "/users/upload_badge?badge="+obj.data('badge'));
+       $("#upload_badge").attr("href", "/<%= params[:controller] %>/upload_badge?badge="+obj.data('badge'));
        $("a.badge").removeClass('selected');
        $(obj).addClass('selected');
      }

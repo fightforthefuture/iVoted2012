@@ -1,11 +1,11 @@
 <div class="menu">
   <% if current_user && current_user != @user %> 
-    <%= link_to "Gonna vote? Get your own page", "/login", :class=> "button grey"  %>
+    <%= link_to "Gonna vote? Get your own page", "/twitter/new", :class=> "button grey"  %>
     <%= link_to "My Page", "/users/#{current_user.id}", :class=> "button grey" %>
   <%end %>
 </div>
 <div class="headline">
-  <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted">voted!</span>
+    <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted"><%= vote_status(@user) %></span>
 </div>
 <div style="text-align:center;">
   <% if !@user.badge.url.nil? %>

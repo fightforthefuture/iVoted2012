@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   alias_attribute :login, :twitter_screen_name
   
   #validates_presence_of [:i_voted_for_president, :i_voted_because, :where_i_voted_at], :on => :update_profile
-  
+
   def update_tokens(token)
     if self.twitter_oauth_token != token.token && self.twitter_oauth_token_secret != token.secret
       self.update_attributes(:twitter_oauth_token => token.token, :twitter_oauth_token_secret => token.secret)
@@ -60,12 +60,14 @@ class User < ActiveRecord::Base
     dst = Magick::Image.read("#{self.avatar.url}").first
     src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
-    badge_path = "#{TEMP_STORAGE}/#{self.login}_badge.jpg"
+    badge_path = "#{TEMP_STORAGE}/#{self.twitter_screen_name}_badge.jpg"
     result.write(badge_path)
     file= open badge_path
     @client = Twitter::Client.new(:oauth_token => self.twitter_oauth_token, :oauth_token_secret => self.twitter_oauth_token_secret)
     @client.update_profile_image(file)
-    if self.update_attributes(:badge => file, :twitter_badge_style => badge_overlay, :pledged => !!badge_overlay.match("pledge"), :voted => !!badge_overlay.match("vote"))
+    atts = {:badge => file, :twitter_badge_style => badge_overlay, :pledged => !!badge_overlay.match("pledge")}
+    atts.merge!(:voted => !!badge_overlay.match("vote")) if !self.voted?
+    if self.update_attributes(atts)
       return true
     else
       return false

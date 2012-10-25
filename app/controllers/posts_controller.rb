@@ -20,10 +20,10 @@ class PostsController < ApplicationController
       @post = Post.new(params[:post])
       if @post.save
         flash[:notice] = TWEET_SENT
-        redirect_to user_path(current_user) 
+        redirect_to "/#{current_platform}/#{current_users.login}"
       else
         flash[:notice] = TWEET_FAILED
-        redirect_to user_path(current_user)
+        redirect_to "/#{current_platform}/#{current_users.login}"
       end
     end
   end

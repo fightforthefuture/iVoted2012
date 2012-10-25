@@ -1,23 +1,17 @@
-<% if params[:controller] == 'users' && (params[:action] == 'edit' || params[:action] == 'show') %>
+<% if (params[:action] == 'edit' || params[:action] == 'show') %>
   <% if !current_page?('/') %>
-    <ul class="menu">
-     <% if !current_user %>
-      <li><%= link_to "Sign-in", "/login", :class=>"button grey" %></li>
-    <% else %>
-      <%  if params[:controller] == 'users' && params[:action] == 'edit' %>
-        <li><%= link_to "View", user_path(current_user), :class=>"button grey" %></li>
-      <% end %>
-      <%  if params[:controller] == 'users' && params[:action] == 'show' %>
-        <li><%= link_to "Edit", edit_user_path(current_user), :class=>"button grey" %></li>
-      <% end %>
-      <li><%= link_to "Logout", signout_path, :method => :delete, :class=>"button grey" %></li>
+     <ul class="menu">
+       <% if !current_user %>
+          <li><%= link_to "Gonna vote? Get your own page", "/#{params[:controller]}/new", :class=>"button grey" %></li>
+       <% else %>
+          <li><%= link_to "Logout", signout_path, :method => :delete, :class=>"button grey" %></li>
+       <% end %>
+     </ul>
+   <% if current_user && params[:action] == 'edit' %> 
+      <ul class="menu">
+        <li><%= link_to "Cancel", "/#{params[:controller]}/#{current_login}", :class=>"button red" %></li>
+        <li><%= link_to "Save Page", "javascript:$('.edit_user').submit();", :class=>"button green" %></li>
+      </ul>
     <% end %>
-    </ul>
-    <br/><br/>
-    <% if current_user && !current_user.voted?  %>
-    <ul class="menu">
-       <li><%= link_to "I Voted", pick_badge_users_path, :class=>"button green" %></li>
-    </ul>
-     <% end %>
   <% end %>
 <% end %>

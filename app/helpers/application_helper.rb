@@ -1,13 +1,18 @@
 module ApplicationHelper
   
-  def current_id
-    return false if !current_user
-    return current_user.id.to_s
+  def current_login
+    return "" if !current_user
+    return "#{current_user[params[:controller].to_s+'_screen_name']}"
+  end
+
+  def platform_path
+    return "/" if !current_user
+    return "/#{params[:controller]}/#{current_login}" if params[:controller] == "twitter"
   end
   
-  def current_login
-    return false if !current_user
-    return current_user.twitter_screen_name
+  def edit_platform_path
+    return "/" if !current_user
+    return "/#{params[:controller]}/#{current_login}" if params[:controller] == "twitter"
   end
   
   def vote_notice

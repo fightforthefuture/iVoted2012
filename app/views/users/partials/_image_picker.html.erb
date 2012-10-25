@@ -1,13 +1,20 @@
 <div id="image_picker">
- 
+  <% if !@user.voted?%>
+    <div class="have_voted">
+      <span>Have you voted?
+       <%= link_to "Yes, get my 'I Voted' badge/page", "/#{params[:controller]}/i_voted" %>
+       </span>
+      <%= link_to "I Voted", "/#{params[:controller]}/i_voted", :class=>"button green" %>
+    </div>
+  <% end %>
   <div class="preview">
     <%= image_tag(@user.avatar.url, :class=>"original")%>
     <%= image_tag("#{@user.twitter_badge_style}.png", :class=>"overlay")%>
   </div>
    <div class="overlay_selection closed">
     <span class="center">
-    <%= link_to "Download Badge", "/users/download_badge" %><br/><br/>
-    <%= link_to "Change Badge", "/users/pick_badge", :class=>"button blue twitter"%>
+    <%= link_to "Download Badge", "/#{params[:controller]}/download_badge" %><br/><br/>
+    <%= link_to "Change Badge", "/#{params[:controller]}/pick_badge", :class=>"button blue twitter"%>
     </span>
   </div>
 </div>
