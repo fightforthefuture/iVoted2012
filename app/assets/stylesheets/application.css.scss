@@ -725,3 +725,19 @@ a.button.grey, a.button.grey:active {
   font-weight:normal;
   color: #414141;
 }
+
+p.disclosure {
+	font-size: 12px;
+	line-height: 1.5;
+	width: 800px;
+	text-align: center;
+	margin: 20px auto;
+	color: #666;
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+p.disclosure a {
+	color: #666;
+	text-decoration: underline;
+}
