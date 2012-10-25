@@ -1,15 +1,6 @@
 <div class="pick_badge">
   <%= image_tag("pick_your_badge.png", :style =>"border:none")  %>
   <div class="row">
-    <a class="badge thumb selected" href="#" data-badge='ivoted_banner'>
-       <div class="ivoted_banner"></div>
-       <%= image_tag(@user.avatar.url, :class=>"avatar")%>
-       <p class="count">I Voted Banner</p>
-     </a>
-     <a class="badge thumb" href="#" data-badge='ivoted_badge'>
-       <div class="ivoted_badge"></div>
-       <p class="count">I Voted Badge</p>
-     </a>
      <a class="badge thumb" href="#" data-badge='ipledge_banner'>
        <div class="ipledge_banner"></div>
        <%= image_tag(@user.avatar.url, :class=>"avatar")%>
@@ -19,6 +10,15 @@
        <div class="ipledge_badge"></div>
        <p class="count">I Pledge Badge</p>
      </a>
+     <a class="badge thumb" href="#" data-badge='ivoted_banner'>
+        <div class="ivoted_banner"></div>
+        <%= image_tag(@user.avatar.url, :class=>"avatar")%>
+        <p class="count">I Voted Banner</p>
+      </a>
+      <a class="badge thumb" href="#" data-badge='ivoted_badge'>
+        <div class="ivoted_badge"></div>
+        <p class="count">I Voted Badge</p>
+      </a>
      <a class="badge thumb" href="#" data-badge='original'>
         <%= image_tag(@user.avatar.url, :class=>"avatar")%>
         <p class="count">Keep Original</p>
@@ -32,8 +32,13 @@
 <% content_for :footer do %>
   <% javascript_tag do %>
      $(document).ready(function(){
-       var badge_style = '<%= session[:badge] %>';
-       console.log(badge_style);
+       var badge_style = '<%= 
+        if @show_ipledge
+          h("ivoted_banner")
+        else
+          session[:badge]
+        end 
+       %>';
        var obj = $("a.badge[data-badge='"+badge_style+"']");
        change_badge(obj);
      });

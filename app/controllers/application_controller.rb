@@ -13,9 +13,10 @@ class ApplicationController < ActionController::Base
   TWEET_SENT = "You tweet has been sent!"
   TWEET_FAILED = "We are sorry. Something went wrong. Please try again later."
   
-  BADGE_UPDATED = "<b>Awesome! Here's your own 'I Voted' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
+  BADGE_UPDATED = "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
   We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
   <div style='margin: 10px;'><a href='/users/CURRENT_ID' class='button grey'>Hide this and view the page</a></div>"
+  
   
   private
   
@@ -26,7 +27,9 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-     "#i_voted, I just voted and got my own IVoted2012.org Badge and Profile page. Join me and pledge your vote."
+    status = "pledged to vote"
+    status = "voted" if current_user && current_user.voted?
+    return "#i_voted, I just #{status} and got my own IVoted2012.org Badge and Profile page. Join me and pledge your vote."
   end
 
   def overlay_options

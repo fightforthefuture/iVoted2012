@@ -121,7 +121,12 @@ img.logo{ border:none; bottom: -30px; position:relative;}
     >a.badge.selected div, a.badge.selected img{
      margin: 9px 9px 40px 9px;
     }
-
+    >a.badge.disabled{
+      pointer-events: none;
+      cursor: default;
+      opacity:0.6;
+      filter:alpha(opacity=60);
+    }
     >a.badge div, a.badge img{
       margin: 10px 10px 40px 10px;
     }
@@ -589,6 +594,18 @@ p.bubble{ padding: 0px; margin: 0px auto;}
 
 /************************************** BUTTON ******************************************/
 
+ul.menu{
+  clear: both;
+  > li{
+    >a.button{	
+      font-size: 80%;
+      color: #ffffff;
+      min-width: 50px;
+      padding: 5px;
+    }
+  }
+}
+
 a.button{
   position: relative;
   -webkit-border-radius: 5px;
@@ -632,20 +649,40 @@ a.button.blue:hover{
     background-image: -o-linear-gradient(top,  #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
     background-image: linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
 }
+a.button.green, a.button.green:active {
+  border: 1px solid #016700;
+  background-color: #36a23c;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#36a23c 0%), to(#046902 50%));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #36a23c 0%, #268f29 50%, #1b841e 50%, #046902 100%);
+  background-image: -moz-linear-gradient(top,  #36a23c 0%, #268f29 50%, #1b841e 50%, #046902 100%);
+  background-image: -ms-linear-gradient(top, #36a23c 0%, #268f29 50%, #1b841e 50%, #046902 100%);
+  background-image: -o-linear-gradient(top, #36a23c 0%, #268f29 50%, #1b841e 50%, #046902 100%);
+  background-image: linear-gradient(top, #36a23c 0%, #268f29 50%, #1b841e 50%, #046902 100%);
+}
+a.button.green:hover{
+    background-color: #f37873;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1b841e 0%), to(#0b500c 50%));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #1b841e 0%, #1b841e 50%, #0d610f 50%, #0b500c 100%);
+    background-image: -moz-linear-gradient(top, #1b841e 0%, #1b841e 50%, #0d610f 50%, #0b500c 100%);
+    background-image: -ms-linear-gradient(top,  #1b841e 0%, #1b841e 50%, #0d610f 50%, #0b500c 100%);
+    background-image: -o-linear-gradient(top,  #1b841e 0%, #1b841e 50%, #0d610f 50%, #0b500c 100%);
+    background-image: linear-gradient(top, #1b841e 0%, #1b841e 50%, #0d610f 50%, #0b500c 100%);
+}
+ul.menu a.button.green{
+  padding: 10px 10px 10px 40px;
+  font-size: 200%;
+}
+a.button.green:before{
+  content:"✓";
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
 a.button.grey, a.button.grey:active {
   border: 1px solid #999999;
   background-color: #979797;
   font-weight:normal;
   color: #414141;
-}
-
-ul.menu{
-  > li{
-    >a.button.grey{	
-      font-size: 80%;
-      color: #ffffff;
-      min-width: 50px;
-      padding: 5px;
-    }
-  }
 }
