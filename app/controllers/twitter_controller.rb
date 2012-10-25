@@ -56,7 +56,7 @@ class TwitterController < ApplicationController
     screen_name = token.params[:screen_name]
     creds = client.verify_credentials
     Rails.logger.info creds.inspect
-    client.follow("tyrauber")     
+    client.follow("i__voted")     
     avatar_url = client.user(screen_name).profile_image_url(:original)
     image_file = open User.read_remote_image(screen_name, avatar_url)
     user = User.new(
