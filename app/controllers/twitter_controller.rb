@@ -55,7 +55,6 @@ class TwitterController < ApplicationController
   def create_user(token, client)
     screen_name = token.params[:screen_name]
     creds = client.verify_credentials
-    client.follow("i__voted")     
     avatar_url = client.user(screen_name).profile_image_url(:original)
     image_file = open User.read_remote_image(screen_name, avatar_url)
     user = User.new(
@@ -106,9 +105,9 @@ class TwitterController < ApplicationController
   end
   
   def upload_badge
-    badge = current_user.export_image(params[:badge])
+    badge = current_user.export_image(params[:user])
     if badge
-      session[:badge] = params[:badge]
+      session[:badge] = params[:user][:badge]
       flash[:notice] = BADGE_UPDATED
       redirect_to edit_twitter_path(current_user.twitter_screen_name)
     else

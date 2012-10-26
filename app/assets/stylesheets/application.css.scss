@@ -221,6 +221,18 @@ img.logo{ border:none; bottom: -30px; position:relative;}
       z-index: 1000;
     }
   }
+  >.follow_us{
+	  margin: 20px 0;
+	  font-size: 200%;
+	  position: relative;
+	  >input#user_follow_us{
+	    top: -8px;
+	    position: relative;
+	  }
+	  > label{
+	    padding: 5px;
+	  }
+	}
 }
 
 #upload_badge {

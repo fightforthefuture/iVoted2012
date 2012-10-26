@@ -6,7 +6,7 @@ IVoted2012::Application.routes.draw do
     collection do
       get 'i_voted'
       get 'pick_badge'
-      get 'upload_badge'
+      post 'upload_badge'
       get 'download_badge'
       post 'tweet'
     end

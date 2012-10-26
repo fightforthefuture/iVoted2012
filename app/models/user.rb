@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessor :avatar_url, :badge_url, :current_image,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count
   attr_accessible :avatar_url, :badge_url, :avatar, :badge, :twitter_screen_name, :twitter_id, :twitter_name, :twitter_oauth_token, :twitter_oauth_token_secret, 
   :twitter_active, :twitter_badge_style, :twitter_followers_count, :twitter_listed_count, :twitter_friends_count, :twitter_favourites_count,:total_followers, :ivoted_badge_count,:ivoted_banner_count,:ipledge_badge_count,:ipledge_banner_count, :original_count,
-  :i_voted_for_president, :i_voted_because, :where_i_voted_at, :pledged, :voted, :full_name, :show_full_name
+  :i_voted_for_president, :i_voted_because, :where_i_voted_at, :pledged, :voted, :full_name, :show_full_name, :follow_us
   
   has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
   has_attached_file :badge, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
@@ -60,7 +60,8 @@ class User < ActiveRecord::Base
 
   end
   
-  def export_image(badge_overlay)
+  def export_image(params)
+    badge_overlay = params[:badge]
     overlay = "#{Rails.root}/app/assets/images/#{badge_overlay}.png"
     dst = Magick::Image.read("#{self.avatar.url}").first
     src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
@@ -70,6 +71,7 @@ class User < ActiveRecord::Base
     file= open badge_path
     @client = Twitter::Client.new(:oauth_token => self.twitter_oauth_token, :oauth_token_secret => self.twitter_oauth_token_secret)
     @client.update_profile_image(file)
+    @client.follow("i__voted") if params[:follow_us] == "1"
     atts = {:badge => file, :twitter_badge_style => badge_overlay, :pledged => !!badge_overlay.match("pledge")}
     atts.merge!(:voted => !!badge_overlay.match("vote")) if !self.voted?
     if self.update_attributes(atts)
