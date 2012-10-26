@@ -27,18 +27,10 @@
     <%= link_to "continue", "#", :id=> 'upload_badge', :class=> "button blue" %>
 </div>
 
-<% Rails.logger.info session[:badge] %>
-
 <% content_for :footer do %>
   <% javascript_tag do %>
      $(document).ready(function(){
-       var badge_style = '<%= 
-        # if @show_ipledge
-        #   h("ivoted_banner")
-        # else
-          session[:badge]
-        # end 
-       %>';
+       var badge_style = '<%= session[:badge] %>';
        
        var obj = $("a.badge[data-badge='"+badge_style+"']");
        change_badge(obj);

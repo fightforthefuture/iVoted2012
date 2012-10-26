@@ -1,10 +1,12 @@
-<div class="headline">
-    <span class="screen_name"><%= @user.twitter_screen_name %></span> <span class="voted"><%= vote_status(@user) %></span>
+<div class="header">
+    <div class="headline bebas">
+    <span class="screen_name"><%= @user.name %></span> <span class="voted"><%= vote_status(@user) %></span>
+  </div>
 </div>
 <div style="text-align:center;">
-  <% if !@user.badge.url.nil? %>
+  <% if @user.badge.url != "/badges/original/missing.png" %>
     <%= image_tag(@user.badge.url, :class=>"original", :style=> "width:250px;")%>
-  <% elsif !@user.avatar.url.nil? %>
+  <% elsif @user.avatar.url != "/badges/original/missing.png" %>
     <%= image_tag(@user.avatar.url, :class=>"original", :style=> "width:250px;")%>
   <% end %>
 </div>
@@ -29,8 +31,8 @@
   <% end %>
 </div>
 <% if params[:action] == 'show' && (!current_user || current_user != @user)%>
-  <div class="followers">
-  <div class="headline" style="font-size: 200%;">Gonna vote? Get your own page</div>
+  <div class="select_badge">
+  <div class="headline bebas" style="font-size: 300%;">Gonna vote? Get your own page</div>
     <a class="badge thumb" href="/twitter/new?badge=ivoted_banner">
       <div class="ivoted_banner"></div>
       <%= image_tag(random_avatar, :class=>"avatar")%>

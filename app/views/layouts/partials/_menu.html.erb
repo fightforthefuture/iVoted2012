@@ -8,6 +8,7 @@
        <% end %>
      </ul>
    <% if current_user %> 
+   
       <% if params[:action] == 'edit'  %>
         <ul class="menu">
           <li><%= link_to "Cancel", "/#{params[:controller]}/#{current_login}", :class=>"button red" %></li>
@@ -15,7 +16,17 @@
         </ul>
       <% else %>
        <ul class="menu">
-          <li><%= link_to "Edit", "/#{params[:controller]}/#{current_login}/edit", :class=>"button grey" %></li>
+         <% if current_user && !@user.nil? && params[:action] == 'show' %> 
+           <% if current_user != @user %>
+              <li><%= link_to "View your page", "/#{params[:controller]}/#{current_login}", :class=>"button grey" %></li>
+           <% end %>
+           <% if current_user == @user %> 
+              <% if !@user.voted? %>
+                <li><%= link_to "I Voted", "/#{params[:controller]}/i_voted", :class=>"button green" %></li>
+              <% end %>
+              <li><%= link_to "Edit", "/#{params[:controller]}/#{current_login}/edit", :class=>"button grey" %></li>
+            <% end %>
+          <% end %>
         </ul>
       <% end %>
     <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121024233611) do
+ActiveRecord::Schema.define(:version => 20121026154339) do
 
   create_table "posts", :force => true do |t|
     t.integer  "user_id",                            :null => false
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(:version => 20121024233611) do
     t.string   "where_i_voted_at"
     t.boolean  "pledged",                    :default => false
     t.boolean  "voted",                      :default => false
+    t.string   "full_name"
+    t.boolean  "show_full_name",             :default => false
   end
 
   add_index "users", ["twitter_badge_style"], :name => "index_users_on_twitter_badge_style"

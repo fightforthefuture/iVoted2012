@@ -1,5 +1,4 @@
 <div class="votebox">
-  <%= form_for(@user, :url=> {:controller => params[:controller],:action=> "update", :id=> current_login}) do |f| %>
     <div class="field">
       <div class="sexy_line"><h4><%= vote_for(@user) %></h4></div>
       <%= f.text_field :i_voted_for_president %>
@@ -12,5 +11,4 @@
       <div class="sexy_line"><h4><%= vote_at(@user) %></h4></div>
       <%= f.text_field :where_i_voted_at %>
     </div>
-  <% end %>
 </div>

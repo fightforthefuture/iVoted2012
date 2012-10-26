@@ -124,11 +124,9 @@ class TwitterController < ApplicationController
   protected
 
   def authorize
-    Rails.logger.info "Authorize"
     if !current_user
       flash[:notice] = AUTHORIZATION_FAILED
       session[:user_id] = nil
-      Rails.logger.info flash[:notice] 
       redirect_to root_url
     end
   end

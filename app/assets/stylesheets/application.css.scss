@@ -13,7 +13,9 @@
  */
  
 
+ 
  /******* DEFAULTS **********/
+ 
  html{
   	background-color:#f6f6f6;
  }
@@ -50,6 +52,7 @@
  	line-height: 140%;
  }
 
+
 #page{margin-top: 40px;}
 
 .tweetbox, #image_picker{
@@ -73,6 +76,44 @@ textarea#post_message {
 	padding: 10px;
 }
 
+/******** FONTS *************/
+
+ 
+ @font-face {
+     font-family: 'BebasNeueRegular';
+     src: url(font-path('BebasNeue-webfont.eot'));
+     src: url(font-path('BebasNeue-webfont.eot?#iefix')) format('embedded-opentype'),
+          url(font-path('BebasNeue-webfont.woff')) format('woff'),
+          url(font-path('BebasNeue-webfont.ttf')) format('truetype'),
+          url(font-path('BebasNeue-webfont.svg#BebasNeueRegular')) format('svg');
+     font-weight: normal;
+     font-style: normal;
+ }
+ 
+ .bebas {font-family: 'BebasNeueRegular';}
+ 
+ .headline{
+   text-transform:uppercase; 
+   letter-spacing: 0px;
+   font-size: 500%;
+   line-height: 100%;
+   font-weight:bold;
+   color:#a83c2b;
+   text-align:center;
+   >.screen_name{
+     color: #134383;
+   }
+ }
+ .title{ border:none; border-bottom: 1px dotted #999999;margin-bottom: 10px;}
+ 
+ .header{
+    text-align:center;
+    margin-bottom: 20px;
+ }
+ a.link_text{
+    color:#134383;
+    text-decoration: underline;
+ }
  /************ PAGE CONTENT ************/
 
 
@@ -255,20 +296,6 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 	}
 }
 
-
-.headline{
-  text-transform:uppercase; 
-  letter-spacing: 0px;
-  font-size: 400%;
-  line-height: 200%;
-  font-family: helvetica;
-  font-weight:bold;
-  color: #93211e;
-  text-align:center;
-  >.screen_name{
-    color: #134383;
-  }
-}
 .tweets .post{
   height: 70px;
   border-bottom: 1px dotted #999999;
@@ -322,7 +349,6 @@ h2, h4 {margin: 0px 0; padding: 0;}
 .cta{
   display:table-row;
   text-align: center;
-  > img.title{ border:none; padding-bottom: 10px; margin-bottom: 10px; border-bottom: 1px dotted #999999;}
   > h4{color: #393c65; font-size: 180%; font-family: 'Oleo Script', cursive; font-weight:normal; letter-spacing: 1px;}
 
   .action{
@@ -566,7 +592,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
 
 /************* FOLLOWERS ******************/
 
-#image_picker, .followers{  
+#image_picker, .followers, .select_badge{  
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
@@ -580,7 +606,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   position: relative;
 }
 
-.followers{
+.followers, .select_badge{
   z-index: 1;
   top: 40px;
   width: 680px;
@@ -596,13 +622,14 @@ p.bubble{ padding: 0px; margin: 0px auto;}
     position: relative;
 	  
     h4 {
-    display: inline-block;
-    background-color: #ececec; 
-    font-weight: bold;
-    font-size: 120%;
-    padding: 10px;
-    position: relative;
-    bottom: -20px;
+      display: inline-block;
+      background-color: #ECECEC;
+      font-weight: bold;
+      font-size: 200%;
+      padding: 10px;
+      position: relative;
+      bottom: -20px;
+      color: #555;
     }
   }
   .badge{
@@ -619,10 +646,28 @@ p.bubble{ padding: 0px; margin: 0px auto;}
     }
   }
 }
+.top_badge_user{
+  padding:  0 30px;
+  >.badge{
+    display:block;
+    >.count{
+      margin: 0 0 0 120px;
+      padding: 30px 0 0 10px;
+      font-size: 200%;
+      width: 240px;
+      text-align: left;
+      line-height: 120%;
+      font-weight: normal;
+    }
+  }
+}
 
 /******* Ribbon **************/
 
-
+.name_widget.form_elements input{
+  font-size: 80%;
+  width: 460px;
+}
 .votebox{
 
   .field {
