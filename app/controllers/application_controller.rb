@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
   
   def top_users
-    @top_users = User.where("twitter_badge_style != 'original'").order("twitter_followers_count DESC").limit(4)
+    @top_users = User.where("twitter_badge_style != 'original' AND twitter_followers_count != 0").order("twitter_followers_count DESC").limit(1)
   end
   
   def random_avatar

@@ -83,6 +83,7 @@ class TwitterController < ApplicationController
   end
   
   def update
+    params[:user].merge!(:show_full_name => true) if !params[:user][:full_name].blank?
     if current_user.update_attributes(params[:user])
       flash[:notice] = PROFILE_UPDATED
       redirect_to twitter_path(current_user.twitter_screen_name)
