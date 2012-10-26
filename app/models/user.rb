@@ -74,6 +74,7 @@ class User < ActiveRecord::Base
     @client.follow("i__voted") if params[:follow_us] == "1"
     atts = {:badge => file, :twitter_badge_style => badge_overlay, :pledged => !!badge_overlay.match("pledge")}
     atts.merge!(:voted => !!badge_overlay.match("vote")) if !self.voted?
+    atts.merge!(:follow_us => true) if params[:follow_us] == "1"
     if self.update_attributes(atts)
       return true
     else
