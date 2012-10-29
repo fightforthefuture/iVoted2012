@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-    idz = current_provider.uuid
+    idz = current_user.twitter.uuid
     status = ""
     status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/twitter/#{idz} #iwillvote" if current_user
     status = "I voted! And here's my voter page http://www.ivoted2012.org/twitter/#{idz} #ivoted" if current_user && current_user.voted?
