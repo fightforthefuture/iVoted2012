@@ -2,11 +2,7 @@
     <div id="notice"><span>
       <p class="flash-notice">
         <% if current_user %>
-          <%= flash[:notice].
-                gsub('CURRENT_LOGIN', current_login).
-                gsub('PLATFORM_PATH', platform_path).
-                gsub('VOTE_NOTICE', vote_notice).
-              html_safe %>
+          <%= personalize(flash[:notice]).html_safe %>
         <% else %>
           <%= flash[:notice].html_safe %>
         <% end %>

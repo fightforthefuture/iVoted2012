@@ -10,6 +10,6 @@ class AddFollowersToUsers < ActiveRecord::Migration
 
     add_index :users, :twitter_followers_count
     add_index :users, :twitter_badge_style
-    change_column :users, :twitter_badge_style, :string, :null => false, :default => "original"
+    #change_column :users, :twitter_badge_style, :string, :null => false, :default => "original"
   end
  end

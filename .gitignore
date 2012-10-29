@@ -20,3 +20,4 @@ app/assets/images/users
 
 .DS_Store
 app/.DS_Store
+.powenv

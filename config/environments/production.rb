@@ -1,6 +1,7 @@
 IVoted2012::Application.configure do
   
   TWITTER_CALLBACK = "http://www.ivoted2012.org/auth/twitter/callback"
+  CALLBACK = "http://www.ivoted2012.org/auth/PLATFORM/callback"
   TEMP_STORAGE = "/tmp"
   
   # Settings specified here will take precedence over those in config/application.rb

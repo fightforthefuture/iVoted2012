@@ -1,0 +1,56 @@
+<div class="header">
+    <div class="headline bebas">
+    <span class="screen_name"><%= @provider.name %></span> <span class="voted"><%= vote_status(@user) %></span>
+  </div>
+</div>
+<div style="text-align:center;">
+
+  <% if @provider.badge.exists? %>
+    <%= image_tag(@provider.badge.url, :class=>"original", :style=> "width:250px;")%>
+  <% elsif @provider.avatar.exists %>
+    <%= image_tag(@provider.avatar.url, :class=>"original", :style=> "width:250px;")%>
+  <% end %>
+</div>
+<div class="votebox">
+  <% if !@user.i_voted_for_president.blank?%>
+    <div class="field">
+      <div class="sexy_line"><h4><%= vote_for(@user) %></h4></div>
+      <p><%= @user.i_voted_for_president %></p>
+    </div>
+  <% end %>
+  <% if !@user.i_voted_because.blank?%>
+  <div class="field">
+    <div class="sexy_line"><h4><%= vote_because(@user) %></h4></div>
+    <p><%=  @user.i_voted_because %></p>
+  </div>
+  <% end %>
+  <% if !@user.where_i_voted_at.blank?%>
+  <div class="field">
+    <div class="sexy_line"><h4><%= vote_at(@user) %></h4></div>
+    <p><%=  @user.where_i_voted_at %></p>
+  </div>
+  <% end %>
+</div>
+<% if params[:action] == 'show' && (!current_user || current_user != @user)%>
+  <div class="select_badge">
+  <div class="headline bebas" style="font-size: 300%;">Gonna vote? Get your own page</div>
+    <a class="badge thumb" href="/twitter/new?badge=ivoted_banner">
+      <div class="ivoted_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+      <p class="count"><%= @counts['ivoted_banner_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ivoted_badge">
+      <div class="ivoted_badge"></div>
+      <p class="count"><%= @counts['ivoted_badge_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ipledge_banner">
+      <div class="ipledge_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+      <p class="count"><%= @counts['ipledge_banner_count'] %> Choose This</p>
+    </a>
+    <a class="badge thumb" href="/twitter/new?badge=ipledge_badge">
+      <div class="ipledge_badge"></div>
+      <p class="count"><%= @counts['ipledge_badge_count'] %> Choose This</p>
+    </a>
+  </div>
+<% end %>

@@ -1,26 +1,41 @@
 IVoted2012::Application.routes.draw do
   
-  resources :posts
+  resources :posts 
+  resources :providers
   
-  resources :twitter do
+  resources :google, :controller => :providers, :provider_type=> "google", :auth_type=> "google_oauth2" do
+    get 'voted', :on => :member  
     collection do
-      get 'i_voted'
-      get 'pick_badge'
-      post 'upload_badge'
-      get 'download_badge'
-      post 'tweet'
+      get 'login'
     end
   end
   
-  match '/auth/twitter/callback' => 'twitter#create'
+  resources :twitter, :controller => :providers, :provider_type=> "twitter", :auth_type=> "twitter" do
+    get 'voted', :on => :member  
+    collection do
+      get 'login'
+    end
+  end
+  
+  resources :facebook, :controller => :providers, :provider_type=> "facebook", :auth_type=> "facebook" do
+    get 'voted', :on => :member  
+    collection do
+      get 'login'
+    end
+  end
+
+  resources :photos do
+    get 'download', on: :member
+  end
+  
+  match '/pick_badge', :to => 'photos#new'  
+  match '/auth/:provider/callback', :to => 'sessions#create'  
+  match '/auth/failure', :to => 'sessions#failure'
   match "/signout" => "sessions#destroy", :as => :signout
 
-  # resources :users, :path => :twitter, :platform => "twitter"
-  # resources :users, :path => :facebook, :platform => "facebook"
-  # root :to => 'users#index', :platform => "twitter"
-  # 
+  root :to => 'providers#index'
   
-  root :to => 'twitter#index'
+  
   #match "/auth/:provider/callback" => "sessions#create"
   
   # The priority is based upon order of creation:

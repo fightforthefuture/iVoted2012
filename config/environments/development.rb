@@ -1,6 +1,8 @@
 IVoted2012::Application.configure do
   
-  TWITTER_CALLBACK = "http://127.0.0.1:3000/auth/twitter/callback"
+  TWITTER_CALLBACK = "http://dev.ivoted2012.org/auth/twitter/callback"
+  CALLBACK = "http://dev.ivoted2012.org/auth/PLATFORM/callback"
+  
   TEMP_STORAGE = "#{Rails.root}/app/assets/images"
   # Settings specified here will take precedence over those in config/application.rb
 

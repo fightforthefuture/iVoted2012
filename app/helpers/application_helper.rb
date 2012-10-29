@@ -1,18 +1,18 @@
 module ApplicationHelper
   
-  def current_login
-    return "" if !current_user
-    return "#{current_user[params[:controller].to_s+'_screen_name']}"
+  def current_uuid
+    return "" if !current_provider
+    return current_provider.uuid
   end
 
   def platform_path
     return "/" if !current_user
-    return "/#{params[:controller]}/#{current_login}" if params[:controller] == "twitter"
+    return "/#{params[:controller]}/#{current_uuid}"
   end
   
   def edit_platform_path
     return "/" if !current_user
-    return "/#{params[:controller]}/#{current_login}" if params[:controller] == "twitter"
+    return "/#{params[:controller]}/#{current_uuid}"
   end
   
   def vote_notice
@@ -43,6 +43,13 @@ module ApplicationHelper
   
   def link_to_submit(text, cls)
     link_to_function text, "$(this).closest('form').submit()", :class=> "button #{cls}"
+  end
+  
+  def personalize(notice)
+    notice.
+      gsub('CURRENT_LOGIN', current_uuid).
+      gsub('PLATFORM_PATH', platform_path).
+      gsub('VOTE_NOTICE', vote_notice)
   end
 
 end

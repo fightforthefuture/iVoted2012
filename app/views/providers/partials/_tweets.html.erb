@@ -1,0 +1,11 @@
+<% if !@tweets.empty? %>
+<div class="tweets">
+  <% @tweets.each do |post | %>
+    <div class="post">
+      <%= image_tag(post[:user][:profile_image_url], :style=> "float:left")%>
+      <%= post[:text] %><br/>
+       <%= post[:user][:screen_name] %>,<b>Posted:</b>  <%= post[:created_at] %>
+    </div>
+  <% end %>
+</div>
+<% end %>

@@ -1,0 +1,29 @@
+<% if current_user %>
+  <%= render :partial => "providers/partials/tweetbox" if @provider.provider_type == "twitter" %>
+  <%= form_for(@user, :url=> {:controller => :providers, :action=> "update", :id=> current_uuid}) do |f| %>
+  <div class="header">
+    <div class="headline bebas">
+      <span class="screen_name">
+        <span class="name_widget"><%= @provider.name %></span>
+        <span class="name_widget form_elements" style="display:none;">
+          <%= f.text_field :full_name %>
+        </span>
+      </span>
+      <span class="voted"><%= vote_status(@user) %></span>
+    </div>
+    <div class="name_widget"><a href="javascript:change_name();" class="link_text">change to my full name</a></div>
+    
+  </div>
+  <%= render :partial => "providers/partials/image_picker"%>
+  <%= render :partial => "providers/partials/votebox", :locals=> {:f => f}%>
+  <% end %>
+<% end %>
+
+<% content_for :footer do %>
+  <% javascript_tag do %>
+      function change_name(){
+        $(".name_widget").toggle();
+        $("#user_show_full_name").val(true);
+      }
+  <% end %>
+<% end %>

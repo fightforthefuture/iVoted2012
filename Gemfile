@@ -4,6 +4,14 @@ gem 'rails', '3.2.8'
 gem "heroku"
 gem 'thin'
 
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+
+gem 'twitter'
+gem 'google_plus'
+gem 'google-api-client', '~> 0.4.3', :require => 'google/api_client'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -12,9 +20,8 @@ gem 'paperclip'
 gem 'aws-sdk'
 gem 'pg'
 gem 'faraday'
-gem 'oauth'
 gem 'json'
-gem 'twitter'
+
 gem 'rmagick', '2.12.0', :require => 'RMagick'
 
 # Gems used only for assets and not required
@@ -30,6 +37,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+#OLD OAUTH APPROACH
+#gem 'oauth'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

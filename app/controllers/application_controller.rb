@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  helper_method :current_user, :default_tweet, :overlay_options, :random_avatar, :get_id
+  
+  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :get_id
   
   after_filter :reset_random_avatar
+
+  before_filter :counts, :only => [:index, :show]
+  before_filter :top_users, :only => :index
+  before_filter :find_user, :only => [:edit, :show]
 
   LOGIN_NOTICE = "Thank you for logging in!"
   SIGNIN_NOTICE = "Thank you for signing up!"
@@ -16,14 +21,24 @@ class ApplicationController < ActionController::Base
   BADGE_UPDATED = "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
   We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
   <div style='margin: 10px;'><a href='PLATFORM_PATH' class='button grey'>Hide this and view the page</a></div>"
-  
-  
+
   private
+  
+  def find_user
+    @provider = Provider.where(:provider_type =>  params[:provider_type], :uuid=> params[:id]).limit(1).first
+    return @user ||= @provider.user if !@provider.nil?
+    return false
+  end
   
   def current_user
     user = User.find(session[:user_id]) rescue session[:user_id] = nil
     return @current_user ||= user if session[:user_id] && !user.nil?
     return @current_user = false
+  end
+  
+  def current_provider
+    p = params[:provider_type] || session[:provider]
+    return Provider.where(:provider_type=> p, :user_id => session[:user_id]).limit(1).first 
   end
   
   def default_tweet
@@ -51,17 +66,18 @@ class ApplicationController < ActionController::Base
   end
   
   def counts
-    @counts ||= ActiveRecord::Base.connection.execute("SELECT SUM(twitter_followers_count) AS total_followers, SUM(CASE WHEN twitter_badge_style='ivoted_badge' THEN 1 ELSE 0 END) AS ivoted_badge_count, SUM(CASE WHEN twitter_badge_style='ivoted_banner' THEN 1 ELSE 0 END) AS ivoted_banner_count, SUM(CASE WHEN twitter_badge_style='ipledge_badge' THEN 1 ELSE 0 END) AS ipledge_badge_count, SUM(CASE WHEN twitter_badge_style='ipledge_banner' THEN 1 ELSE 0 END) AS ipledge_banner_count, SUM(CASE WHEN twitter_badge_style='original' THEN 1 ELSE 0 END) AS original_count FROM users;").first
+    @counts ||= ActiveRecord::Base.connection.execute("SELECT SUM(followers_count) AS total_followers, SUM(CASE WHEN badge_type='ivoted_badge' THEN 1 ELSE 0 END) AS ivoted_badge_count, SUM(CASE WHEN badge_type='ivoted_banner' THEN 1 ELSE 0 END) AS ivoted_banner_count, SUM(CASE WHEN badge_type='ipledge_badge' THEN 1 ELSE 0 END) AS ipledge_badge_count, SUM(CASE WHEN badge_type='ipledge_banner' THEN 1 ELSE 0 END) AS ipledge_banner_count, SUM(CASE WHEN badge_type='original' THEN 1 ELSE 0 END) AS original_count FROM providers;").first
   end
   
   def top_users
-    @top_users = User.where("twitter_badge_style != 'original' AND twitter_followers_count != 0").order("twitter_followers_count DESC").limit(8)
+    @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
   end
   
   def random_avatar
-    session[:random_avatar_id] ||= rand(User.count)
+    count = Photo.count rescue 0 
+    session[:random_avatar_id] ||= rand()
     return "/assets/example_badge.jpg" if session[:random_avatar_id].to_i <= 0
-    return rand_record = User.first(:conditions => [ "id >= ?", session[:random_avatar_id] ]).avatar.url
+    return Photo.first(:conditions => [ "id >= ?", session[:random_avatar_id] ]).avatar.url  rescue "/assets/example_badge.jpg"
   end
   
   def reset_random_avatar

@@ -13,24 +13,25 @@ class PostsController < ApplicationController
   end
 
   def create
-    if current_user.nil? || params[:post][:user_id].to_i != current_user.id.to_i
+    if current_provider.nil?
       redirect_to "/twitter", :notice => "You are unauthorized for that action. Please sign-in!"
     else
-      send_tweet(params[:post][:message])
+      send_tweet(params)
       @post = Post.new(params[:post])
       if @post.save
         flash[:notice] = TWEET_SENT
-        redirect_to "/twitter/#{current_user.twitter_screen_name}"
+        redirect_to :back
       else
         flash[:notice] = TWEET_FAILED
-        redirect_to "/twitter/#{current_user.twitter_screen_name}"
+        redirect_to :back
       end
     end
   end
   
-  def send_tweet(message)
-    @client = Twitter::Client.new(:oauth_token => current_user.twitter_oauth_token, :oauth_token_secret => current_user.twitter_oauth_token_secret)
-    @client.update(message)
+  def send_tweet(params)
+    provider = Provider.where(:user_id => params[:post][:user_id], :provider_type => params[:post][:platform]).limit(1).first
+    @client = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret)
+    @client.update(params[:post][:message])
   end
 
 end

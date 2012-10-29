@@ -1,0 +1,57 @@
+<%= form_for(:user, :url=> {:controller => :photos}, :html=> {:class=> "pick_badge", :method => :post}) do %>
+    <%= image_tag("pick_your_badge.png", :style =>"border:none")  %>
+    <div class="row">
+       <a class="badge thumb" href="#" data-badge='ipledge_banner'>
+         <div class="ipledge_banner"></div>
+         <%= image_tag(current_provider.avatar.url, :class=>"avatar")%>
+         <p class="count">I Pledge Banner</p>
+       </a>
+       <a class="badge thumb" href="#" data-badge='ipledge_badge'>
+         <div class="ipledge_badge"></div>
+         <p class="count">I Pledge Badge</p>
+       </a>
+       <a class="badge thumb" href="#" data-badge='ivoted_banner'>
+          <div class="ivoted_banner"></div>
+          <%= image_tag(current_provider.avatar.url, :class=>"avatar")%>
+          <p class="count">I Voted Banner</p>
+        </a>
+        <a class="badge thumb" href="#" data-badge='ivoted_badge'>
+          <div class="ivoted_badge"></div>
+          <p class="count">I Voted Badge</p>
+        </a>
+       <a class="badge thumb" href="#" data-badge='original'>
+          <%= image_tag(current_provider.avatar.url, :class=>"avatar")%>
+          <p class="count">Keep Original</p>
+       </a>
+     </div>
+    <%= link_to "continue", "javascript:$('.pick_badge').submit();", :id=> 'upload_badge', :class=> "button blue" %>
+    <%= hidden_field :user, :badge, :value=> session[:badge] %>
+    <%= hidden_field :photo, :id, :value=> @photo.id %>
+    
+    <% if session[:provider] == "twitter" %>
+       <div class="follow_us">
+         <%= check_box :user, :following, :checked => true, :style=> "top: -7px; position: relative;" %>
+         <%= label_tag :user_following, "Follow @i__voted on Twitter" %><br/>
+       </div>
+    <% end %>
+<% end %>
+<% content_for :footer do %>
+  <% javascript_tag do %>
+     $(document).ready(function(){
+       var badge_style = '<%= session[:badge] %>';
+       var obj = $("a.badge[data-badge='"+badge_style+"']");
+       change_badge(obj);
+     });
+    
+     $('a.badge').bind("click", function() {
+       change_badge($(this));
+     });
+  
+     function change_badge(obj){
+       $('#user_badge').val(obj.data('badge'))
+       $("a.badge").removeClass('selected');
+       $(obj).addClass('selected');
+     }
+  <% end %>
+<% end %>
+  

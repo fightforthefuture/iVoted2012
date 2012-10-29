@@ -1,17 +1,18 @@
 namespace :avatars do
   desc "Revert Avatars"
  	task :revert => :environment do
- 	  puts "Preparing to revert the avatar of #{User.count} Users"
+ 	  count = Photo.where(:uploaded=> true).count
+ 	  puts "Preparing to revert #{count} Avatars"
  	  i = 0
-    User.find_in_batches(:batch_size => 50) do |batch|
-      batch.each do |u|
-        u.export_image('original')
+    Photo.where(:uploaded=> true).find_in_batches(:batch_size => 50) do |batch|
+      batch.each do |p|
+        p.revert_avatar
         i = i+1
         sleep 1
       end
-      puts "Reverted #{i} / #{User.count} Users User Avatars"
+      puts "Reverted #{i} / #{count} Avatars"
       sleep 10
     end
-    puts "Finished Reverting #{i} / #{User.count} User Avatars"
+    puts "Finished Reverting #{i} / #{count} Avatars"
   end
 end
