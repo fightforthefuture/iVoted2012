@@ -16,5 +16,9 @@
     <%= link_to "Download Badge", "/photos/#{@provider.photo.id}/download", :class=> "link_text" %><br/><br/>
     <%= link_to "Change Badge", "/pick_badge", :class=>"button blue twitter"%>
     </span>
+    <% if @provider.provider_type != "twitter" %>
+    <br/>
+      <p>Here's your page and badge. <%= link_to "Download the badge", "/photos/#{@provider.photo.id}/download", :class=> "link_text" %> and change your <%= @provider.provider_type.capitalize %> profile pic. <%= link_to "Share this page.", "/#{@provider.provider_type}/#{@provider.uuid}/", :class=> "link_text" %></p>
+    <% end %>
   </div>
 </div>

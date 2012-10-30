@@ -27,8 +27,8 @@ module ApplicationHelper
   end
   
   def vote_for(user)
-    return "I voted for President:" if user.voted?
-    return "I will vote for President:"
+    return "Who I voted for President:" if user.voted?
+    return "Who I will vote for President:"
   end
   
   def vote_because(user)
