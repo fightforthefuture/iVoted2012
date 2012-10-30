@@ -42,7 +42,7 @@ class SessionsController < ApplicationController
     auth_hash = request.env['omniauth.auth']
     if auth_hash[:provider] == "twitter"
        id = auth_hash.extra.raw_info.screen_name
-    elsif auth_hash[:provider]== "google"
+    else
        id = auth_hash.extra.raw_info.id
     end
     return id
