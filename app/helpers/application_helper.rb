@@ -7,12 +7,12 @@ module ApplicationHelper
 
   def platform_path
     return "/" if !current_user
-    return "/#{params[:controller]}/#{current_uuid}"
+    return "/#{current_provider.provider_type}/#{current_uuid}"
   end
   
   def edit_platform_path
     return "/" if !current_user
-    return "/#{params[:controller]}/#{current_uuid}"
+    return "/#{current_provider.provider_type}/#{current_uuid}"
   end
   
   def vote_notice
