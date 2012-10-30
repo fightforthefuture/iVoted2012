@@ -7,14 +7,13 @@ class Photo < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
   has_attached_file :badge, :styles => { :large => "300x300>",:medium => "128x128>", :thumb => "64x64>" }
 
-  attr_accessor :voted, :pledged, :following
+  attr_accessor :voted, :pledged
   
   belongs_to :provider
   belongs_to :user  
-
+  
   before_update :update_badge
-  before_update :update_user
-  before_update :update_provider
+  before_create :update_badge
 
   def self.read_remote_image(provider_type, uuid, url)
     local_path = "#{TEMP_STORAGE}/#{provider_type}_#{uuid}.png"
@@ -46,24 +45,14 @@ class Photo < ActiveRecord::Base
     result.write(local_path)
     return local_path
   end
-  
+
   def update_badge
-    badge_path = Photo.create_badge(self.badge_type, self.provider_type, self.provider_uuid, self.avatar.url)
-    badge = open badge_path
-    self.uploaded = self.upload_image(badge)
-    self.badge = badge
-  end
-  
-  def update_user
-    atts = {:twitter_badge_style => self.badge_type, :pledged => !!self.badge_type.match("pledge")}
-    atts.merge!(:voted =>  !!self.badge_type.match("vote")) if !!self.badge_type.match("vote") && !self.user.voted
-    self.provider.user.update_attributes(atts)
-  end
-  
-  def update_provider
-    atts = {:badge_type=> self.badge_type}
-    atts.merge!(:following => (self.following == "1")) if !self.following.blank?
-    self.provider.update_attributes(atts)
+    if !self.badge_type.nil?
+      badge_path = Photo.create_badge(self.badge_type, self.provider_type, self.provider_uuid, self.avatar.url)
+      badge = open badge_path
+      self.uploaded = self.upload_image(badge)
+      self.badge = badge
+    end
   end
 
   def upload_image(file)
@@ -80,7 +69,7 @@ class Photo < ActiveRecord::Base
     if self.uploaded
       file = open Photo.read_remote_image(self.provider.provider_type, self.provider.uuid, self.avatar.url)
       if self.provider_type == "twitter"
-        @client = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret)
+        @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
         @client.update_profile_image(file)
       end
     end

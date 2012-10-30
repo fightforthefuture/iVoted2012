@@ -133,6 +133,11 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 .splash_img{width: 120px; vertical-align:top;}
 .center{
 	text-align:center;width: 100%; display:block;
+	
+	>.other_platforms{
+	  margin-top: 20px;
+	  font-size: 200%;
+	}
 }
 
 #notice{

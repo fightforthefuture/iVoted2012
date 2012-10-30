@@ -9,7 +9,7 @@
   <% end %>
   <div class="preview">
     <%= image_tag(@provider.avatar.url, :class=>"original")%>
-    <%= image_tag("#{@user.twitter_badge_style}.png", :class=>"overlay")%>
+    <%= image_tag("#{@user.badge_type}.png", :class=>"overlay")%>
   </div>
    <div class="overlay_selection closed">
     <span class="center">

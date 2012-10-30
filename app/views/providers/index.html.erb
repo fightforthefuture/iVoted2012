@@ -3,7 +3,7 @@
   <h4>Get a Twitter badge and vote page to help motivate your followers to vote.</h4>
   <div class="padd">
     <div class="action">
-      <a class="option half left selected" data-url="/twitter/new?badge=ivoted_banner">
+      <a class="option half left selected" data-url="ivoted_banner">
         <div class="text">
           <p class="bubble red" style="float: left;">Yes, I voted.</p>
            <p class="explanation"></p>
@@ -14,7 +14,7 @@
         </div>
       </a>
       <div class="buffer"><div class="line"></div></div>
-      <a class="option half right" data-url="/twitter/new?badge=ipledge_banner">
+      <a class="option half right" data-url="ipledge_banner">
         <div class="badge medium">
           <div class="ipledge_banner"></div>
           <%= image_tag(random_avatar, :class=>"avatar")%>
@@ -48,11 +48,17 @@
   		   }
         $("a.option.half").removeClass('selected');
         $(obj).addClass('selected');
-        $("#login_button").attr("href", $(obj).data('url'));
+        $("#twitter_login").attr("href", "/twitter/new?badge="+$(obj).data('url'));
+        $("#google_login").attr("href", "/google/new?badge="+$(obj).data('url'));
+        $("#facebook_login").attr("href", "/facebook/new?badge="+$(obj).data('url'));
       }
   <% end %>
 <% end %>
-<span class="center"><%= link_to "choose your badge", "/twitter/new?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%></span>
+<span class="center"><%= link_to "choose your badge", "/twitter/new?badge=ivoted_banner", :id => 'login_button', :class=>"button blue twitter"%><br/>
+  <div class="other_platforms">
+  Get it for:  <%= link_to "Google+", "/google/new?badge=ivoted_banner", :id => 'google_login', :class=> 'link_text' %> | <%= link_to "Facebook", "/facebook/new?badge=ivoted_banner", :id => 'facebook_login', :class=> 'link_text' %>
+  </div>
+</span>
 
 <%= image_tag("seperator.png", :style=> "border:none;margin-top: 60px;") %>
 

@@ -5,9 +5,9 @@
 </div>
 <div style="text-align:center;">
 
-  <% if @provider.badge.exists? %>
+  <% if @provider.badge %>
     <%= image_tag(@provider.badge.url, :class=>"original", :style=> "width:250px;")%>
-  <% elsif @provider.avatar.exists %>
+  <% elsif @provider.avatar %>
     <%= image_tag(@provider.avatar.url, :class=>"original", :style=> "width:250px;")%>
   <% end %>
 </div>

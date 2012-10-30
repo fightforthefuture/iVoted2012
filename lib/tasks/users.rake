@@ -15,7 +15,7 @@ namespace :users do
           :id_str => u.twitter_id,
           :name => u.full_name,
           :active => u.twitter_active,
-          :badge_type => u.twitter_badge_style,
+          :badge_type => u.badge_type,
           :followers_count => u.twitter_followers_count,
           :listed_count => u.twitter_listed_count,
           :friends_count => u.twitter_friends_count,
@@ -23,7 +23,7 @@ namespace :users do
           :following => u.follow_us,
           :profile_image_url => u.avatar.url
         )
-        p.photo.update_attributes(:badge_type => u.twitter_badge_style)
+        p.photo.update_attributes(:badge_type => u.badge_type)
         i = i+1
       end
       puts "Migrating #{i} / #{count} User"

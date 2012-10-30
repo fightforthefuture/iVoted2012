@@ -49,12 +49,6 @@ class ApplicationController < ActionController::Base
     return status
   end
 
-  def get_id(user, params)
-    return @id ||= user.twitter_screen_name if params[:platform] == "twitter"
-    #return @id ||= user.facebook_screen_name if params[:platform] == "facebook"
-    return user.id
-  end
-
   def overlay_options
      [
        {:name => 'ivoted_badge', :title=> "I Voted Badge", :description=> "Replace your avatar with a full I Voted Badge"},
@@ -75,9 +69,9 @@ class ApplicationController < ActionController::Base
   
   def random_avatar
     count = Photo.count rescue 0 
-    session[:random_avatar_id] ||= rand()
-    return "/assets/example_badge.jpg" if session[:random_avatar_id].to_i <= 0
-    return Photo.first(:conditions => [ "id >= ?", session[:random_avatar_id] ]).avatar.url  rescue "/assets/example_badge.jpg"
+    return "/assets/example_badge.jpg" if count == 0
+    session[:random_avatar_id] ||= rand(count)
+    return Photo.first(:offset => session[:random_avatar_id]).avatar.url
   end
   
   def reset_random_avatar

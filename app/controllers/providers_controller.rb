@@ -33,7 +33,7 @@ class ProvidersController < ApplicationController
   end
   
   def update
-    current_provider.update_attributes(:name=> params[:user][:full_name]) if !params[:user][:full_name].blank?
+    current_provider.update_attributes(:name=> params[:provider][:name]) if !params[:provider][:name].blank?
     if current_user.update_attributes(params[:user])
       flash[:notice] = PROFILE_UPDATED
       redirect_to "/#{current_provider.provider_type}/#{current_provider.uuid}"

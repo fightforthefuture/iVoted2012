@@ -1,12 +1,12 @@
 namespace :avatars do
   desc "Revert Avatars"
  	task :revert => :environment do
- 	  count = Photo.where(:uploaded=> true).count
+ 	  count = Provider.where(:provider_type=> "twitter").count
  	  puts "Preparing to revert #{count} Avatars"
  	  i = 0
-    Photo.where(:uploaded=> true).find_in_batches(:batch_size => 50) do |batch|
+    Provider.where(:provider_type=> "twitter").find_in_batches(:batch_size => 50) do |batch|
       batch.each do |p|
-        p.revert_avatar
+        p.photo.revert_avatar
         i = i+1
         sleep 1
       end

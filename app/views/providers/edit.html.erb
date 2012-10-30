@@ -6,7 +6,7 @@
       <span class="screen_name">
         <span class="name_widget"><%= @provider.name %></span>
         <span class="name_widget form_elements" style="display:none;">
-          <%= f.text_field :full_name %>
+          <%= text_field :provider, :name %>
         </span>
       </span>
       <span class="voted"><%= vote_status(@user) %></span>

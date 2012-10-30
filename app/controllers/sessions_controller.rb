@@ -13,14 +13,15 @@ class SessionsController < ApplicationController
     auth_hash[:provider] = auth_hash[:provider].split("_")[0]
     p_atts = {:provider_type => auth_hash[:provider], :uuid=> get_uuid}
     p_atts.merge!(:user_id => current_user.id) if current_user
-    provider = Provider.where(p_atts).first_or_create(:auth_hash => auth_hash)
+    provider = Provider.where(p_atts).first_or_create(:auth_hash=>auth_hash)
+    provider.update_attributes(:auth_hash => auth_hash)
     current_user = provider.user
     session[:user_id] = provider.user_id
     session[:provider] = auth_hash[:provider]
-    if provider.badge
-      redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}", :notice => SIGNIN_NOTICE
-    else
+    if provider.update_badge?
       redirect_to "/photos/new", :notice => SIGNIN_NOTICE
+    else
+      redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}", :notice => SIGNIN_NOTICE
     end
   end
   
@@ -46,6 +47,7 @@ class SessionsController < ApplicationController
     end
     return id
   end
+
   
   def log
     Rails.logger.info auth_hash.inspect+"\n\n"
