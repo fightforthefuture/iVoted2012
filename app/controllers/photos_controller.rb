@@ -30,7 +30,7 @@ class PhotosController < ApplicationController
   protected
   
   def update_provider
-    sleep 2 ## Must wait for Twitter to Update
+    sleep 1 ## Must wait for Twitter to Update
     if current_provider.provider_type == "twitter"
       @client = Twitter::Client.new(:oauth_token => current_provider.token, :oauth_token_secret => current_provider.secret)
       url = @client.user(current_provider.uuid).profile_image_url(:original)
