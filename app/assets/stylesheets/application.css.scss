@@ -855,3 +855,16 @@ p.disclosure a {
 	color: #666;
 	text-decoration: underline;
 }
+
+.glabel {
+	display: block;
+	margin: 0 auto;
+    color: white;
+    text-align: center;
+    font-size: 140%;
+    width: 472px;
+    padding: 14px 0;
+    height: 44px;
+    background: url("/assets/ribbon.png") top right no-repeat;
+  }
+}
