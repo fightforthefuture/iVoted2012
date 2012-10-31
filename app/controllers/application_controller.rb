@@ -68,10 +68,11 @@ class ApplicationController < ActionController::Base
   end
   
   def random_avatar
-    count = Photo.count rescue 0 
-    return "/assets/example_badge.jpg" if count == 0
-    session[:random_avatar_id] ||= rand(count)
-    return Photo.first(:offset => session[:random_avatar_id]).avatar.url
+    # count = Photo.count rescue 0 
+    # return "/assets/example_badge.jpg" if count == 0
+    # session[:random_avatar_id] ||= rand(count)
+    # return Photo.first(:offset => session[:random_avatar_id]).avatar.url
+    return "/assets/original_girl.jpg"
   end
   
   def reset_random_avatar
