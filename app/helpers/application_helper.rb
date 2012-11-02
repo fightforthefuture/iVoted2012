@@ -6,12 +6,12 @@ module ApplicationHelper
   end
 
   def platform_path
-    return "/" if !current_user
+    return "/" if !current_user || !current_provider
     return "/#{current_provider.provider_type}/#{current_uuid}"
   end
   
   def edit_platform_path
-    return "/" if !current_user
+    return "/" if !current_user || !current_provider
     return "/#{current_provider.provider_type}/#{current_uuid}"
   end
   

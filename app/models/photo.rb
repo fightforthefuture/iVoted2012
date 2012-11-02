@@ -13,8 +13,12 @@ class Photo < ActiveRecord::Base
   belongs_to :user  
   
   before_update :update_badge
-  before_create :update_badge
+  
+  after_create :update_user
+  after_update :update_user
 
+  after_save :update_provider
+  
   def self.read_remote_image(provider_type, uuid, url)
     local_path = "#{TEMP_STORAGE}/#{provider_type}_#{uuid}.png"
     response = Photo.read_remote_location(url) 
@@ -39,6 +43,10 @@ class Photo < ActiveRecord::Base
   def self.create_badge(badge_type, provider_type, provider_uuid, url)
     overlay = "#{Rails.root}/app/assets/images/#{badge_type}.png"
     dst = Magick::Image.read("#{url}").first
+    if dst.columns != dst.rows
+      crop = [dst.columns, dst.rows].min
+      dst = dst.resize_to_fill(crop)
+    end
     src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
     local_path = "#{TEMP_STORAGE}/#{provider_type}_#{provider_uuid}_#{badge_type}.jpg"
@@ -64,7 +72,27 @@ class Photo < ActiveRecord::Base
       return false
     end
   end
-
+  
+  def update_user
+    user = self.provider.user
+    atts = {:badge_type => self.badge_type, :pledged => !!self.badge_type.match("pledge")}
+    atts.merge!(:voted =>  !!self.badge_type.match("vote")) if !!self.badge_type.match("vote") && !user.voted
+    user.update_attributes(atts)
+  end
+  
+  def update_provider
+    atts={:badge_type => self.badge_type}
+    if self.provider.provider_type == "twitter"
+      sleep 1 ## Must wait for Twitter to Update
+      @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
+      url = @client.user(self.provider.uuid).profile_image_url(:original)
+      if (url != self.provider.profile_image_url)
+        atts.merge!(:profile_image_url => url)
+      end
+    end
+    self.provider.update_attributes(atts)
+  end
+  
   def revert_avatar
     if self.uploaded
       file = open Photo.read_remote_image(self.provider.provider_type, self.provider.uuid, self.avatar.url)

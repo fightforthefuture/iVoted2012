@@ -13,13 +13,14 @@ class SessionsController < ApplicationController
     auth_hash[:provider] = auth_hash[:provider].split("_")[0]
     p_atts = {:provider_type => auth_hash[:provider], :uuid=> get_uuid}
     p_atts.merge!(:user_id => current_user.id) if current_user
+    auth_hash.merge!(:badge_type => session[:badge]) if !session[:badge].nil?
     provider = Provider.where(p_atts).first_or_create(:auth_hash=>auth_hash)
-    provider.update_attributes(:auth_hash => auth_hash)
+    provider.update_attributes(:auth_hash=>auth_hash)
     current_user = provider.user
     session[:user_id] = provider.user_id
     session[:provider] = auth_hash[:provider]
-    if provider.update_badge?
-      redirect_to "/photos/new", :notice => SIGNIN_NOTICE
+    if current_user.i_voted_for_president.blank?
+      redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}/edit", :notice => BADGE_UPDATED
     else
       redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}", :notice => SIGNIN_NOTICE
     end

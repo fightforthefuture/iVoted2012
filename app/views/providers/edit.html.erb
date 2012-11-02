@@ -4,7 +4,9 @@
   <div class="header">
     <div class="headline bebas">
       <span class="screen_name">
-        <span class="name_widget"><%= @provider.name %></span>
+        <span class="name_widget">
+          <%= h('@') if @provider.provider_type =="twitter" %><%= @provider.name %>
+        </span>
         <span class="name_widget form_elements" style="display:none;">
           <%= text_field :provider, :name %>
         </span>

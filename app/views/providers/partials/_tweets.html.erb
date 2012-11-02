@@ -1,11 +1,14 @@
-<% if !@tweets.empty? %>
-<div class="tweets">
-  <% @tweets.each do |post | %>
-    <div class="post">
-      <%= image_tag(post[:user][:profile_image_url], :style=> "float:left")%>
-      <%= post[:text] %><br/>
-       <%= post[:user][:screen_name] %>,<b>Posted:</b>  <%= post[:created_at] %>
+<% if !ivoted_tweets.nil? %>
+  <div class="tweets">
+    <div class="line"><h4>Tweet Stream</h4></div>
+    <div class="rounded_box">
+      <% ivoted_tweets.results.map do |post| %>
+        <div class="post">
+          <%= image_tag(post[:user][:profile_image_url], :style=> "float:left")%>
+          <b>@<%= post[:user][:screen_name] %></b><br/>
+          <%= post[:text] %><br/>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
 <% end %>

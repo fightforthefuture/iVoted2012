@@ -9,12 +9,12 @@
   <% end %>
   <div class="preview">
     <%= image_tag(@provider.avatar.url, :class=>"original")%>
-    <%= image_tag("#{@user.badge_type}.png", :class=>"overlay")%>
+    <%= image_tag("#{@provider.badge_type}.png", :class=>"overlay")%>
   </div>
    <div class="overlay_selection closed">
     <span class="center">
     <%= link_to "Download Badge", "/photos/#{@provider.photo.id}/download", :class=> "link_text" %><br/><br/>
-    <%= link_to "Change Badge", "/pick_badge", :class=>"button blue twitter"%>
+    <%= link_to "Change Badge", "/pick_badge", :class=>"button twitter"%>
     </span>
     <% if @provider.provider_type != "twitter" %>
     <br/>

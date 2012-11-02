@@ -38,9 +38,13 @@
  a:hover{color: #555;}
  a, a:hover, a:active{ text-decoration:none;}
 
-.cta .padd{
-  margin: 60px 0 40px 0;
+.cta{
+  margin: 0px auto;
+  padding: 0px;
   position: relative;
+  >.row{
+    margin-top: 30px;
+  }
 }
 #_vit{
   margin-top: 100px;
@@ -169,8 +173,31 @@ img.logo{ border:none; bottom: -30px; position:relative;}
   color: #999999;
   a{ color: #999999; padding: 0px; margin: 0px;}
 }
+.cta .center{
+  margin-top: 40px;
+}
+.arrow{
+  border:none;
+  position: absolute;
+  bottom: 95px;
+}
+#ivoted_badge_arrow {
+  right: 200px;
+}
+#ivoted_banner_arrow{
+  right: 360px;
+}
+#ipledge_badge_arrow{
+  left: 360px;
+}
+#ipledge_banner_arrow {
+  left: 200px;
+}
+
 
 /********* IMAGE PICKER **************/
+
+
 
 .pick_badge{
   width: 100%;
@@ -230,20 +257,21 @@ img.logo{ border:none; bottom: -30px; position:relative;}
       z-index: 1000;
     }
   }
-  >.follow_us{
-	  font-size: 200%;
-	  position: relative;
-	  color: #555555;
-	  >input#user_follow_us{
-	    top: -8px;
-	    position: relative;
-	  }
-	  > label{
-	    padding: 5px;
-	  }
-	}
+  
 }
-
+.follow_us{
+  font-size: 200%;
+  position: relative;
+  color: #555555;
+  margin-top: 40px;
+  >input#user_follow_us{
+    top: -8px;
+    position: relative;
+  }
+  > label{
+    padding: 5px;
+  }
+}
 #upload_badge {
 	background: url('/assets/upload_badge.png') no-repeat;
 	width: 176px;
@@ -317,11 +345,6 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 	}
 }
 
-.tweets .post{
-  height: 70px;
-  border-bottom: 1px dotted #999999;
-  margin-bottom: 10px;
-}
 .button, button{
 /*    display: table-cell;
     position: relative;*/
@@ -368,103 +391,10 @@ a.button:hover, button:hover{
 h2, h4 {margin: 0px 0; padding: 0;}
 
 .cta{
-  display:table-row;
   text-align: center;
   > h4{color: #393c65; font-size: 180%; font-family: 'Oleo Script', cursive; font-weight:normal; letter-spacing: 1px;}
-
-  .action{
-    display:table-row;
-    position: relative;
-    width: 860px;
-    min-height: 170px;
-    
-    > a.option{
-      -moz-border-radius: 5px;
-      -webkit-border-radius: 5px;
-      border-radius: 5px;
-      
-      > img {  margin: 10px;}
-      
-      > p {margin:0px auto; padding: 0px;}
-      
-      > .text{
-        font-size: 80%;
-        display:inline-block;
-        min-height: 120px;
-        margin-top: 40px;
-        vertical-align: top;
-      }
-      p.bubble{
-        padding: 10px 5px 10px 40px;
-        width:160px;
-      }
-      p.explanation{
-        width: 200px;
-        padding: 0px;
-      }
-    }
-    a.option .left{
-      text-align: right;
-    }
-    a.option .right{
-      text-align: left;
-    }
-    .option.half{
-      display: block;
-      position: relative;
-      width: 400px;
-      border: 1px solid #a5a5a5;
-    }
-    a.option{
-      background-repeat: no-repeat;
-
-      background-image: -webkit-linear-gradient(top, #ffffff, #f1f1f1);
-      background-image:    -moz-linear-gradient(top, #ffffff, #f1f1f1); 
-      background-image:     -ms-linear-gradient(top, #ffffff, #f1f1f1);
-      background-image:      -o-linear-gradient(top, #ffffff,#f1f1f1);
-      background-image:         linear-gradient(to bottom, #ffffff, #f1f1f1);
-    }
-    a.option.selected{
-
-      -moz-background-clip: padding;
-      -webkit-background-clip: padding-box;
-      background-clip: padding-box;
-      background-color: rgba(166,166,166,.51);
-      -moz-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);
-      -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);
-      box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);  
-    }
-    a.option:hover{
-      background-repeat: no-repeat;
-      background: #cdcdcd;
-      background-image: -webkit-linear-gradient(top, #eeeeee, #cdcdcd);
-      background-image:    -moz-linear-gradient(top, #eeeeee, #cdcdcd); 
-      background-image:     -ms-linear-gradient(top, #eeeeee, #cdcdcd);
-      background-image:      -o-linear-gradient(top, #eeeeee,#cdcdcd);
-      background-image:         linear-gradient(to bottom, #eeeeee,#cdcdcd);
-    }
-
-    .buffer{
-      display:table-cell;
-      width: 90px;
-      min-height: inherit;
-      
-      > .line{
-        width: 1px;
-        min-height: inherit;
-        border-left: 1px dotted #999999;
-        margin: 0px 45px;
-      }
-    }
-    a.option.half.selected:before {
-      content: url('/assets/selected.png');
-      position: absolute;
-      top: -15px;
-    }
-    a.option.half.left.selected:before { left: -15px; }
-    a.option.half.right.selected:before { left: -15px; z-index: 999;}
-  }
 }
+
 
 
 /********** BADGE CODE **************/
@@ -599,17 +529,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
   line-height: 120%;
   text-align: left;
 }
-.arrow{
-  border:none;
-  position: absolute;
-  bottom: -100px;
-  left: 200px;
-}
 
-#thatone {
-	left: 590px;
-	display: none;
-}
 
 /************* FOLLOWERS ******************/
 
@@ -629,27 +549,23 @@ p.bubble{ padding: 0px; margin: 0px auto;}
 
 .followers, .select_badge{
   z-index: 1;
-  top: 40px;
+  top: 20px;
   width: 680px;
   padding: 40px 50px;
   margin: 40px auto;
   text-align: center;
-
   .line {
     width: 100%;
     border-bottom: 1px dotted #999;
-    text-align: center;
     margin: 20px 0;
     position: relative;
-	  
+	  text-align:left;
     h4 {
-      display: inline-block;
       background-color: #ECECEC;
       font-weight: bold;
       font-size: 200%;
       padding: 10px;
       position: relative;
-      bottom: -20px;
       color: #555;
     }
   }
@@ -667,19 +583,51 @@ p.bubble{ padding: 0px; margin: 0px auto;}
     }
   }
 }
-.top_badge_user{
-  padding:  0 30px;
+.select_badge{
+  margin: 0px auto;
+}
+.top_badge_user, .tweets{
+  display:table-cell;
+  width: 50%;
+  .line{
+    width: auto;
+    margin: 0px 20px;
+  }
   >.badge{
     display:block;
     >.count{
       margin: 0 0 0 120px;
       padding: 30px 0 0 10px;
-      font-size: 200%;
+      font-size: 140%;
       width: 240px;
       text-align: left;
       line-height: 120%;
       font-weight: normal;
     }
+  }
+}
+.tweets{
+  .post{
+    text-align:left;
+    display:block;
+    clear:both;
+    border-bottom: 1px solid #999999;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    min-height: 60px;
+    color: #3e3e3e;
+    b{
+      font-size: 140%;
+    }
+    
+    img{
+      border:none;
+      padding: 10px 10px 30px 10px;
+    }
+  }
+  .rounded_box{
+    margin-top: 20px;
+    padding: 20px;
   }
 }
 
@@ -778,11 +726,29 @@ a.button.twitter:after{
   left: 10px;
   top: 10px;
 }
-a.button.blue, a.button.blue:active {
 
+a.button.blue, a.button.blue:active {
+  border: none;
+  background-color: #208bc0;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#27a4e0 0%), to(#208bc0 50%));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
+  background-image: -moz-linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
+  background-image: -ms-linear-gradient(top,#77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
+  background-image: -o-linear-gradient(top,#77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
+  background-image: linear-gradient(top, #77afc5 0%, #2293cb 50%, #2293cb 50%, #208bc0 100%);
 }
 a.button.blue:hover{
+    background-color: #f37873;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#1f8bbd 0%), to(#216ec8 50%));
+    /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
+    background-image: -moz-linear-gradient(top,  #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
+    background-image: -ms-linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
+    background-image: -o-linear-gradient(top,  #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
+    background-image: linear-gradient(top, #1f8bbd 0%, #216ec8 50%, #1f77bd 50%, #1d539e 100%);
 }
+
 a.button.green, a.button.green:active {
   border: 1px solid #016700;
   background-color: #36a23c;
@@ -857,17 +823,39 @@ p.disclosure a {
 }
 
 .glabel {
-	display: block;
-	margin: 0 auto;
-	margin-top: 100px;
-	margin-bottom: -100px;
-    color: white;
-    text-align: center;
-    font-size: 140%;
-    width: 472px;
-    padding: 14px 0;
-	font-weight: bold;
-	font-weight: 140%;
-    height: 44px;
-    background: url("/assets/ribbon.png") top right no-repeat;
+  display: block;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: -100px;
+  color: white;
+  text-align: center;
+  font-size: 140%;
+  width: 472px;
+  padding: 14px 0;
+  font-weight: bold;
+  font-weight: 140%;
+  height: 44px;
+  background: url("/assets/ribbon.png") top right no-repeat;
 }
+
+.rounded_box{
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #d9d9d9;
+  -moz-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);
+  -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);
+  box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/********* BROWSER SPECIFIC CSS ******************/
+
+@-moz-document url-prefix() {
+  .headline {
+    font-weight: 400;
+  }
+}
+

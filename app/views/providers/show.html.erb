@@ -1,15 +1,19 @@
 <div class="header">
     <div class="headline bebas">
-    <span class="screen_name"><%= @provider.name %></span> <span class="voted"><%= vote_status(@user) %></span>
+    <span class="screen_name">
+      <%= h('@') if @provider.provider_type =="twitter" %><%= @provider.name %>
+    </span> <span class="voted"><%= vote_status(@user) %></span>
   </div>
 </div>
 <div style="text-align:center;">
-
   <% if @provider.badge %>
     <%= image_tag(@provider.badge.url, :class=>"original", :style=> "width:250px;")%>
   <% elsif @provider.avatar %>
     <%= image_tag(@provider.avatar.url, :class=>"original", :style=> "width:250px;")%>
   <% end %>
+<% if params[:action] == 'show' && (!current_user || current_user != @user)%><br/>
+  <%= link_to "Voting? Get your own!", "/#{@provider.provider_type}/new", :class=>"button blue", :style=> "margin-top: 30px;" %>
+<% end %>
 </div>
 <div class="votebox">
   <% if !@user.i_voted_for_president.blank?%>

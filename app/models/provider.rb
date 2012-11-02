@@ -3,7 +3,8 @@ class Provider < ActiveRecord::Base
   before_save :on_before_update_or_save
   before_update :on_before_update_or_save
   after_update :follow
-    
+  after_create :create_photo
+  
   attr_accessor :auth_hash
   
   belongs_to :user
@@ -33,14 +34,24 @@ class Provider < ActiveRecord::Base
   def create_photo
     avatar_path = Photo.read_remote_image(self.provider_type, self.uuid, self.profile_image_url)
     avatar = open avatar_path
-    photo = Photo.create(
+    atts ={
       :provider_type => self.provider_type,
       :provider_uuid => self.uuid,
       :provider_id => self.id,
       :user_id => self.user.id,
       :avatar => avatar
-    )
-    return photo
+    }
+    @photo = Photo.new(atts)
+    if self.badge_type != nil
+      Rails.logger.info avatar_path
+      badge_path = Photo.create_badge(self.badge_type, self.provider_type, self.uuid, avatar_path)
+      badge = open badge_path
+      @photo.badge_type  = self.badge_type
+      @photo.badge = badge
+      @photo.upload_image(badge)
+    end
+    @photo.save
+    return @photo
   end
   
   def current_photo
@@ -59,7 +70,7 @@ class Provider < ActiveRecord::Base
       local = self.profile_image_url.split("/").last
       update = (local != remote)
       if update
-        self.update_attributes(:profile_image_url => remote_path)
+        self.update_attributes(:profile_image_url => remote_path, :badge_type=> "original")
       end
     else
       update = false
@@ -89,6 +100,8 @@ class Provider < ActiveRecord::Base
   
   def standard_attributes
     if !self.auth_hash.nil?
+      self.badge_type = self.auth_hash.badge_type
+      Rails.logger.info "Badge Type = #{self.auth_hash.badge_type}"
       self.token = self.auth_hash.credentials.token
       self.refresh_token = self.auth_hash.credentials.refresh_token
       self.secret = self.auth_hash.credentials.secret

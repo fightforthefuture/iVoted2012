@@ -3,11 +3,12 @@ class ProvidersController < ApplicationController
   before_filter :redirect, :only => [:show, :edit]
 
   def login
+    session[:badge] = params[:badge]
     redirect_to "/auth/#{params[:auth_type]}"
   end
   
   def new
-    session[:badge] == params[:badge]
+    session[:badge] = params[:badge]
     redirect_to "/auth/#{params[:auth_type]}"
   end
   
@@ -33,7 +34,9 @@ class ProvidersController < ApplicationController
   end
   
   def update
-    current_provider.update_attributes(:name=> params[:provider][:name]) if !params[:provider][:name].blank?
+    atts = {:following => (params[:provider][:following] == "1")}
+    atts.merge!(:name=> params[:provider][:name]) if !params[:provider][:name].blank?
+    current_provider.update_attributes(atts)
     if current_user.update_attributes(params[:user])
       flash[:notice] = PROFILE_UPDATED
       redirect_to "/#{current_provider.provider_type}/#{current_provider.uuid}"

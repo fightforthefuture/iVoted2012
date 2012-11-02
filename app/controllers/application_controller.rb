@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :get_id
+  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :ivoted_tweets
   
   after_filter :reset_random_avatar
 
@@ -65,17 +65,19 @@ class ApplicationController < ActionController::Base
   
   def top_users
     @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
+   # @top_users ||= Provider.order("followers_count DESC").limit(8)
   end
   
   def random_avatar
-    # count = Photo.count rescue 0 
-    # return "/assets/example_badge.jpg" if count == 0
-    # session[:random_avatar_id] ||= rand(count)
-    # return Photo.first(:offset => session[:random_avatar_id]).avatar.url
     return "/assets/original_girl.jpg"
   end
   
   def reset_random_avatar
     session.delete(:random_avatar_id)
+  end
+  
+  def ivoted_tweets
+    @client = Twitter::Client.new(:oauth_token =>ENV['TWITTER_ACCESS_TOKEN'],  :oauth_token_secret =>ENV['TWITTER_ACCESS_SECRET'])
+    @ivoted_tweets ||=@client.search("#ivoted", :count => 8, :result_type => "recent")
   end
 end
