@@ -1,10 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :ivoted_tweets, :badge_updated_text
+  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :badge_updated_text, :ivoted_tweets
   
   after_filter :reset_random_avatar
-
+  before_filter :ivoted_tweets
   before_filter :counts, :only => [:index, :show]
   before_filter :top_users, :only => :index
   before_filter :find_user, :only => [:edit, :show]
@@ -17,7 +17,10 @@ class ApplicationController < ActionController::Base
   PROFILE_FAILED = "We we're unable to update your Profile!"
   TWEET_SENT = "You tweet has been sent!"
   TWEET_FAILED = "We are sorry. Something went wrong. Please try again later."
-
+  
+  @@ivoted_tweets = nil
+  @@last_tweet = nil
+  
   private
 
   def badge_updated_text
@@ -87,7 +90,10 @@ class ApplicationController < ActionController::Base
   end
   
   def ivoted_tweets
+    return @@ivoted_tweets unless @@ivoted_tweets.nil? || ((@@last_tweet+300) < Time.now)
+    @@last_tweet = Time.now
     @client = Twitter::Client.new(:oauth_token =>ENV['TWITTER_ACCESS_TOKEN'],  :oauth_token_secret =>ENV['TWITTER_ACCESS_SECRET'])
-    @ivoted_tweets ||=@client.search("#ivoted", :count => 8, :result_type => "recent")
+    @@ivoted_tweets =  @client.search("#ivoted", :count => 8, :result_type => "recent")
+    return @@ivoted_tweets
   end
 end

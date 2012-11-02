@@ -16,7 +16,7 @@ module ApplicationHelper
   end
   
   def download_badge_path
-     return "/" if !current_user || !current_provider
+     return "/" if !current_user || !current_provider || !current_provider.photo.nil?
      return "/photos/#{current_provider.photo.id}/download"
   end
   

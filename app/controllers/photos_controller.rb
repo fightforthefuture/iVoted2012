@@ -8,7 +8,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:photo][:id])
     if @photo.update_attributes(:badge_type => params[:user][:badge])
       session[:badge] = params[:user][:badge]
-      flash[:notice] = BADGE_UPDATED
+      flash[:notice] = badge_updated_text
       redirect_to "/#{session[:provider]}/#{current_provider.uuid}/edit"
     else
       flash[:notice] = BADGE_FAILED
