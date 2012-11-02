@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     session[:user_id] = provider.user_id
     session[:provider] = auth_hash[:provider]
     if current_user.i_voted_for_president.blank?
-      redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}/edit", :notice => BADGE_UPDATED
+      redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}/edit", :notice => badge_updated_text
     else
       redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}", :notice => SIGNIN_NOTICE
     end

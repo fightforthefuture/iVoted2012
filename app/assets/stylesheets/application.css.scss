@@ -616,13 +616,15 @@ p.bubble{ padding: 0px; margin: 0px auto;}
     margin-bottom: 10px;
     min-height: 60px;
     color: #3e3e3e;
-    b{
-      font-size: 140%;
+    .b{
+      font-weight: bold;
+      font-size: 130%;
+      margin-bottom: 10px;
     }
     
     img{
       border:none;
-      padding: 10px 10px 30px 10px;
+      padding: 10px;
     }
   }
   .rounded_box{
@@ -804,6 +806,11 @@ a.button.grey, a.button.grey:active {
   background-color: #979797;
   font-weight:normal;
   color: #414141;
+}
+
+ul.menu li a.large{
+  padding: 10px 20px;
+  font-size: 200%;
 }
 
 p.disclosure {

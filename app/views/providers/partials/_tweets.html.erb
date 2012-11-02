@@ -5,7 +5,7 @@
       <% ivoted_tweets.results.map do |post| %>
         <div class="post">
           <%= image_tag(post[:user][:profile_image_url], :style=> "float:left")%>
-          <b>@<%= post[:user][:screen_name] %></b><br/>
+          <div class="b">@<%= post[:user][:screen_name] %></div>
           <%= post[:text] %><br/>
         </div>
       <% end %>

@@ -11,9 +11,6 @@
   <% elsif @provider.avatar %>
     <%= image_tag(@provider.avatar.url, :class=>"original", :style=> "width:250px;")%>
   <% end %>
-<% if params[:action] == 'show' && (!current_user || current_user != @user)%><br/>
-  <%= link_to "Voting? Get your own!", "/#{@provider.provider_type}/new", :class=>"button blue", :style=> "margin-top: 30px;" %>
-<% end %>
 </div>
 <div class="votebox">
   <% if !@user.i_voted_for_president.blank?%>

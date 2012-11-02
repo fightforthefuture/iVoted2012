@@ -2,7 +2,7 @@
   <% if !current_page?('/') %>
      <ul class="menu">
        <% if !current_user %>
-          <li><%= link_to "Gonna vote? Get your own page", "/#{params[:provider_type]}/new", :class=>"button grey" %></li>
+          <li><%= link_to "Voting? Get your own page!", "/#{params[:provider_type]}/new", :class=>"button blue large" %></li>
        <% else %>
           <li><%= link_to "Logout", signout_path, :method => :delete, :class=>"button grey" %></li>
        <% end %>

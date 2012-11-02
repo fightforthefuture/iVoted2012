@@ -11,10 +11,4 @@
       <div class="sexy_line"><h4><%= vote_at(@user) %></h4></div>
       <%= f.text_field :where_i_voted_at %>
     </div>
-    <% if session[:provider] == "twitter" %>
-       <div class="center follow_us">
-         <%= check_box :provider, :following, :checked => true, :style=> "top: -7px; position: relative;" %>
-         <%= label_tag :provider_following, "Follow @i__voted on Twitter" %><br/>
-       </div>
-    <% end %>
 </div>

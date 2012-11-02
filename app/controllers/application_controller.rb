@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :ivoted_tweets
+  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :ivoted_tweets, :badge_updated_text
   
   after_filter :reset_random_avatar
 
@@ -17,12 +17,22 @@ class ApplicationController < ActionController::Base
   PROFILE_FAILED = "We we're unable to update your Profile!"
   TWEET_SENT = "You tweet has been sent!"
   TWEET_FAILED = "We are sorry. Something went wrong. Please try again later."
-  
-  BADGE_UPDATED = "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
-  We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
-  <div style='margin: 10px;'><a href='PLATFORM_PATH' class='button grey'>Hide this and view the page</a></div>"
 
   private
+
+  def badge_updated_text
+    if current_provider.provider_type == "twitter"
+      txt = "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b> Your new avatar will appear on 'CURRENT_LOGIN' in just a few moments. 
+      We will revert your avatar photo 2 days after the election. You can always restore your original at any time.<br/>
+      <div style='margin: 10px;'><a href='PLATFORM_PATH' class='button grey'>Hide this and view the page</a></div>"
+    else
+      txt= "<b>Awesome! Here's your own 'VOTE_NOTICE' Page.</b><br/>
+      <a href='DOWNLOAD_BADGE' style='color:#999999'>Download the badge</a> and change your CURRENT_PLATFORM profile pic.
+      <a href='PLATFORM_PATH' style='color:#999999'>Share this page</a>.
+      <div style='margin: 10px;'><a href='PLATFORM_PATH' class='button grey'>Hide this and view the page</a></div>"
+    end
+    return txt
+  end
   
   def find_user
     @provider = Provider.where(:provider_type =>  params[:provider_type], :uuid=> params[:id]).limit(1).first
@@ -64,8 +74,8 @@ class ApplicationController < ActionController::Base
   end
   
   def top_users
-    @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
-   # @top_users ||= Provider.order("followers_count DESC").limit(8)
+   # @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
+    @top_users ||= Provider.order("followers_count DESC").limit(8)
   end
   
   def random_avatar

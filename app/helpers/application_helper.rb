@@ -15,6 +15,11 @@ module ApplicationHelper
     return "/#{current_provider.provider_type}/#{current_uuid}"
   end
   
+  def download_badge_path
+     return "/" if !current_user || !current_provider
+     return "/photos/#{current_provider.photo.id}/download"
+  end
+  
   def vote_notice
     return false if !current_user
     return "I Voted" if current_user.voted?
@@ -48,7 +53,9 @@ module ApplicationHelper
   def personalize(notice)
     notice.
       gsub('CURRENT_LOGIN', current_uuid).
+      gsub('DOWNLOAD_BADGE', download_badge_path).
       gsub('PLATFORM_PATH', platform_path).
+      gsub('CURRENT_PLATFORM', current_provider.provider_type.capitalize).
       gsub('VOTE_NOTICE', vote_notice)
   end
 
