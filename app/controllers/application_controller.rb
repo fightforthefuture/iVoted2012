@@ -74,8 +74,8 @@ class ApplicationController < ActionController::Base
   end
   
   def top_users
-   # @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
-    @top_users ||= Provider.order("followers_count DESC").limit(8)
+   @top_users ||= Provider.where("badge_type != 'original' AND followers_count != 0").order("followers_count DESC").limit(8)
+   # @top_users ||= Provider.order("followers_count DESC").limit(8)
   end
   
   def random_avatar
