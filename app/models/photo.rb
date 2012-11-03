@@ -75,8 +75,7 @@ class Photo < ActiveRecord::Base
   
   def update_user
     user = self.provider.user
-    atts = {:badge_type => self.badge_type, :pledged => !!self.badge_type.match("pledge")}
-    atts.merge!(:voted =>  !!self.badge_type.match("vote")) if !!self.badge_type.match("vote") && !user.voted
+    atts = {:badge_type => self.badge_type, :pledged => !!self.badge_type.match("pledge"), :voted =>  !!self.badge_type.match("vote")}
     user.update_attributes(atts)
   end
   
