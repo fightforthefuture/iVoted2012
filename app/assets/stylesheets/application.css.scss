@@ -227,7 +227,8 @@ img.logo{ border:none; bottom: -30px; position:relative;}
       border: 1px solid #555555;
     }
     > a.badge p.count{
-      color:#5d5d5d;
+      color:#131313;
+      font-weight: bold;
       width: 110px;
       font-size: 100%;
       text-align:center;
@@ -445,12 +446,12 @@ h2, h4 {margin: 0px 0; padding: 0;}
 .badge{
   margin: 10px;
   display:inline-block;
-  border: 1px solid #4e4e4e;
+/*  border: 1px solid #4e4e4e;
   background-color: #333333;
-  -moz-box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
-  -webkit-box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
-  box-shadow: 0 1px 13px rgba(0,0,0,.43); /* drop shadow */
-  border-radius: 1px;
+  -moz-box-shadow: 0 1px 13px rgba(0,0,0,.43);
+  -webkit-box-shadow: 0 1px 13px rgba(0,0,0,.43);
+  box-shadow: 0 1px 13px rgba(0,0,0,.43);
+  border-radius: 1px;*/
 }
 .sexy_line {
   background:-moz-linear-gradient(left, #FFFFFF 0%,#777 50%,#FFFFFF 100%); 
