@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   end
   
   def send_tweet(params)
-    provider = Provider.where(:user_id => params[:post][:user_id], :provider_type => params[:post][:platform]).limit(1).first
+    provider = Provider.where(:user_id => params[:post][:user_id], :uuid => params[:post][:screen_name], :provider_type => params[:post][:platform]).limit(1).first
     @client = Twitter::Client.new(:oauth_token => provider.token, :oauth_token_secret => provider.secret)
     @client.update(params[:post][:message])
   end
