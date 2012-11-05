@@ -5,7 +5,7 @@
       <p id="text_count">0/<b>140</b></p>
     </div>
     <div class="field">
-      <%= f.text_area :message, :value => default_tweet, :style=> "width:56%; height: 60px;font-size: 120%;" %>
+      <%= f.text_area :message, :value => message, :style=> "width:56%; height: 60px;font-size: 120%;" %>
     </div>
     <%= f.hidden_field :user_id, :value=> @user.id %>
     <%= f.hidden_field :screen_name, :value=> @provider.uuid %>

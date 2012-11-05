@@ -8,12 +8,16 @@ IVoted2012::Application.routes.draw do
     collection do
       get 'login'
     end
+    resources :sopa, :only => [:index]
   end
   
   resources :twitter, :controller => :providers, :provider_type=> "twitter", :auth_type=> "twitter" do
     get 'voted', :on => :member  
     collection do
       get 'login'
+    end
+    resources :sopa, :only => [:index] do
+      get 'edit', :on => :collection
     end
   end
   
@@ -22,7 +26,10 @@ IVoted2012::Application.routes.draw do
     collection do
       get 'login'
     end
+    resources :sopa, :only => [:index]
   end
+  
+  resources :sopa, :only => [:index]
 
   resources :photos do
     get 'download', on: :member

@@ -1,13 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :current_provider, :default_tweet, :overlay_options, :random_avatar, :badge_updated_text, :ivoted_tweets
+  helper_method :current_user, :current_provider, :get_current_id, :default_tweet, :sopa_tweet, :overlay_options, :random_avatar, :badge_updated_text, :ivoted_tweets
   
   after_filter :reset_random_avatar
   before_filter :ivoted_tweets
   before_filter :counts, :only => [:index, :show]
   before_filter :top_users, :only => :index
-  before_filter :find_user, :only => [:edit, :show]
+  before_filter :find_user, :only => [:index, :edit, :show]
 
   LOGIN_NOTICE = "Thank you for logging in!"
   SIGNIN_NOTICE = "Thank you for signing up!"
@@ -38,7 +38,8 @@ class ApplicationController < ActionController::Base
   end
   
   def find_user
-    @provider = Provider.where(:provider_type =>  params[:provider_type], :uuid=> params[:id]).limit(1).first
+    return nil if get_current_id.nil?
+    @provider = Provider.where(:provider_type =>  params[:provider_type], :uuid=> get_current_id).limit(1).first
     return @user ||= @provider.user if !@provider.nil?
     return false
   end
@@ -62,6 +63,29 @@ class ApplicationController < ActionController::Base
     status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/twitter/#{idz} #iwillvote" if current_user
     status = "I voted! And here's my voter page http://www.ivoted2012.org/twitter/#{idz} #ivoted" if current_user && current_user.voted?
     return status
+  end
+  
+  def sopa_tweet
+    return "" if !current_user && !current_provider
+    idz = current_provider.uuid
+    status = ""
+    status = "I helped kill SOPA and I vote. Join me and get your own badge, see my page: http://www.ivoted2012.org/twitter/#{idz}/sopa #antisopavoter" if current_user
+    return status
+  end
+  
+  def get_current_id
+    if !params[:id].nil?
+      id = params[:id]
+    elsif !params[:twitter_id].nil?
+      id = params[:twitter_id]
+    elsif !params[:facebook_id].nil?
+      id = params[:facebook_id]
+    elsif !params[:google_id].nil?
+      id = params[:google_id]
+    else
+      id = nil
+    end
+    return id
   end
 
   def overlay_options

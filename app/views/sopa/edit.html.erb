@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= render :partial => "providers/partials/tweetbox", :locals=> {:message => default_tweet} if @provider.provider_type == "twitter" %>
+  <%= render :partial => "providers/partials/tweetbox", :locals=> {:message => sopa_tweet} if @provider.provider_type == "twitter" %>
   <%= form_for(@user, :url=> {:controller => :providers, :action=> "update", :id=> current_uuid}) do |f| %>
   <div class="header">
     <div class="headline bebas">
@@ -11,7 +11,7 @@
           <%= text_field :provider, :name %>
         </span>
       </span>
-      <span class="voted"><%= vote_status(@user) %></span>
+      <span class="voted">An Anti-SOPA Voter</span>
     </div>
     <div class="name_widget"><a href="javascript:change_name();" class="link_text">change to my full name</a></div>
     

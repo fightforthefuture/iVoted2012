@@ -1,0 +1,44 @@
+<div class="cta pick_badge">
+   <div class="headline title bebas">Care about a free internet?</div>
+  <h4>Did you help kill SOPA? Get a social media badge and vote page to motivate your followers to vote for internet freedom this year.</h4>
+    
+  <div class="row">
+     <a class="badge thumb selected" href="#" data-badge='sopa_banner'>
+        <div class="sopa_banner"></div>
+        <%= image_tag(random_avatar, :class=>"avatar")%>
+        <p class="count">Anti-Sopa Banner</p>
+      </a>
+      <a class="badge thumb" href="#" data-badge='sopa_badge'>
+        <div class="sopa_badge"></div>
+        <p class="count">Anti-Sopa Badge</p>
+      </a>
+   </div>
+   <%= image_tag("near_right_arrow.png", :class=>"arrow", :id=>"ivoted_badge_arrow", :style =>"display: none;")%>
+   <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"ivoted_banner_arrow", :style =>"display: block;")%>
+
+  <span class="center"><%= link_to "choose your badge", "/twitter/new?badge=sopa_banner", :id => 'twitter_login', :class=>"button twitter"%><br/>
+    <div class="other_platforms">
+    Get it for:  <%= link_to "Google+", "/google/new?badge=sopa_banner", :id => 'google_login', :class=> 'link_text' %> | <%= link_to "Facebook", "/facebook/new?badge=sopa_banner", :id => 'facebook_login', :class=> 'link_text' %>
+    </div>
+  </span>
+</div>
+<% content_for :footer do %>
+  <% javascript_tag do %>
+  
+    $('a.badge').bind("click", function() {
+      change_badge($(this));
+    });
+
+    function change_badge(obj){
+
+      $("a.badge").removeClass('selected');
+      $(obj).addClass('selected');
+      $("img.arrow").hide();
+      $("img#"+$(obj).data('badge')+"_arrow").show();
+      $("#twitter_login").attr("href", "/twitter/new?badge="+$(obj).data('badge'));
+      $("#google_login").attr("href", "/google/new?badge="+$(obj).data('badge'));
+      $("#facebook_login").attr("href", "/facebook/new?badge="+$(obj).data('badge'));
+    }
+
+  <% end %>
+<% end %>

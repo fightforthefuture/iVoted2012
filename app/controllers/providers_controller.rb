@@ -14,7 +14,7 @@ class ProvidersController < ApplicationController
   
   def voted
     redirect_to root_url if !current_user
-    session[:badge]= "ivoted_banner"
+    session[:badge]= "ivoted_banner" if !session[:badge].match("sopa")
     current_user.update_attributes(:voted=> true)
     @photo = current_provider.photos.last
     render "photos/new"
@@ -36,10 +36,11 @@ class ProvidersController < ApplicationController
   def update
     atts = {:following => (params[:provider][:following] == "1")}
     atts.merge!(:name=> params[:provider][:name]) if !params[:provider][:name].blank?
+    sopa = ""; sopa = "/sopa" if params[:badge][:sopa] == "true"
     current_provider.update_attributes(atts)
     if current_user.update_attributes(params[:user])
       flash[:notice] = PROFILE_UPDATED
-      redirect_to "/#{current_provider.provider_type}/#{current_provider.uuid}"
+      redirect_to "/#{current_provider.provider_type}/#{current_provider.uuid}#{sopa}"
     else
       flash[:notice] = current_user.errors.full_messages.to_sentence
       redirect_to :back

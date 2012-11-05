@@ -400,7 +400,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
 
 .cta{
   text-align: center;
-  > h4{color: #393c65; font-size: 180%; font-family: 'Oleo Script', cursive; font-weight:normal; letter-spacing: 1px;}
+  > h4{color: #393c65; font-size: 180%; font-family: 'Oleo Script', cursive; font-weight:normal; letter-spacing: 1px; line-height: 110%;}
 }
 
 
@@ -410,7 +410,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
 
 .badge{
   position:relative;
-  > img.avatar, .ivoted_banner,.ivoted_badge, .ipledge_banner,.ipledge_badge{
+  > img.avatar, .ivoted_banner,.ivoted_badge, .ipledge_banner,.ipledge_badge, .sopa_badge, .sopa_banner{
     position: absolute;
     top: 0px;left: 0px;
     z-index: 100;border: none;
@@ -429,24 +429,31 @@ h2, h4 {margin: 0px 0; padding: 0;}
   >.ipledge_badge{
     background: url('/assets/ipledge_badge.png') top right no-repeat;
   }
+  >.sopa_banner{
+    background: url('/assets/sopa_banner.png') top right no-repeat;
+  }
+  >.sopa_badge{
+    background: url('/assets/sopa_badge.png') top right no-repeat;
+  }
 }
+
 .badge.medium{
   width: 150px; height:150px;
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge{
+  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge{
     width: 150px; height:150px; background-size: 151px 151px;
   }
 }
 
 .badge.thumb{
   width: 109px; height:109px;
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge{
+  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge{
     width: 109px; height:109px; background-size: 111px 111px;
   }
 }
 .badge.icon{
   width: 30px; height:30px;
 
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge{
+  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge{
     width: 30px; height:30px; background-size: 31px 31px;
   }
 }

@@ -14,7 +14,7 @@
    <div class="overlay_selection closed">
     <span class="center">
     <%= link_to "Download Badge", "/photos/#{@provider.photo.id}/download", :class=> "link_text" %><br/><br/>
-    <%= link_to "Change Badge", "/pick_badge", :class=>"button twitter"%>
+    <%= link_to "Change Badge", "/pick_badge?badge=#{session[:badge]}", :class=>"button twitter"%>
     </span>
     <% if session[:provider] == "twitter" %>
        <div class="center follow_us">
