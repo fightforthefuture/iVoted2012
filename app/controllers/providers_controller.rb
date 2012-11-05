@@ -1,6 +1,6 @@
 class ProvidersController < ApplicationController
   
-  before_filter :redirect, :only => [:show, :edit]
+  before_filter :redirect, :only => [:edit]
 
   def login
     session[:badge] = params[:badge]
@@ -48,7 +48,7 @@ class ProvidersController < ApplicationController
   end
   
   def redirect
-    redirect_to root_url if !@user
+    redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user && !@current_user) || (@current_user != @user)
   end
 
 end

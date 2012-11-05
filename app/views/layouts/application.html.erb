@@ -32,7 +32,11 @@
 							<div id="shareitup" style="overflow: visible">
 								<div class="fb-like" data-href="http://www.ivoted2012.org" data-send="true" data-layout="box_count" data-width="150" data-show-faces="true" style="margin-bottom: 5px;"></div>
 								<br />
-								<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.ivoted2012.org" data-text="Did you vote yet? Will you pledge to vote? Become a one person Get Out the Vote machine with these twitter badges!" style="float: left; clear: both;">Tweet</a>
+								<% if params[:controller] == "sopa"%>
+								  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.ivoted2012.org" data-text="Care about a free internet? Get a social media badge and motivate your followers to vote for internet freedom. http://www.ivoted2012.org" style="float: left; clear: both;">Tweet</a>
+								<% else %>
+								  <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.ivoted2012.org" data-text="Did you vote yet? Will you pledge to vote? Become a one person Get Out the Vote machine with these twitter badges!" style="float: left; clear: both;">Tweet</a>
+								<% end %>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
 				</div>

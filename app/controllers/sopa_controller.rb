@@ -1,5 +1,7 @@
 class SopaController < ApplicationController
-
+  
+  before_filter :redirect, :only => [:edit]
+  
   def index
     if params[:provider_type].nil?
       render "sopa/index"
@@ -12,4 +14,9 @@ class SopaController < ApplicationController
     @post = Post.new
     render "sopa/edit"
   end
+  
+  def redirect
+    redirect_to "/sopa", :notice => AUTHORIZATION_FAILED if (!@user && !@current_user) || (@current_user != @user)
+  end
+  
 end
