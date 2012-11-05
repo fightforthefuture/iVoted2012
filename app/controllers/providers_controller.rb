@@ -9,6 +9,7 @@ class ProvidersController < ApplicationController
   
   def new
     session[:badge] = params[:badge]
+    session[:email] = params[:email] if !params[:email].blank?
     redirect_to "/auth/#{params[:auth_type]}"
   end
   

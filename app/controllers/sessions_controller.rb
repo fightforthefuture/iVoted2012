@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   
-  #before_filter :log, :only => :create
+  before_filter :log, :only => :create
 
   def destroy
     flash[:notice] = "You have signed out!"
@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
     p_atts = {:provider_type => auth_hash[:provider], :uuid=> get_uuid}
     p_atts.merge!(:user_id => current_user.id) if current_user
     auth_hash.merge!(:badge_type => session[:badge]) if !session[:badge].nil?
+    auth_hash.merge!(:email => session[:email]) if !session[:email].nil?
     provider = Provider.where(p_atts).first_or_create(:auth_hash=>auth_hash)
     provider.update_attributes(:auth_hash=>auth_hash)
     current_user = provider.user

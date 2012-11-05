@@ -101,13 +101,14 @@ class Provider < ActiveRecord::Base
   def standard_attributes
     if !self.auth_hash.nil?
       self.badge_type = self.auth_hash.badge_type
-      Rails.logger.info "Badge Type = #{self.auth_hash.badge_type}"
       self.token = self.auth_hash.credentials.token
       self.refresh_token = self.auth_hash.credentials.refresh_token
       self.secret = self.auth_hash.credentials.secret
       self.name =  self.auth_hash.info.name
       self.uuid = self.auth_hash.info.uid
       self.email = self.auth_hash.info.email
+      self.email = self.auth_hash.email if self.email.blank? && !self.auth_hash.email.blank?
+      Rails.logger.info "Email = #{self.auth_hash.email} :: #{self.email}"
       self.nickname = self.auth_hash.info.nickname
       self.first_name = self.auth_hash.info.first_name
       self.last_name = self.auth_hash.info.last_name
