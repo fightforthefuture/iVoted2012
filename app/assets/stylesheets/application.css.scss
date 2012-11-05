@@ -52,6 +52,7 @@
     -moz-border-radius: 4px;
   	-webkit-border-radius: 4px;
   	border-radius: 4px; /* border radius */
+  	width: 240px;
   }
 }
 #_vit{
@@ -186,7 +187,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 .arrow{
   border:none;
   position: absolute;
-  bottom: 95px;
+  bottom: 130px;
 }
 /*
 #ivoted_badge_arrow {
@@ -861,8 +862,15 @@ p.disclosure {
 	padding-top: 40px;
 	padding-bottom: 40px;
 }
+p.privacy{
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: #666;
+  padding-top: 5px;
+}
 
-p.disclosure a {
+p.disclosure a, p.privacy a {
 	color: #666;
 	text-decoration: underline;
 }

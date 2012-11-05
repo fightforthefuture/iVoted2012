@@ -17,11 +17,12 @@
    <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"ivoted_banner_arrow", :style =>"display: block;")%>
 
    <span class="center">
-     <%= text_field :user, :email, :placeholder => "Email" %>
+     <%= text_field :user, :email, :placeholder => "Email (optional)" %>
      <%= link_to "choose your badge", "javascript:submit_cta('twitter');", :id => 'twitter_login', :class=>"button twitter"%><br/>
      <div class="other_platforms">
      Get it for:  <%= link_to "Google+", "javascript:submit_cta('google');", :id => 'google_login', :class=> 'link_text' %> | <%= link_to "Facebook", "javascript:submit_cta('facebook');", :id => 'facebook_login', :class=> 'link_text' %>
      </div>
+     <p class="privacy">Center for Rights can contact you about related campaigns. <a href="http://thecenterforrights.org/privacy">Privacy Policy</a></p>
    </span>
 </div>
 <% content_for :footer do %>
