@@ -16,7 +16,7 @@ class SopaController < ApplicationController
   end
   
   def redirect
-    redirect_to "/sopa", :notice => AUTHORIZATION_FAILED if (!@user && !@current_user) || (@current_user != @user)
+    redirect_to "/sopa", :notice => AUTHORIZATION_FAILED if (!@user && !current_user) || (current_user != @user)
   end
   
 end

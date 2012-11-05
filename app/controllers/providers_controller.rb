@@ -48,7 +48,7 @@ class ProvidersController < ApplicationController
   end
   
   def redirect
-    redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user && !@current_user) || (@current_user != @user)
+    redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user && !current_user) || (current_user != @user)
   end
 
 end

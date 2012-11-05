@@ -6,14 +6,20 @@
      <a class="badge thumb selected" href="#" data-badge='sopa_banner'>
         <div class="sopa_banner"></div>
         <%= image_tag(random_avatar, :class=>"avatar")%>
-        <p class="count">Anti-Sopa Banner</p>
+        <p class="count">Banner</p>
+      </a>
+      <a class="badge thumb" href="#" data-badge='reddit_sopa_banner'>
+       <div class="reddit_sopa_banner"></div>
+       <%= image_tag(random_avatar, :class=>"avatar")%>
+       <p class="count">Reddit Banner</p>
       </a>
       <a class="badge thumb" href="#" data-badge='sopa_badge'>
         <div class="sopa_badge"></div>
-        <p class="count">Anti-Sopa Badge</p>
+        <p class="count">Badge</p>
       </a>
    </div>
    <%= image_tag("near_right_arrow.png", :class=>"arrow", :id=>"sopa_badge_arrow", :style =>"display: none;")%>
+   <%= image_tag("middle_arrow.png", :class=>"arrow", :id=>"reddit_sopa_banner_arrow", :style =>"display: none;")%>
    <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"sopa_banner_arrow", :style =>"display: block;")%>
 
   <span class="center"><%= link_to "choose your badge", "/twitter/new?badge=sopa_banner", :id => 'twitter_login', :class=>"button twitter"%><br/>

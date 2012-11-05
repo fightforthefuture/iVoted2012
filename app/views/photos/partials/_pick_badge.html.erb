@@ -2,6 +2,11 @@
   <div class="headline bebas">Pick your favorite badge</div>
     <div class="row">
       <% if session[:badge].match('sopa')%>
+        <a class="badge thumb" href="#" data-badge='reddit_sopa_banner'>
+         <div class="reddit_sopa_banner"></div>
+         <%= image_tag(current_provider.avatar.url, :class=>"avatar")%>
+         <p class="count">Reddit Banner</p>
+        </a>
         <a class="badge thumb" href="#" data-badge='sopa_banner'>
            <div class="sopa_banner"></div>
            <%= image_tag(current_provider.avatar.url, :class=>"avatar")%>
