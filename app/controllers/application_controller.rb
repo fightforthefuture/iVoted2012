@@ -51,7 +51,8 @@ class ApplicationController < ActionController::Base
   
   def current_provider
     p = params[:provider_type] || session[:provider]
-    return Provider.where(:provider_type=> p, :user_id => session[:user_id]).limit(1).first 
+    return Provider.where(:provider_type=> p, :uuid=> session[:provider_uuid], :user_id => session[:user_id]).limit(1).first if !session[:provider_uuid].nil?
+    return Provider.where(:provider_type=> p, :user_id => session[:user_id]).limit(1).first
   end
   
   def default_tweet
