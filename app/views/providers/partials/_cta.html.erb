@@ -3,15 +3,6 @@
   <h4>Get a Twitter badge and vote page to help motivate your followers to vote.</h4>
     
   <div class="row">
-     <a class="badge thumb" href="#" data-badge='ipledge_banner'>
-       <div class="ipledge_banner"></div>
-        <%= image_tag(random_avatar, :class=>"avatar")%>
-       <p class="count">I Pledge Banner</p>
-     </a>
-     <a class="badge thumb" href="#" data-badge='ipledge_badge'>
-       <div class="ipledge_badge"></div>
-       <p class="count">I Pledge Badge</p>
-     </a>
      <a class="badge thumb selected" href="#" data-badge='ivoted_banner'>
         <div class="ivoted_banner"></div>
         <%= image_tag(random_avatar, :class=>"avatar")%>
@@ -22,10 +13,8 @@
         <p class="count">I Voted Badge</p>
       </a>
    </div>
-   <%= image_tag("far_right_arrow.png", :class=>"arrow", :id=>"ivoted_badge_arrow", :style =>"display:none;")%>
-   <%= image_tag("near_right_arrow.png", :class=>"arrow", :id=>"ivoted_banner_arrow", :style =>"display: block;")%>
-   <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"ipledge_badge_arrow", :style =>"display: none;")%>
-   <%= image_tag("far_left_arrow.png", :class=>"arrow", :id=>"ipledge_banner_arrow", :style =>"display: none;")%>
+   <%= image_tag("near_right_arrow.png", :class=>"arrow", :id=>"ivoted_badge_arrow", :style =>"display: none;")%>
+   <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"ivoted_banner_arrow", :style =>"display: block;")%>
 
   <span class="center"><%= link_to "choose your badge", "/twitter/new?badge=ivoted_banner", :id => 'twitter_login', :class=>"button twitter"%><br/>
     <div class="other_platforms">

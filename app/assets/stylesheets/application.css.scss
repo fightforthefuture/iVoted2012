@@ -180,6 +180,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
   position: absolute;
   bottom: 95px;
 }
+/*
 #ivoted_badge_arrow {
   right: 200px;
 }
@@ -191,8 +192,14 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 }
 #ipledge_banner_arrow {
   left: 200px;
-}
+}*/
 
+#ivoted_badge_arrow{
+  right: 360px;
+}
+#ivoted_banner_arrow{
+  left: 360px;
+}
 
 /********* IMAGE PICKER **************/
 
@@ -659,6 +666,7 @@ p.bubble{ padding: 0px; margin: 0px auto;}
       font-weight:bold;
       letter-spacing: 2px;
       text-align:center;
+      line-height: 110%;
     }
   }
 }
