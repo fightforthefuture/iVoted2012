@@ -23,7 +23,7 @@
    <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"sopa_banner_arrow", :style =>"display: block;")%>
 
   <span class="center">
-    <%= text_field :user, :email, :placeholder => "Email (optional)" %>
+    <%= text_field :user, :email, :placeholder => "Email (optional)" %><br/>
     <%= link_to "choose your badge", "javascript:submit_cta('twitter');", :id => 'twitter_login', :class=>"button twitter"%><br/>
     <div class="other_platforms">
     Get it for:  <%= link_to "Google+", "javascript:submit_cta('google');", :id => 'google_login', :class=> 'link_text' %> | <%= link_to "Facebook", "javascript:submit_cta('facebook');", :id => 'facebook_login', :class=> 'link_text' %>
