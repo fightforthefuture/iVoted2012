@@ -8,12 +8,18 @@
         <%= image_tag(random_avatar, :class=>"avatar")%>
         <p class="count">I Voted Banner</p>
       </a>
+      <a class="badge thumb" href="#" data-badge='reddit_ivoted_banner'>
+         <div class="reddit_ivoted_banner"></div>
+         <%= image_tag(random_avatar, :class=>"avatar")%>
+         <p class="count">Reddit Banner</p>
+       </a>
       <a class="badge thumb" href="#" data-badge='ivoted_badge'>
         <div class="ivoted_badge"></div>
         <p class="count">I Voted Badge</p>
       </a>
    </div>
    <%= image_tag("near_right_arrow.png", :class=>"arrow", :id=>"ivoted_badge_arrow", :style =>"display: none;")%>
+   <%= image_tag("middle_arrow.png", :class=>"arrow", :id=>"reddit_ivoted_banner_arrow", :style =>"display: none;")%>
    <%= image_tag("near_left_arrow.png", :class=>"arrow", :id=>"ivoted_banner_arrow", :style =>"display: block;")%>
 
    <span class="center">

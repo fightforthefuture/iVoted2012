@@ -248,6 +248,9 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 }
 */
 
+#reddit_ivoted_banner_arrow{
+  left: 430px;
+}
 #ivoted_badge_arrow{
   right: 360px;
 }
@@ -474,7 +477,7 @@ h2, h4 {margin: 0px 0; padding: 0;}
 
 .badge{
   position:relative;
-  > img.avatar, .ivoted_banner,.ivoted_badge, .ipledge_banner,.ipledge_badge, .sopa_badge, .sopa_banner, .reddit_sopa_banner{
+  > img.avatar,.reddit_ivoted_banner, .ivoted_banner,.ivoted_badge, .ipledge_banner,.ipledge_badge, .sopa_badge, .sopa_banner, .reddit_sopa_banner{
     position: absolute;
     top: 0px;left: 0px;
     z-index: 100;border: none;
@@ -483,6 +486,9 @@ h2, h4 {margin: 0px 0; padding: 0;}
 
   >.ivoted_banner{
     background: url('/assets/ivoted_banner.png') top right no-repeat;
+  }
+  >.reddit_ivoted_banner{
+    background: url('/assets/reddit_ivoted_banner.png') top right no-repeat;
   }
   >.ivoted_badge{
     background: url('/assets/ivoted_badge.png') top right no-repeat;
@@ -506,21 +512,21 @@ h2, h4 {margin: 0px 0; padding: 0;}
 
 .badge.medium{
   width: 150px; height:150px;
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
+  >img.avatar, .reddit_ivoted_banner, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
     width: 150px; height:150px; background-size: 151px 151px;
   }
 }
 
 .badge.thumb{
   width: 109px; height:109px;
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
+  >img.avatar,.reddit_ivoted_banner, .ivoted_banner, .ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
     width: 109px; height:109px; background-size: 111px 111px;
   }
 }
 .badge.icon{
   width: 30px; height:30px;
 
-  >img.avatar, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
+  >img.avatar, .reddit_ivoted_banner, .ivoted_banner,.ivoted_badge,.ipledge_banner,.ipledge_badge, .sopa_banner, .sopa_badge, .reddit_sopa_banner{
     width: 30px; height:30px; background-size: 31px 31px;
   }
 }
