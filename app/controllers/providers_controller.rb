@@ -13,7 +13,6 @@ class ProvidersController < ApplicationController
     session[:email] = params[:email] if !params[:email].blank?
     session[:autotweet] = (params[:autotweet] == "true")
     session[:message] = params[:message] if !params[:message].blank?
-    Rails.logger.info "#{session[:autotweet]} :: #{session[:message]} "
     redirect_to "/auth/#{params[:auth_type]}"
   end
   

@@ -57,8 +57,9 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-    if (!@user.nil? && !current_user) || (!@user.nil? && current_user && @user.id != current_user.id)
-      return "#{@user.twitter.uuid} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/twitter/new?badge=ivoted_banner"
+    if (!@provider.nil? && !current_user) || (!@provider.nil? && current_user && @provider.user_id != current_user.id)
+      sym = ""; sym = "@" if @provider.provider_type == "twitter" && @provider.uuid == @provider.name
+      return "#{sym}#{@provider.name} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/#{@provider.provider_type}/#{@provider.uuid}"
     elsif current_provider && current_user
       idz = current_provider.uuid
       status = ""
@@ -71,9 +72,10 @@ class ApplicationController < ActionController::Base
   end
   
   def sopa_tweet
-    if (!@user.nil? && !current_user) || (!@user.nil? && current_user && @user.id != current_user.id)
-      return "#{@user.twitter.uuid} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/twitter/new?badge=sopa_ivoted_banner"
-    elsif current_provider
+    if (!@provider.nil? && !current_user) || (!@provider.nil? && current_user && @provider.user_id != current_user.id)
+      sym = ""; sym = "@" if @provider.provider_type == "twitter" && @provider.uuid == @provider.name
+      return "#{sym}#{@provider.name} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/#{@provider.provider_type}/#{@provider.uuid}"
+    elsif current_provider && current_user
       idz = current_provider.uuid
       status = ""
       status = "I helped kill SOPA and I vote. Join me and get your own badge, see my page: http://www.ivoted2012.org/twitter/#{idz}/sopa #antisopavoter" if current_user

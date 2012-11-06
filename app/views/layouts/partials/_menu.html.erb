@@ -11,7 +11,7 @@
           <li><%= link_to "Logout", signout_path, :method => :delete, :class=>"button grey" %></li>
        <% end %>
      </ul>
-   <% if current_user %> 
+   <% if current_user && current_provider %> 
       <% @sopa = ""; @sopa = "/sopa" if params[:controller] == "sopa"; %>
       <% if params[:action] == 'edit'  %>
         <ul class="menu">
@@ -22,7 +22,7 @@
        <ul class="menu">
          <% if current_user && !@user.nil? && (params[:action] == 'show' || (params[:controller] == "sopa" && !params[:provider_type].nil? && params[:action] == "index")) %> 
            <% if current_user != @user %>
-              <li><%= link_to "View your page", "/#{params[:provider_type]}/#{get_current_id}#{@sopa}", :class=>"button grey" %></li>
+              <li><%= link_to "View your page", "/#{params[:provider_type]}/#{current_provider.uuid}#{@sopa}", :class=>"button grey" %></li>
            <% end %>
            <% if current_user == @user %> 
               <% if !@user.voted? || params[:controller_type] == "sopa" %>
