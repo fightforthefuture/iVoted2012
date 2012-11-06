@@ -40,6 +40,15 @@ class Photo < ActiveRecord::Base
     return response
   end
   
+  def self.resize(path, width)
+     dst = Magick::Image.read(path).first
+     if dst.columns < width
+       dst = dst.resize_to_fill(width)
+       dst.write(path)
+     end
+     return path
+   end
+  
   def self.create_badge(badge_type, provider_type, provider_uuid, url)
     overlay = "#{Rails.root}/app/assets/images/#{badge_type}.png"
     dst = Magick::Image.read("#{url}").first
