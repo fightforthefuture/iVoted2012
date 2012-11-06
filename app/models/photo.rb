@@ -56,6 +56,9 @@ class Photo < ActiveRecord::Base
       crop = [dst.columns, dst.rows].min
       dst = dst.resize_to_fill(crop)
     end
+    if dst.columns < 180
+      dst = dst.resize_to_fill(180)
+    end
     src = Magick::Image.read(overlay).first.scale(dst.columns, dst.rows)
     result = dst.composite(src, Magick::SouthEastGravity, Magick::OverCompositeOp)
     local_path = "#{TEMP_STORAGE}/#{provider_type}_#{provider_uuid}_#{badge_type}.jpg"

@@ -20,7 +20,7 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @provider = Provider.find(@photo.provider_id)
     file = Photo.read_remote_image(@provider.provider_type, @provider.uuid, @photo.badge.url)
-    file = Photo.resize(file, 200)
+    file = Photo.resize(file, 180)
     send_file file, :type => 'image/png', :disposition => 'attachment'
   end
   
