@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   
-  before_filter :log, :only => :create
+ # before_filter :log, :only => :create
 
   def destroy
     flash[:notice] = "You have signed out!"
