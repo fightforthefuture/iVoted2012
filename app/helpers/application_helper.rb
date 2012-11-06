@@ -47,7 +47,7 @@ module ApplicationHelper
   end
   
   def link_to_submit(text, cls)
-    link_to_function text, "$(this).closest('form').submit()", :class=> "button #{cls}"
+    link_to_function text, "$(this).closest('form').submit()", :class=> "#{cls}"
   end
   
   def personalize(notice)

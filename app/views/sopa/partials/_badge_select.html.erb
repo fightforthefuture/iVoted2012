@@ -1,6 +1,6 @@
 <% if params[:action] == 'index' && (!current_user || current_user != @user)%>
   <div class="select_badge">
-    <div class="headline bebas" style="font-size: 300%;">Voting? Get your badge!</div>
+    <div class="headline bebas" style="font-size: 300%;">Voting? Choose your badge here!</div>
     <a class="badge thumb" href="#" data-badge="sopa_banner">
       <div class="sopa_banner"></div>
       <%= image_tag(random_avatar, :class=>"avatar")%>

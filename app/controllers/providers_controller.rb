@@ -12,7 +12,8 @@ class ProvidersController < ApplicationController
     session[:badge] = params[:badge]
     session[:email] = params[:email] if !params[:email].blank?
     session[:autotweet] = (params[:autotweet] == "true")
-    Rails.logger.info session[:autotweet]
+    session[:message] = params[:message] if !params[:message].blank?
+    Rails.logger.info "#{session[:autotweet]} :: #{session[:message]} "
     redirect_to "/auth/#{params[:auth_type]}"
   end
   
@@ -22,6 +23,18 @@ class ProvidersController < ApplicationController
     current_user.update_attributes(:voted=> true)
     @photo = current_provider.photos.last
     render "photos/new"
+  end
+  
+  def tweet
+    @user = User.find(params[:id])
+    msg = params[:message]
+    url = "/twitter/new?badge=ivoted_banner&autotweet=true&message=#{msg}"
+    if (current_provider.nil? || current_provider.provider_type != "twitter")
+      redirect_to url
+    else
+      current_provider.send_tweet(msg) rescue false
+      redirect_to :back, :notice => TWEET_SENT
+    end
   end
   
   def index

@@ -102,16 +102,6 @@
 }
 
 .tweetbox{
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px; /* border radius */
-	-moz-background-clip: padding;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box; /* prevents bg color from leaking outside the border */
-	background-color: #f9f9f9; /* layer fill content */
-	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
-	box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
 
 }
 textarea#post_message {
@@ -821,6 +811,28 @@ a.button.twitter:after{
   left: 10px;
   top: 10px;
 }
+
+a.button.tweetbird, a.button.tweetbird:active {
+  background-color: #208bc0;
+  padding: 5px 5px 5px 15px;
+  font-weight: normal;
+  background-image: -moz-linear-gradient(bottom, #0088ba 0%, #0088ba 1.51%, #01a5e2 100%); /* gradient overlay */
+  background-image: -o-linear-gradient(bottom, #0088ba 0%, #0088ba 1.51%, #01a5e2 100%); /* gradient overlay */
+  background-image: -webkit-linear-gradient(bottom, #0088ba 0%, #0088ba 1.51%, #01a5e2 100%); /* gradient overlay */
+  background-image: linear-gradient(bottom, #0088ba 0%, #0088ba 1.51%, #01a5e2 100%); /* gradient overlay */
+  -moz-box-shadow: 0 3px 5px rgba(0,0,0,.26), inset 0 1px 0 rgba(184,236,255,.75); /* drop shadow and inner shadow */
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,.26), inset 0 1px 0 rgba(184,236,255,.75); /* drop shadow and inner shadow */
+  box-shadow: 0 3px 5px rgba(0,0,0,.26), inset 0 1px 0 rgba(184,236,255,.75); /* drop shadow and inner shadow */
+
+}
+
+a.button.tweetbird:before{
+  content: url('/assets/btn_twitter_bird.png');
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
+
 
 a.button.blue, a.button.blue:active {
   border: none;

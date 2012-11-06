@@ -28,8 +28,11 @@ class SessionsController < ApplicationController
       sopa = ""
       msg = default_tweet
     end
+    if !session[:message].nil?
+      msg = session[:message]
+      session.delete(:message)
+    end
     if session[:autotweet]
-      Rails.logger.info "Tweeting #{msg}"
       provider.send_tweet(msg) rescue false
     end
     if current_user.i_voted_for_president.blank?

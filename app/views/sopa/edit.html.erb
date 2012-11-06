@@ -1,4 +1,8 @@
 <% if current_user %>
+  <% content_for :head do %>
+    <%= render :partial => "providers/partials/tweetbanner", :locals=> {:message => sopa_tweet} %>
+  <% end %>
+  <%= render :partial => "providers/partials/tweetbox", :locals=> { :message => sopa_tweet } %>
   <%= form_for(@user, :url=> {:controller => :providers, :action=> "update", :id=> current_uuid}) do |f| %>
   <div class="header">
     <div class="headline bebas">

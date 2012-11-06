@@ -1,13 +1,41 @@
-<div id="tweet_banner">
-  <p class="center"><p>"<%= message %>"</p>
-  <div style="float:right;">
-    <% if current_user && !current_user.twitter.nil? %>
-      <%= link_to_submit 'Tweet this page', "twitter" %>
-    <% elsif params[:controller]=="sopa" %>
-      <%= link_to 'Tweet this page', "/twitter/new?badge=sopa_banner", :class=> "button twitter" %>
-    <% else %>
-      <%= link_to 'Tweet this page', "/twitter/new?badge=ivoted_banner", :class=> "button twitter" %>
-    <% end %>
-    <p id="text_count">0/<b>140</b></p>
-  </div>
+<div class="tweetbox">
+  <%= form_for(@post) do |f| %>
+    <div style="float:right;">
+      <% if current_user && !current_user.twitter.nil? %>
+        <%= link_to_submit 'Tweet this page', "button twitter" %>
+      <% elsif params[:controller]=="sopa" %>
+        <%= link_to 'Tweet this page', "/twitter/new?badge=sopa_banner", :class=> "button twitter" %>
+      <% else %>
+        <%= link_to 'Tweet this page', "/twitter/new?badge=ivoted_banner", :class=> "button twitter" %>
+      <% end %>
+      <p id="text_count">0/<b>140</b></p>
+    </div>
+    <div class="field">
+      <%= f.text_area :message, :value => message, :style=> "width:56%; height: 60px;font-size: 120%;" %>
+    </div>
+    <%= f.hidden_field :user_id, :value=> @user.id %>
+    <%= f.hidden_field :screen_name, :value=> @provider.uuid %>
+    <%= f.hidden_field :platform, :value => "twitter"  %>
+  <% end %>
 </div>
+<% content_for :footer do %>
+  <% javascript_tag do %>
+      
+      var char_limit = 140;
+      $(document).ready(function() {
+          update_text_count();
+          $('#post_message').keyup(function() {
+              update_text_count();
+          });
+      });
+      function update_text_count(){
+        var len = $('#post_message').val().length;
+        if (len >= char_limit) {
+            $('#post_message').val($('#post_message').val().substring(0,  char_limit));
+        }
+        $('#text_count').html(len+"/<b>"+char_limit+"</b>");
+      }
+
+  <% end %>
+<% end %>
+<br/><br/>

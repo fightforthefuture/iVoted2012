@@ -1,0 +1,8 @@
+<div id="tweet_banner">
+  <p class="center">
+  <span style="float:right;">
+      <%= link_to 'Tweet This!', "/twitter/#{@user.id}/tweet?message=#{message}", :class=> "button tweetbird" %>
+  </span>
+  "<%= message %>"
+  </p>
+</div>

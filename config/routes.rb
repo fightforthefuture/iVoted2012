@@ -4,9 +4,10 @@ IVoted2012::Application.routes.draw do
   resources :providers
   
   resources :google, :controller => :providers, :provider_type=> "google", :auth_type=> "google_oauth2" do
-    get 'voted', :on => :member  
+    get 'voted', :on => :member
+    get 'tweet', :on => :member   
     collection do
-      get 'login'
+      get 'tweet'
     end
     resources :sopa, :only => [:index] do
       get 'edit', :on => :collection
@@ -14,7 +15,8 @@ IVoted2012::Application.routes.draw do
   end
   
   resources :twitter, :controller => :providers, :provider_type=> "twitter", :auth_type=> "twitter" do
-    get 'voted', :on => :member  
+    get 'voted', :on => :member
+    get 'tweet', :on => :member   
     collection do
       get 'login'
     end
@@ -24,7 +26,8 @@ IVoted2012::Application.routes.draw do
   end
   
   resources :facebook, :controller => :providers, :provider_type=> "facebook", :auth_type=> "facebook" do
-    get 'voted', :on => :member  
+    get 'voted', :on => :member
+    get 'tweet', :on => :member   
     collection do
       get 'login'
     end
