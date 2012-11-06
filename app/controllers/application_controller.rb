@@ -57,25 +57,29 @@ class ApplicationController < ActionController::Base
   end
   
   def default_tweet
-    if !current_user && !current_provider
+    if !@user.nil?
       return "#{@user.twitter.uuid} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/twitter/new?badge=ivoted_banner"
-    else
+    elsif current_provider
       idz = current_provider.uuid
       status = ""
       status = "Check out my new twitter badge and my personal voter page http://www.ivoted2012.org/twitter/#{idz} #iwillvote" if current_user
       status = "I voted! And here's my voter page http://www.ivoted2012.org/twitter/#{idz} #ivoted" if current_user && current_user.voted?
       return status
+    else
+      return ""
     end
   end
   
   def sopa_tweet
-    if !current_user && !current_provider
+    if !@user.nil?
       return "#{@user.twitter.uuid} voted. Check it out and get your own badge and page here: http://www.ivoted2012.org/twitter/new?badge=sopa_ivoted_banner"
-    else
+    elsif current_provider
       idz = current_provider.uuid
       status = ""
       status = "I helped kill SOPA and I vote. Join me and get your own badge, see my page: http://www.ivoted2012.org/twitter/#{idz}/sopa #antisopavoter" if current_user
       return status
+    else
+      return ""
     end
   end
   
