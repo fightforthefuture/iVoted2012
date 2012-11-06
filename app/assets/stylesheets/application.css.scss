@@ -118,8 +118,17 @@ textarea#post_message {
    font-weight:bold;
    color:#a83c2b;
    text-align:center;
+   
    >.screen_name{
-     color: #134383;
+     color: #0f4e95;
+     font-family: "Helvetica" arial, sans-serif;
+     font-size: 42px;
+      text-transform:none; 
+   }
+   >.voted{
+     color: #c40100; /* text color */
+     font-family: "Helvetica" arial, sans-serif;
+     font-size: 42px;
    }
  }
  .title{ border:none; border-bottom: 1px dotted #999999;margin-bottom: 10px;}

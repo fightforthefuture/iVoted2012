@@ -35,4 +35,8 @@
       <% end %>
     <% end %>
   <% end %>
+<% elsif current_page?('/') %>
+    <ul class="menu">
+      <li><%= link_to "Anti-SOPA and a voter?", "/sopa", :class=>"button blue large" %></li>
+    </ul>
 <% end %>
