@@ -1,6 +1,7 @@
 class ProvidersController < ApplicationController
   
-  before_filter :redirect, :only => [:edit]
+  before_filter :show_redirect, :only => [:show]
+  before_filter :edit_redirect, :only => [:edit]
 
   def login
     session[:badge] = params[:badge]
@@ -10,6 +11,8 @@ class ProvidersController < ApplicationController
   def new
     session[:badge] = params[:badge]
     session[:email] = params[:email] if !params[:email].blank?
+    session[:autotweet] = (params[:autotweet] == "true")
+    Rails.logger.info session[:autotweet]
     redirect_to "/auth/#{params[:auth_type]}"
   end
   
@@ -26,6 +29,7 @@ class ProvidersController < ApplicationController
   end
   
   def show
+    @post = Post.new
     render "providers/show"
   end
 
@@ -48,8 +52,12 @@ class ProvidersController < ApplicationController
     end
   end
   
-  def redirect
+  def edit_redirect
     redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user && !current_user) || (current_user != @user)
+  end
+  
+  def show_redirect
+    redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user)
   end
 
 end

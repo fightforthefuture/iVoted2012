@@ -1,5 +1,4 @@
 <% if current_user %>
-  <%= render :partial => "providers/partials/tweetbox", :locals=> {:message => default_tweet} if @provider.provider_type == "twitter" %>
   <%= form_for(@user, :url=> {:controller => :providers, :action=> "update", :id=> current_uuid}) do |f| %>
   <div class="header">
     <div class="headline bebas">

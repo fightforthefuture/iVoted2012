@@ -72,6 +72,28 @@
 
 
 /*#page{margin-top: 40px;}*/
+.auto_tweet{
+  margin: 20px 0;
+}
+
+#tweet_banner{
+  width: 100%;
+  background: #414141 url('/assets/blue_tile.png');
+  box-shadow: inset 0 -10px 20px -10px black;
+  text-align:center;
+  padding: 20px 0;
+  
+  > p{
+    width: 800px;
+    margin: 0px auto;
+    padding: 0px;
+    color: #fff; /* text color */
+    font-family: "Helvetica";
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 120%;
+  }
+}
 
 .tweetbox, #image_picker{
   width: 640px;
@@ -79,6 +101,19 @@
   padding: 20px;
 }
 
+.tweetbox{
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px; /* border radius */
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box; /* prevents bg color from leaking outside the border */
+	background-color: #f9f9f9; /* layer fill content */
+	-moz-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
+	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
+	box-shadow: 0 1px 0 rgba(255,255,255,.51), inset 0 1px 8px rgba(1,0,0,.29), inset 0 0 5px rgba(0,0,0,.11); /* drop shadow, inner shadow and inner glow */
+
+}
 textarea#post_message {
 	border: 1px solid #828282; /* stroke */
 	-moz-border-radius: 4px;
@@ -203,7 +238,7 @@ img.logo{ border:none; bottom: -30px; position:relative;}
 .arrow{
   border:none;
   position: absolute;
-  bottom: 180px;
+  top: 320px;
 }
 /*
 #ivoted_badge_arrow {

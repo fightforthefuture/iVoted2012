@@ -46,6 +46,7 @@
 			</div>
 
   <%= render :partial => "layouts/partials/flash", :locals=> {:flash => flash} %>
+  <%= yield :head %>
   <table class="stars"><tr><td class="lft"></td><td>
     <% if params[:controller] == "sopa" %>
         <%= link_to image_tag("ivoted_logo.png"), "/sopa" %>

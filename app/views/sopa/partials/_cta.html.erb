@@ -28,6 +28,10 @@
     <div class="other_platforms">
     Get it for:  <%= link_to "Google+", "javascript:submit_cta('google');", :id => 'google_login', :class=> 'link_text' %> | <%= link_to "Facebook", "javascript:submit_cta('facebook');", :id => 'facebook_login', :class=> 'link_text' %>
     </div>
+    <div class="auto_tweet">
+       <%= check_box :user, :autotweet, :checked => true, :style=> "top: -2px; position: relative;" %>
+       <%= label_tag :user_autotweet, "Tweet about my new badge and page for me." %><br/>
+     </div>
     <p class="privacy">Center for Rights and Fight for the Future (501c4) will update you about related campaigns. <a href="http://thecenterforrights.org/privacy">Privacy Policy</a></p>
   </span>
 </div>
@@ -48,7 +52,8 @@
     function submit_cta(type){
       var badge = $('a.selected').data('badge');
       var email = $("#user_email").val();
-      var url ="/"+type+"/new?badge="+badge+"&email="+email;
+      var tweet = $("#user_autotweet").is(':checked')
+      var url ="/"+type+"/new?badge="+badge+"&autotweet="+tweet+"&email="+email;
       window.location.href = url;
     }
 

@@ -34,7 +34,7 @@
 </div>
 <% if params[:action] == 'show' && (!current_user || current_user != @user)%>
   <div class="select_badge">
-  <div class="headline bebas" style="font-size: 300%;">Gonna vote? Get your own page</div>
+  <div class="headline bebas" style="font-size: 300%;">Voting? Get your badge!</div>
     <a class="badge thumb" href="/twitter/new?badge=ivoted_banner">
       <div class="ivoted_banner"></div>
       <%= image_tag(random_avatar, :class=>"avatar")%>

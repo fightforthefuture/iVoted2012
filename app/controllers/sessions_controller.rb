@@ -21,8 +21,17 @@ class SessionsController < ApplicationController
     session[:user_id] = provider.user_id
     session[:provider] = auth_hash[:provider]
     session[:provider_uuid] = provider.uuid
-    sopa = ""
-    sopa = "/sopa" if provider.badge_type.match("sopa")    
+    if provider.badge_type.match("sopa")
+      sopa = "/sopa"
+      msg = sopa_tweet
+    else
+      sopa = ""
+      msg = default_tweet
+    end
+    if session[:autotweet]
+      Rails.logger.info "Tweeting #{msg}"
+      provider.send_tweet(msg) rescue false
+    end
     if current_user.i_voted_for_president.blank?
       redirect_to "/#{auth_hash[:provider]}/#{provider[:uuid]}#{sopa}/edit", :notice => badge_updated_text
     else

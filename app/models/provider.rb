@@ -82,6 +82,14 @@ class Provider < ActiveRecord::Base
     end
   end
   
+  def send_tweet(msg)
+    if self.provider_type == "twitter"
+      @client = Twitter::Client.new(:oauth_token => self.token, :oauth_token_secret => self.secret)
+      @client.update(msg)
+    end
+  end
+  
+  
   protected
 
   def on_before_update_or_save
@@ -108,7 +116,6 @@ class Provider < ActiveRecord::Base
       self.uuid = self.auth_hash.info.uid
       self.email = self.auth_hash.info.email
       self.email = self.auth_hash.email if self.email.blank? && !self.auth_hash.email.blank?
-      Rails.logger.info "Email = #{self.auth_hash.email} :: #{self.email}"
       self.nickname = self.auth_hash.info.nickname
       self.first_name = self.auth_hash.info.first_name
       self.last_name = self.auth_hash.info.last_name
