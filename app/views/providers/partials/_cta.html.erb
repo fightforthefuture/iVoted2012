@@ -46,7 +46,7 @@
     function submit_cta(type){
       var badge = $('a.selected').data('badge');
       var email = $("#user_email").val();
-      var tweet = $("#user_autotweet").val();
+      var tweet = $("#user_autotweet").is(':checked');
       var url ="/"+type+"/new?badge="+badge+"&autotweet="+tweet+"&email="+email;
       window.location.href = url;
     }

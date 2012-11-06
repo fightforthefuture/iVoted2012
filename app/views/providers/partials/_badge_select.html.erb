@@ -1,0 +1,40 @@
+<% if params[:action] == 'show' && (!current_user || current_user != @user)%>
+  <div class="select_badge">
+    <div class="headline bebas" style="font-size: 300%;">Voting? Get your badge!</div>
+    <a class="badge thumb" href="#" data-badge="ivoted_banner">
+      <div class="ivoted_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+    </a>
+    <a class="badge thumb" href="#" data-badge="ivoted_badge">
+      <div class="ivoted_badge"></div>
+    </a>
+    <a class="badge thumb" href="#" data-badge="ipledge_banner">
+      <div class="ipledge_banner"></div>
+      <%= image_tag(random_avatar, :class=>"avatar")%>
+    </a>
+    <a class="badge thumb" href="#" data-badge="ipledge_badge">
+      <div class="ipledge_badge"></div>
+    </a>
+    <div class="auto_tweet">
+      <%= check_box :user, :autotweet, :checked => true, :style=> "top: -2px; position: relative;" %>
+      <%= label_tag :user_autotweet, "Tweet about my new badge and page for me." %><br/>
+    </div>
+  </div>
+  <% content_for :footer do %>
+    <% javascript_tag do %>
+
+      $('a.badge').bind("click", function() {
+        change_badge($(this));
+      });
+
+      function change_badge(obj){
+        var type = '<%= @provider.provider_type %>'
+        var badge = $(obj).data('badge');
+        var tweet = $("#user_autotweet").is(':checked');
+        var url ="/"+type+"/new?badge="+badge+"&autotweet="+tweet;
+        window.location.href = url;
+      }
+
+    <% end %>
+  <% end %>
+<% end %>
