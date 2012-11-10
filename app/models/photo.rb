@@ -94,7 +94,7 @@ class Photo < ActiveRecord::Base
   def update_provider
     atts={:badge_type => self.badge_type}
     if self.provider.provider_type == "twitter"
-      sleep 1 ## Must wait for Twitter to Update
+      sleep 2 ## Must wait for Twitter to Update
       @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
       url = @client.user(self.provider.uuid).profile_image_url(:original)
       if (url != self.provider.profile_image_url)
@@ -105,12 +105,11 @@ class Photo < ActiveRecord::Base
   end
   
   def revert_avatar
-    if self.uploaded
-      file = open Photo.read_remote_image(self.provider.provider_type, self.provider.uuid, self.avatar.url)
-      if self.provider_type == "twitter"
-        @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
-        @client.update_profile_image(file)
-      end
+    file = open Photo.read_remote_image(self.provider.provider_type, self.provider.uuid, self.avatar.url)
+    if self.provider_type == "twitter"
+      @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
+      @client.update_profile_image(file)
     end
   end
+
 end
