@@ -108,7 +108,10 @@ class Photo < ActiveRecord::Base
     file = open Photo.read_remote_image(self.provider.provider_type, self.provider.uuid, self.avatar.url)
     if self.provider_type == "twitter"
       @client = Twitter::Client.new(:oauth_token => self.provider.token, :oauth_token_secret => self.provider.secret)
-      @client.update_profile_image(file)
+      @upload = @client.update_profile_image(file) rescue false
+      if !@upload
+        puts "Error Uploading Avatar for: #{self.provider.uuid}, #{self.avatar.url}"
+      end
     end
   end
 
