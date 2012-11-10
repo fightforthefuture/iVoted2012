@@ -43,9 +43,7 @@ class SessionsController < ApplicationController
   end
   
   def failure
-    current_user = false
-    session[:user_id] = nil
-    session[:provider] = nil
+    delete_session
     redirect_to root_url, :notice => AUTHORIZATION_FAILED
   end
 

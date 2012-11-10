@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user, :current_provider, :get_current_id, :default_tweet, :sopa_tweet, :overlay_options, :random_avatar, :badge_updated_text, :ivoted_tweets
+  helper_method :current_user, :current_provider, :delete_session, :get_current_id, :default_tweet, :sopa_tweet, :overlay_options, :random_avatar, :badge_updated_text, :ivoted_tweets
   
   after_filter :reset_random_avatar
   before_filter :ivoted_tweets
@@ -22,6 +22,17 @@ class ApplicationController < ActionController::Base
   @@last_tweet = nil
   
   private
+
+  def delete_session
+    current_user = false
+    current_provider = false
+    session.delete(:user_id)
+    session.delete(:provider)
+    session.delete(:provider_uuid)
+    session.delete(:badge)
+    session.delete(:email)
+    session.delete(:message)
+  end
 
   def badge_updated_text
     if current_provider.provider_type == "twitter"

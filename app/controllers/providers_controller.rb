@@ -65,7 +65,10 @@ class ProvidersController < ApplicationController
   end
   
   def edit_redirect
-    redirect_to "/", :notice => AUTHORIZATION_FAILED if (!@user && !current_user) || (current_user != @user)
+    if (!@user && !current_user) || (current_user != @user)
+      delete_session
+      redirect_to "/", :notice => AUTHORIZATION_FAILED 
+    end
   end
   
   def show_redirect

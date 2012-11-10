@@ -18,7 +18,10 @@ class SopaController < ApplicationController
   end
   
   def edit_redirect
-    redirect_to "/sopa", :notice => AUTHORIZATION_FAILED if (!@user && !current_user) || (current_user != @user)
+    if (!@user && !current_user) || (current_user != @user)
+      delete_session
+      redirect_to "/sopa", :notice => AUTHORIZATION_FAILED 
+    end
   end
   
   def index_redirect
