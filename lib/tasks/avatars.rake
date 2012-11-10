@@ -7,9 +7,9 @@ namespace :avatars do
     Provider.where(:provider_type=> "twitter").find_in_batches(:batch_size => 50) do |batch|
       batch.each do |p|
         puts "**** Twitter user:  #{p.uuid}"
-        @client = Twitter::Client.new(:oauth_token => p.token, :oauth_token_secret => p.secret) rescue false
-        if @client
-          remote_path = @client.user(p.uuid).profile_image_url(:original)
+        @client = Twitter::Client.new(:oauth_token => p.token, :oauth_token_secret => p.secret)
+        remote_path = @client.user(p.uuid).profile_image_url(:original) rescue false
+        if remote_path
           local_path = p.profile_image_url
           if remote_path.split("/").last == local_path.split("/").last
             puts "Revert Avatar for: #{p.uuid} to: #{p.photos.first.avatar.url}"
